@@ -4,6 +4,10 @@
     {
       "source": "/api/genera",
       "destination": "https://ds84-officine-production.up.railway.app/api/genera"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
