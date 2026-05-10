@@ -1539,7 +1539,11 @@ function Archivio({db,onBack,onOpen}) {
         return;
       }
 
-      setListaSupabase((data || []).map(r => r.dati));
+      setListaSupabase((data || []).map(r => ({
+        ...r.dati,
+        stato_cliente: r.stato_cliente || 'in_attesa',
+        token: r.token
+      })));
     };
 
     loadArchivio();
@@ -1603,6 +1607,16 @@ function Archivio({db,onBack,onOpen}) {
                   <div style={{fontSize:11,color:MT}}>{p.numero}</div>
                 </div>
                 {p.cliente&&<div style={{fontSize:11,color:MT,marginTop:2}}>👤 {p.cliente}</div>}
+                <div style={{marginTop:6}}>
+                  <span style={{
+                    fontSize:11, fontWeight:700, borderRadius:4, padding:"2px 8px",
+                    background: p.stato_cliente==='accettato' ? '#14532d' : p.stato_cliente==='rifiutato' ? '#3f1212' : '#2a2a2a',
+                    color: p.stato_cliente==='accettato' ? '#86efac' : p.stato_cliente==='rifiutato' ? '#ef4444' : '#888'
+                 
+                  }}>
+                    {p.stato_cliente==='accettato' ? '✓ Accettato' : p.stato_cliente==='rifiutato' ? '✗ Rifiutato' : '⏳ In attesa'}
+                  </span>
+                </div>
               </div>
             ))}
           </div>
@@ -1648,12 +1662,60 @@ const BottomNav = ({active,onChange,hasPrev,desktopTop=false}) => (
 );
 
 
+function PreventivoPublico({token}) {
+  const [prev, setPrev] = useState(null);
+  const [stato, setStato] = useState(null);
+  const [fatto, setFatto] = useState(false);
 
+  useEffect(() => {
+    supabase.from("preventivi").select("dati,stato_cliente").eq("token", token).single()
+      .then(({data,error}) => {
+        if (data) { setPrev(data.dati); setStato(data.stato_cliente); }
+      });
+  }, [token]);
+
+  const rispondi = async (risposta) => {
+    await supabase.from("preventivi").update({stato_cliente: risposta}).eq("token", token);
+    setStato(risposta); setFatto(true);
+  };
+
+  if (!prev) return <div style={{background:"#080808",minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontFamily:"Barlow Condensed"}}>Caricamento...</div>;
+
+  return (
+    <div style={{background:"#080808",minHeight:"100vh",padding:20,fontFamily:"'Barlow Condensed',sans-serif",color:"#fff",maxWidth:480,margin:"0 auto"}}>
+      <Logo h={32}/>
+      <div style={{marginTop:20,background:"#111",border:"1px solid #2a2a2a",borderRadius:12,padding:16}}>
+        <div style={{fontSize:11,color:"#888",letterSpacing:2,textTransform:"uppercase"}}>Preventivo {prev.numero}</div>
+        <div style={{fontSize:24,fontWeight:900,color:"#fff",marginTop:4}}>{prev.veicolo}</div>
+        <div style={{fontSize:13,color:"#aaa",marginTop:4}}>{prev.descrizione_lavoro}</div>
+        <div style={{fontSize:32,fontWeight:900,color:"#22c55e",marginTop:12}}>{fmt(tot(prev.voci))}</div>
+        <div style={{fontSize:11,color:"#555",marginTop:2}}>IVA esclusa</div>
+      </div>
+      {fatto || stato !== 'in_attesa' ? (
+        <div style={{marginTop:20,textAlign:"center",padding:24,background:stato==='accettato'?"#0a2a0a":"#2a0a0a",borderRadius:12}}>
+          <div style={{fontSize:32}}>{stato==='accettato'?"✅":"❌"}</div>
+          <div style={{fontSize:20,fontWeight:800,marginTop:8}}>{stato==='accettato'?"Preventivo accettato":"Preventivo rifiutato"}</div>
+          <div style={{fontSize:13,color:"#888",marginTop:4}}>Grazie, l'officina riceverà una notifica.</div>
+        </div>
+      ) : (
+        <div style={{marginTop:20,display:"flex",flexDirection:"column",gap:12}}>
+          <button onClick={()=>rispondi('accettato')} style={{background:"#22c55e",color:"#000",border:"none",borderRadius:12,padding:"18px",fontSize:18,fontWeight:900,cursor:"pointer"}}>✅ ACCETTO IL PREVENTIVO</button>
+          <button onClick={()=>rispondi('rifiutato')} style={{background:"transparent",color:"#ef4444",border:"1px solid #ef4444",borderRadius:12,padding:"18px",fontSize:18,fontWeight:900,cursor:"pointer"}}>❌ RIFIUTO IL PREVENTIVO</button>
+        </div>
+      )}
+    </div>
+  );
+}
 
 // ─────────────────────────────────────────
 //  APP
 // ─────────────────────────────────────────
 export default function App() {
+  const urlPath = window.location.pathname;
+  if (urlPath.startsWith('/preventivo/')) {
+    const token = urlPath.split('/preventivo/')[1];
+    return <PreventivoPublico token={token} />;
+  }
   const [db,setDb]=useState({preventivi:[],clienti:[],nextNum:1});
   const [dbLoaded,setDbLoaded]=useState(false);
   const [screen,setScreen]=useState("home");
@@ -1803,13 +1865,12 @@ export default function App() {
   const onSalva = async () => {
     try {
       // 1. Salva su Supabase
+      
+
+      const token = nId() + nId();
       const { error } = await supabase
         .from("preventivi")
-        .insert([
-          {
-            dati: draft
-          }
-        ]);
+        .insert([{ dati: draft, stato_cliente: 'in_attesa', token }]);
 
       if (error) {
         console.error("Errore Supabase:", error);
@@ -1988,6 +2049,16 @@ export default function App() {
         {screen==="view" && viewPrev && (
           <div style={{display:"flex",flexDirection:"column",gap:14}}>
             <Preview prev={viewPrev} onEdit={()=>{setDraft(viewPrev); setScreen("edit")}} onBack={()=>setScreen("archivio")} saved={true}/>
+            {viewPrev.telefono && (
+              <button onClick={() => {
+                const link = `https://assistente-officinaprev.vercel.app/preventivo/${viewPrev.token}`;
+                const testo = `🔧 *DS84 OFFICINE* — Preventivo N° ${viewPrev.numero}\n🚗 ${viewPrev.veicolo}\n\nPuò visualizzare e accettare il preventivo al seguente link:\n${link}`;
+                window.open(`https://wa.me/39${viewPrev.telefono.replace(/\s/g,'')}?text=${encodeURIComponent(testo)}`);
+              }} style={{background:"#25D366",color:"#fff",border:"none",borderRadius:10,padding:"14px",fontSize:15,fontWeight:800,cursor:"pointer",fontFamily:"'Barlow Condensed',sans-serif",letterSpacing:1}}>
+                 📲 INVIA SU WHATSAPP
+              </button>
+            )}
+            
             <button onClick={()=>onDeleteFromArchivio(viewPrev)} style={{background:"none",border:`1px solid #3f1212`,color:"#ef4444",borderRadius:8,padding:"10px",fontSize:12,cursor:"pointer",fontFamily:"'Barlow',sans-serif"}}>
               🗑 Elimina preventivo
             </button>
