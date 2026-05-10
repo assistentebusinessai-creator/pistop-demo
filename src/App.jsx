@@ -1640,7 +1640,7 @@ const LoadingDots = ({big=false}) => (
 // ─────────────────────────────────────────
 //  BOTTOM NAV
 // ─────────────────────────────────────────
-const NAV=[{id:"home",icon:"🏠",label:"HOME"},{id:"nuovo",icon:"📝",label:"BOZZE"},{id:"archivio",icon:"📂",label:"ARCHIVIO"},{/*{id:"cliente",icon:"",label:""}*/}];
+const NAV=[{id:"home",icon:"🏠",label:"HOME"},{id:"nuovo",icon:"📝",label:"BOZZE"},{id:"archivio",icon:"📂",label:"ARCHIVIO"}];
 const BottomNav = ({active,onChange,hasPrev,desktopTop=false}) => (
   <div style={{
     position: desktopTop ? "relative" : "fixed",
