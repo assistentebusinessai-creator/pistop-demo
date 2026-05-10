@@ -2057,7 +2057,7 @@ export default function App() {
               <button onClick={() => {
                 const link = `https://assistente-officinaprev.vercel.app/preventivo/${viewPrev.token}`;
                 const testo = `🔧 *DS84 OFFICINE* — Preventivo N° ${viewPrev.numero}\n🚗 ${viewPrev.veicolo}\n\nPuò visualizzare e accettare il preventivo al seguente link:\n${link}`;
-                window.open(`https://wa.me/39${viewPrev.telefono.replace(/\s/g,'')}?text=${encodeURIComponent(testo)}`);
+                window.location.href = `https://wa.me/39${viewPrev.telefono.replace(/\s/g,'')}?text=${encodeURIComponent(testo)}`);
               }} style={{background:"#25D366",color:"#fff",border:"none",borderRadius:10,padding:"14px",fontSize:15,fontWeight:800,cursor:"pointer",fontFamily:"'Barlow Condensed',sans-serif",letterSpacing:1}}>
                  📲 INVIA SU WHATSAPP
               </button>
