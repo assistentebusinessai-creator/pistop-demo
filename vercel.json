@@ -1,0 +1,10 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    {
+      "source": "/api/genera",
+      "destination": "https://ds84-officine-production.up.railway.app/api/genera"
+    }
+  ]
+}
+
