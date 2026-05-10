@@ -1531,7 +1531,7 @@ function Archivio({db,onBack,onOpen}) {
     const loadArchivio = async () => {
       const { data, error } = await supabase
         .from("preventivi")
-        .select("dati")
+        .select("dati,stato_cliente,token")
         .order("created_at", { ascending: false });
 
       if (error) {
@@ -1675,6 +1675,10 @@ function PreventivoPublico({token}) {
   }, [token]);
 
   const rispondi = async (risposta) => {
+    const testo = risposta === 'accettato' 
+      ? "Confermi di accettare il preventivo?" 
+      : "Confermi di rifiutare il preventivo?";
+    if (!confirm(testo)) return;
     await supabase.from("preventivi").update({stato_cliente: risposta}).eq("token", token);
     setStato(risposta); setFatto(true);
   };
