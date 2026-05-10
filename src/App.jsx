@@ -1534,6 +1534,7 @@ function Archivio({db,onBack,onOpen}) {
         .select("dati,stato_cliente,token")
         .order("created_at", { ascending: false });
 
+        
       if (error) {
         console.error("Errore caricamento archivio:", error);
         return;
