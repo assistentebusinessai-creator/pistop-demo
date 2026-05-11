@@ -2345,7 +2345,9 @@ export default function App() {
           zIndex:9999,
           background:"#fff",
           display:"flex",
-          flexDirection:"column"
+          flexDirection:"column",
+          height:"100dvh",
+          overflow:"hidden"
         }}>
 
          
@@ -2354,7 +2356,8 @@ export default function App() {
             title="Form cliente"
             style={{
               width:"100vw",
-              height:"calc(100vh - 50px)",
+              height: "100%",
+            
               border:"none",
               display:"block"
             }}
