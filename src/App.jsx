@@ -2219,17 +2219,100 @@ export default function App() {
               }}
             />
 
-            <div style={{
-              background:BG,
-              border:`1px dashed ${BR}`,
-              borderRadius:12,
-              padding:18,
-              color:MT2,
-              textAlign:"center",
-              fontSize:14
-            }}>
-              Area foto lavoro — prossimo step
-            </div>
+            <div style={{display:"flex",flexDirection:"column",gap:12}}>
+
+              <input
+                type="file"
+                accept="image/*"
+                multiple
+                onChange={(e)=>{
+                  const files = Array.from(e.target.files || []);
+
+                  const nuoveFoto = files.map(file => ({
+                    id: Date.now() + Math.random(),
+                    file,
+                    preview: URL.createObjectURL(file)
+                  }));
+
+                  setLavoriData({
+                    ...lavoriData,
+                    foto:[...lavoriData.foto, ...nuoveFoto]
+                  });
+                }}
+                style={{display:"none"}}
+                id="upload-foto-lavoro"
+              />
+
+              <label
+                htmlFor="upload-foto-lavoro"
+                style={{
+                  background:BG,
+                  border:`1px dashed ${BR}`,
+                  borderRadius:12,
+                  padding:18,
+                  color:MT2,
+                  textAlign:"center",
+                  fontSize:14,
+                  cursor:"pointer"
+                }}
+              >
+                📸 Carica foto lavoro
+              </label>
+
+              {lavoriData.foto.length > 0 && (
+                <div style={{
+                  display:"grid",
+                  gridTemplateColumns:"repeat(auto-fill,minmax(120px,1fr))",
+                  gap:12
+                }}>
+                  {lavoriData.foto.map(foto => (
+                    <div
+                      key={foto.id}
+                      style={{
+                        position:"relative",
+                        borderRadius:12,
+                        overflow:"hidden",
+                        border:`1px solid ${BR}`
+                      }}
+                    >
+                      <img
+                        src={foto.preview}
+                        alt=""
+                        style={{
+                          width:"100%",
+                          height:120,
+                          objectFit:"cover",
+                          display:"block"
+                        }}
+                      />
+
+                      <button
+                        onClick={()=>{
+                          setLavoriData({
+                            ...lavoriData,
+                            foto:lavoriData.foto.filter(f=>f.id !== foto.id)
+                          });
+                        }}
+                        style={{
+                          position:"absolute",
+                          top:6,
+                          right:6,
+                          background:"rgba(0,0,0,0.7)",
+                          color:"#fff",
+                          border:"none",
+                          borderRadius:8,
+                          padding:"4px 8px",
+                          cursor:"pointer"
+                        }}
+                      >
+                        ✕
+                      </button>
+                    </div>
+                  ))}
+                </div>
+               )}
+
+             </div>
           </div>
         </div>
       )}
