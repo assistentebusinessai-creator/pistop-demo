@@ -2154,6 +2154,86 @@ export default function App() {
         )}
       </div>
 
+      {screen==="lavori" && viewPrev && (
+        <div style={{display:"flex", flexDirection:"column", gap:14}}>
+          <button
+            onClick={() => setScreen("view")}
+            style={{
+              background:"none",
+              border:"none",
+              color:MT2,
+              fontSize:18,
+              cursor:"pointer",
+              alignSelf:"flex-start"
+            }}
+          >
+            ← Torna al preventivo
+          </button>
+
+          <div style={{
+            background:C2,
+            border:`1px solid ${BR}`,
+            borderRadius:14,
+            padding:18
+          }}>
+            <div style={{
+              fontFamily:"Barlow Condensed, sans-serif",
+              fontSize:24,
+              fontWeight:800,
+              color:TX,
+              marginBottom:6,
+              textTransform:"uppercase"
+            }}>
+              📷 Documentazione lavoro
+            </div>
+
+            <div style={{color:MT2, fontSize:14, marginBottom:18}}>
+              {viewPrev.veicolo || "Veicolo"} — {viewPrev.cliente || "Cliente"}
+            </div>
+
+            <div style={{
+              color:MT2,
+              fontSize:13,
+              letterSpacing:1,
+              textTransform:"uppercase",
+              marginBottom:8
+            }}>
+              Note lavoro
+            </div>
+
+            <textarea
+              value={lavoriData.note}
+              onChange={(e) => setLavoriData({...lavoriData, note:e.target.value})}
+              placeholder="Es: foto dei componenti sostituiti, prodotti utilizzati, dettagli dell’intervento..."
+              rows={5}
+              style={{
+                width:"100%",
+                background:BG,
+                border:`1px solid ${BR}`,
+                borderRadius:10,
+                color:TX,
+                padding:12,
+                fontSize:15,
+                resize:"none",
+                marginBottom:16
+              }}
+            />
+
+            <div style={{
+              background:BG,
+              border:`1px dashed ${BR}`,
+              borderRadius:12,
+              padding:18,
+              color:MT2,
+              textAlign:"center",
+              fontSize:14
+            }}>
+              Area foto lavoro — prossimo step
+            </div>
+          </div>
+        </div>
+      )}
+
       {screen==="cliente" && (
         <div style={{
           position:"fixed",
