@@ -1736,22 +1736,7 @@ function PreventivoPublico({token}) {
         <div style={{fontSize:11,color:"#555",marginTop:2}}>IVA esclusa</div>
       </div>
 
-      <button
-        onClick={() => scaricaPDF(prev)}
-        style={{
-          width: '100%',
-          marginTop: 16,
-          background: '#1a1a1a',
-          border: '1px solid #2a2a2a',
-          color: '#fff',
-          padding: '14px',
-          borderRadius: 12,
-          fontSize: 16,
-          fontWeight: 600
-        }}
-      >
-         📄 Scarica PDF 
-      </button>
+      
       {fatto || stato !== 'in_attesa' ? (
         <div style={{marginTop:20,textAlign:"center",padding:24,background:stato==='accettato'?"#0a2a0a":"#2a0a0a",borderRadius:12}}>
           <div style={{fontSize:32}}>{stato==='accettato'?"✅":"❌"}</div>
@@ -1764,6 +1749,25 @@ function PreventivoPublico({token}) {
           <button onClick={()=>rispondi('rifiutato')} style={{background:"transparent",color:"#ef4444",border:"1px solid #ef4444",borderRadius:12,padding:"18px",fontSize:18,fontWeight:900,cursor:"pointer"}}>❌ RIFIUTO IL PREVENTIVO</button>
         </div>
       )}
+
+      <button
+        onClick={() => scaricaPDF(prev)}
+        style={{
+          width: '100%',
+          marginTop: 16,
+          background: '#1a1a1a',
+          border: '1px solid #2a2a2a',
+          color: '#fff',
+          padding: '14px',
+          borderRadius: 12,
+          fontSize: 16,
+          fontWeight: 600,
+          cursor: 'pointer'
+        }}
+      >
+         📄 Scarica PDF 
+      </button>
+
     </div>
   );
 }
