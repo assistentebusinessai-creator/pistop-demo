@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import OpenAI from 'openai';
+import webpush from 'web-push';
 
 dotenv.config();
 
@@ -44,7 +45,7 @@ app.post('/api/notifica-risposta', async (req, res) => {
   const { stato, veicolo, numero } = req.body;
   
   try {
-    const webpush = require('web-push');
+    
     
     webpush.setVapidDetails(
       process.env.VAPID_SUBJECT,
