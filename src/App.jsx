@@ -1739,7 +1739,7 @@ function PreventivoPublico({token}) {
         <div style={{marginTop:20,textAlign:"center",padding:24,background:stato==='accettato'?"#0a2a0a":"#2a0a0a",borderRadius:12}}>
           <div style={{fontSize:32}}>{stato==='accettato'?"✅":"❌"}</div>
           <div style={{fontSize:20,fontWeight:800,marginTop:8}}>{stato==='accettato'?"Preventivo accettato":"Preventivo rifiutato"}</div>
-          <div style={{fontSize:13,color:"#888",marginTop:4}}>Grazie, l'officina riceverà una notifica.</div>
+          <div style={{fontSize:13,color:"#888",marginTop:4}}>La tua scelta è stata salvata correttamente.</div>
         </div>
       ) : (
         <div style={{marginTop:20,display:"flex",flexDirection:"column",gap:12}}>
@@ -1766,6 +1766,10 @@ export default function App() {
   const [draft,setDraft]=useState(null);
   const [savedId,setSavedId]=useState(null);
   const [viewPrev,setViewPrev]=useState(null);
+  const [lavoriData, setLavoriData] = useState({
+    note: "",
+    foto: []
+  });
 
   useEffect(() => {
     const handleMessage = (event) => {
