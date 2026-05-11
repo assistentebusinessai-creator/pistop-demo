@@ -1915,9 +1915,22 @@ export default function App() {
       
 
       const token = nId() + nId();
-      const { error } = await supabase
-        .from("preventivi")
-        .insert([{ dati: draft, stato_cliente: 'in_attesa', token }]);
+      const isUpdate = db.preventivi.some(p => p.id === draft.id);
+
+      let error;
+
+      if (isUpdate) {
+        const result = await supabase
+          .from("preventivi")
+          .update({ dati: draft })
+          .eq("dati->>id", draft.id);
+        error = result.error;
+      } else {
+        const result = await supabase
+          .from("preventivi")
+          .insert([{ dati: draft, stato_cliente: 'in_attesa', token }]);
+        error = result.error;
+      }
 
       if (error) {
         console.error("Errore Supabase:", error);
@@ -2095,7 +2108,7 @@ export default function App() {
         )}
         {screen==="view" && viewPrev && (
           <div style={{display:"flex",flexDirection:"column",gap:14}}>
-            <Preview prev={viewPrev} onEdit={()=>{setDraft(viewPrev); setScreen("edit")}} onBack={()=>setScreen("archivio")} saved={true}/>
+            <Preview prev={viewPrev} onEdit={()=>{setDraft(viewPrev); setSavedId(null); setScreen("edit")}} onBack={()=>setScreen("archivio")} saved={true}/>
             <button onClick={() => {
                const link = `https://assistente-officinaprev.vercel.app/preventivo/${viewPrev.token}`;
                const testo = `🔧 *DS84 OFFICINE* — Preventivo\n🚗 ${viewPrev.veicolo}\n\nPuò visualizzare e accettare il preventivo al seguente link:\n${link}`;
