@@ -26,7 +26,7 @@ async function registraPushNotifiche() {
       applicationServerKey: VAPID_PUBLIC
     });
 
-    await supabase.from('push_subscriptions').upsert([
+    await supabase.from('push_subscription').upsert([
       { subscription: sub.toJSON() }
     ]);
 
