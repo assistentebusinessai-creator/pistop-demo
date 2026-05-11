@@ -2118,9 +2118,31 @@ export default function App() {
                const testo = `🔧 *DS84 OFFICINE* — Preventivo\n🚗 ${viewPrev.veicolo}\n\nPuò visualizzare e accettare il preventivo al seguente link:\n${link}`;
                const numero = viewPrev.telefono ? `39${viewPrev.telefono.replace(/\s/g,'')}` : '';
                window.open(`https://wa.me/${numero}?text=${encodeURIComponent(testo)}`);
-             }} style={{background:"#25D366",color:"#fff",border:"none",borderRadius:10,padding:"14px",fontSize:15,fontWeight:800,cursor:"pointer",fontFamily:"'Barlow Condensed',sans-serif",letterSpacing:1}}>
+            }} style={{background:"#25D366",color:"#fff",border:"none",borderRadius:10,padding:"14px",fontSize:15,fontWeight:800,cursor:"pointer",fontFamily:"'Barlow Condensed',sans-serif",letterSpacing:1}}>
                 📲 INVIA SU WHATSAPP
-             </button>
+            </button>
+
+            <button
+              onClick={() => {
+                setLavoriData({
+                  note: "",
+                  foto: []
+                });
+
+                 setScreen("lavori");
+              }}
+              style={{
+                background:"#1E293B",
+                color:"#fff",
+                border:"none",
+                borderRadius:10,
+                padding:"14px",
+                fontSize:15,
+                fontWeight:700
+              }}
+            >
+              📷 DOCUMENTAZIONE LAVORO
+            </button>
 
             
             <button onClick={()=>onDeleteFromArchivio(viewPrev)} style={{background:"none",border:`1px solid #3f1212`,color:"#ef4444",borderRadius:8,padding:"10px",fontSize:12,cursor:"pointer",fontFamily:"'Barlow',sans-serif"}}>
