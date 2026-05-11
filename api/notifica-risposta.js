@@ -1,4 +1,4 @@
-const webpush = require('web-push');
+const webpush = from('web-push');
 const { createClient } = require('@supabase/supabase-js');
 
 const supabase = createClient(
