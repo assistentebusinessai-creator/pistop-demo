@@ -1,5 +1,5 @@
 import webpush from 'web-push';
-import { createClient } from ('@supabase/supabase-js');
+import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
