@@ -2121,7 +2121,8 @@ export default function App() {
             }} style={{background:"#25D366",color:"#fff",border:"none",borderRadius:10,padding:"14px",fontSize:15,fontWeight:800,cursor:"pointer",fontFamily:"'Barlow Condensed',sans-serif",letterSpacing:1}}>
                 📲 INVIA SU WHATSAPP
             </button>
-
+            
+            {viewPrev?.tipo_pratica === "fattura" && (
             <button
               onClick={() => {
                 setLavoriData({
@@ -2143,6 +2144,7 @@ export default function App() {
             >
               📷 DOCUMENTAZIONE LAVORO
             </button>
+            )}
 
             
             <button onClick={()=>onDeleteFromArchivio(viewPrev)} style={{background:"none",border:`1px solid #3f1212`,color:"#ef4444",borderRadius:8,padding:"10px",fontSize:12,cursor:"pointer",fontFamily:"'Barlow',sans-serif"}}>
