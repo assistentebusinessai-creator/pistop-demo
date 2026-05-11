@@ -1,12 +1,12 @@
-const webpush = from('web-push');
-const { createClient } = require('@supabase/supabase-js');
+import webpush from 'web-push';
+import { createClient } from ('@supabase/supabase-js');
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_ANON_KEY
 );
 
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
   const { stato, veicolo } = req.body;
   
   webpush.setVapidDetails(
