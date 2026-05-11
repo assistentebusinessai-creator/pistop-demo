@@ -9,6 +9,33 @@ const supabase = createClient(
 )
 
 // ─────────────────────────────────────────
+//  PUSH NOTIFICATIONS
+// ─────────────────────────────────────────
+const VAPID_PUBLIC = import.meta.env.VITE_VAPID_PUBLIC_KEY;
+
+async function registraPushNotifiche() {
+  try {
+    if (!('serviceWorker' in navigator) || !('PushManager' in window)) return;
+    
+    const reg = await navigator.serviceWorker.register('/sw.js');
+    const permission = await Notification.requestPermission();
+    if (permission !== 'granted') return;
+
+    const sub = await reg.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey: VAPID_PUBLIC
+    });
+
+    await supabase.from('push_subscriptions').upsert([
+      { subscription: sub.toJSON() }
+    ]);
+
+  } catch(e) {
+    console.error('Push registration error:', e);
+  }
+}
+
+// ─────────────────────────────────────────
 //  BRAND & HELPERS
 // ─────────────────────────────────────────
 const G = "#22c55e", R = "#e53535", A = "#f59e0b";
@@ -1680,7 +1707,19 @@ function PreventivoPublico({token}) {
       ? "Confermi di accettare il preventivo?" 
       : "Confermi di rifiutare il preventivo?";
     if (!confirm(testo)) return;
+  
     await supabase.from("preventivi").update({stato_cliente: risposta}).eq("token", token);
+  
+    await fetch('/api/notifica-risposta', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        stato: risposta,
+        veicolo: prev.veicolo,
+        numero: prev.numero
+      })
+    });
+  
     setStato(risposta); setFatto(true);
   };
 
@@ -1753,6 +1792,9 @@ export default function App() {
       window.removeEventListener("message", handleMessage);
     };
   }, []);
+
+  registraPushNotifiche();
+
   useEffect(()=>{ loadDB().then(d=>{ setDb(d); setDbLoaded(true); }); },[]);
 
   const persist = d => { setDb(d); saveDB(d); };

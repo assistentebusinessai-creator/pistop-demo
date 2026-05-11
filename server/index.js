@@ -40,4 +40,40 @@ app.post("/api/genera", async (req, res) => {
   }
 });
 
+app.post('/api/notifica-risposta', async (req, res) => {
+  const { stato, veicolo, numero } = req.body;
+  
+  try {
+    const webpush = require('web-push');
+    
+    webpush.setVapidDetails(
+      process.env.VAPID_SUBJECT,
+      process.env.VITE_VAPID_PUBLIC_KEY,
+      process.env.VAPID_PRIVATE_KEY
+    );
+
+    const { data } = await supabase
+      .from('push_subscriptions')
+      .select('subscription');
+
+    const messaggio = {
+      title: stato === 'accettato' ? '✅ Preventivo Accettato!' : '❌ Preventivo Rifiutato',
+      body: `${veicolo} — ${numero}`,
+      url: '/archivio'
+    };
+
+    for (const row of data || []) {
+      await webpush.sendNotification(
+        row.subscription,
+        JSON.stringify(messaggio)
+      );
+    }
+
+    res.json({ ok: true });
+  } catch(e) {
+    console.error(e);
+    res.json({ ok: false });
+  }
+});
+
 app.listen(PORT, '0.0.0.0', () => console.log("Server attivo su porta " + PORT));
