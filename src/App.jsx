@@ -2017,11 +2017,60 @@ export default function App() {
     setScreen("archivio");
   };
 
+  const salvaDocumentazioneLavoro = async () => {
+    if (!viewPrev?.id) {
+      alert("Preventivo non valido");
+      return;
+    }
+
+    const documentazione = {
+      note: lavoriData.note || "",
+      foto: lavoriData.foto.map(f => ({
+        id: f.id,
+        nome: f.nome,
+        path: f.path,
+        url: f.preview
+      })),
+      aggiornata_il: new Date().toISOString()
+    };
+
+    const preventivoAggiornato = {
+      ...viewPrev,
+      documentazione_lavoro: documentazione
+    };
+
+    const { error } = await supabase
+      .from("preventivi")
+      .update({ dati: preventivoAggiornato })
+      .eq("dati->>id", viewPrev.id);
+
+    if (error) {
+      console.error("Errore salvataggio documentazione:", error);
+      alert("Errore nel salvataggio della documentazione");
+      return;
+    }
+
+    setViewPrev(preventivoAggiornato);
+
+    const newDb = {
+      ...db,
+      preventivi: db.preventivi.map(p =>
+        p.id === viewPrev.id ? preventivoAggiornato : p
+      )
+    };
+
+    persist(newDb);
+
+    alert("Documentazione salvata");
+  };
+
   if(!dbLoaded) return (
     <div style={{background:BG,minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center"}}>
       <div style={{textAlign:"center"}}><Logo h={40}/><div style={{color:MT,marginTop:20,fontSize:13}}>Caricamento...</div></div>
     </div>
   );
+
+
      
   return (
     <div style={{
@@ -2240,25 +2289,57 @@ export default function App() {
               }}
             />
 
+            
+
             <div style={{display:"flex",flexDirection:"column",gap:12}}>
 
               <input
                 type="file"
                 accept="image/*"
                 multiple
-                onChange={(e)=>{
+                onChange={async (e) => {
                   const files = Array.from(e.target.files || []);
+                  if (!viewPrev?.numero) {
+                    alert("Preventivo non valido: numero mancante");
+                    return;
+                  }
 
-                  const nuoveFoto = files.map(file => ({
-                    id: Date.now() + Math.random(),
-                    file,
-                    preview: URL.createObjectURL(file)
-                  }));
+                  const uploadate = [];
+
+                  for (const file of files) {
+                    const nomePulito = file.name.replace(/\s+/g, "-");
+                    const nomeFile = `${viewPrev.numero}/${Date.now()}-${nomePulito}`;
+
+                    const { error } = await supabase
+                      .storage
+                      .from("documentazione-lavoro")
+                      .upload(nomeFile, file);
+
+                    if (error) {
+                      console.error("Errore upload:", error);
+                      alert("Errore durante il caricamento di una foto");
+                      continue;
+                    }
+
+                    const { data } = supabase
+                      .storage
+                      .from("documentazione-lavoro")
+                      .getPublicUrl(nomeFile);
+
+                    uploadate.push({
+                       id: Date.now() + Math.random(),
+                       nome: file.name,
+                       path: nomeFile,
+                       preview: data.publicUrl
+                    });
+                  }
 
                   setLavoriData({
                     ...lavoriData,
-                    foto:[...lavoriData.foto, ...nuoveFoto]
+                    foto: [...lavoriData.foto, ...uploadate]
                   });
+
+                  e.target.value = "";
                 }}
                 style={{display:"none"}}
                 id="upload-foto-lavoro"
@@ -2279,6 +2360,22 @@ export default function App() {
               >
                 📸 Carica foto lavoro
               </label>
+
+              <button
+              onClick={salvaDocumentazioneLavoro}
+              style={{
+                background:"#25D366",
+                color:"#fff",
+                border:"none",
+                borderRadius:10,
+                padding:"14px",
+                fontSize:15,
+                fontWeight:800,
+                cursor:"pointer"
+              }}
+            >
+               💾 SALVA DOCUMENTAZIONE
+            </button>
 
               {lavoriData.foto.length > 0 && (
                 <div style={{
@@ -2331,6 +2428,9 @@ export default function App() {
                     </div>
                   ))}
                 </div>
+                
+
+
                )}
 
              </div>
