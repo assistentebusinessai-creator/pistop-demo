@@ -2636,7 +2636,10 @@ export default function App() {
                 <div style={{
                   display:"grid",
                   gridTemplateColumns:"repeat(auto-fill,minmax(120px,1fr))",
-                  gap:12
+                  gap:12,
+                  maxHeight:280,
+                   overflowY:"auto",
+                   paddingRight:4
                 }}>
                   {lavoriData.foto.map(foto => (
                     <div
