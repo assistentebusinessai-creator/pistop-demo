@@ -1742,6 +1742,9 @@ function DocumentazionePubblica({token}) {
         margin:"0 auto"
       }}>
         <h1 style={{
+          color:"#f30d0de6",
+          fontWeight:800,
+          textShadow:"0 1px 8px rgba(0,0,0,0.8)",
           fontSize:32,
           marginBottom:8
         }}>
@@ -1797,7 +1800,7 @@ function DocumentazionePubblica({token}) {
             {(doc.foto || []).map((foto, i) => (
               <img
                 key={i}
-                src={foto.preview}
+                src={foto.preview || foto.url}
                 alt=""
                 style={{
                   width:"100%",
