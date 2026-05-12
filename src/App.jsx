@@ -2,8 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { LISTINO } from "./listino";
 import { generaXmlFatturaPA } from "./fatturaXml";
 import { createClient } from '@supabase/supabase-js'
-import { fontFamily } from "html2canvas/dist/types/css/property-descriptors/font-family";
-import { letterSpacing } from "html2canvas/dist/types/css/property-descriptors/letter-spacing";
+
 
 const supabase = createClient(
   "https://ytfnepbphttounnurcqa.supabase.co",
@@ -1373,14 +1372,7 @@ function Preview({prev,onSalva,onEdit,onBack,saved}) {
       </div>
 
       {/* Azioni */}
-      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>
-        <button onClick={handlePDF} style={{background:pdfDone?"#14532d":"#1a1a1a",border:`1px solid ${pdfDone?"#166534":"#333"}`,color:pdfDone?"#86efac":"#94a3b8",borderRadius:10,padding:"14px 10px",fontSize:15,fontWeight:800,cursor:"pointer",fontFamily:"'Barlow Condensed',sans-serif",letterSpacing:1,display:"flex",alignItems:"center",justifyContent:"center",gap:6}}>
-          {pdfDone ? "✓ PDF SCARICATO" : "📄 SCARICA PDF"}
-        </button>
-        <button onClick={handleXML} style={{background:"#0d2b1a", border:"1px solid #166534", color:"#fff", fontWeight:800}}>
-           📄 SCARICA XML
-        </button>
-      </div>
+      
 
       <div style={{
         display:"grid",
@@ -1389,23 +1381,7 @@ function Preview({prev,onSalva,onEdit,onBack,saved}) {
         marginTop:18
 
       }}>
-        <BtnSoft onClick={onEdit} 
-          style={{
-              minHeight:64,
-              borderRadius:14,
-              background:"#1a1a1a",
-              border:"1px solid #ea580c",
-              color:"#f97316",
-              fontWeight:900,
-              fontSize:18,
-              fontFamily:"Barlow Condensed, sans-serif",
-              letterSpacing:1,
-              textTransform:"uppercase"
-          
-          }}
-        >✏️ Modifica</BtnSoft>
-
-        {!saved && <Btn onClick={onSalva} 
+         {!saved && <Btn onClick={onSalva} 
         style={{
           display:"flex",
           alignItems:"center",
@@ -1413,9 +1389,9 @@ function Preview({prev,onSalva,onEdit,onBack,saved}) {
           gap:6,
           minHeight:64,
           borderRadius:14,
-          background:"#14532d",
-          border:"1px solid #166534",
-          color:"#86efac",
+          background:"#111111",
+          border:"5px solid #22c55e",
+          color:"#4ade80",
           fontWeight:900,
           fontFamily:"Barlow Condensed, sans-serif",
           letterSpacing:1,
@@ -1432,17 +1408,89 @@ function Preview({prev,onSalva,onEdit,onBack,saved}) {
           justifyContent:"center",
           gap:6,
           minHeight:64,
-          background:"#14532d",
-          border:"1px solid #166534",
-          color:"#86efac",
+          background:"#111111",
+          border:"5px solid #22c55e",
+          color:"#4ade80",
           borderRadius:14,
           fontSize:18,
           fontWeight:900,
           letterSpacing:1,
           textTransform:"uppercase",
-          fontFamily:"'Barlow Condensed',sans-serif",
+          fontFamily:"Barlow Condensed, sans-serif"
 
-          }}>✓ Salvato</div>}
+        }}
+        >✓ Salvato</div>}
+
+        <BtnSoft onClick={onEdit} 
+          style={{
+              minHeight:64,
+              borderRadius:14,
+              background:"#1a1a1a",
+              border:"5px solid #e67a2e",
+              color:"#f97316",
+              fontWeight:900,
+              fontSize:18,
+              fontFamily:"Barlow Condensed, sans-serif",
+              letterSpacing:1,
+              textTransform:"uppercase"
+          
+          }}
+        >✏️ Modifica</BtnSoft>
+
+        <div style={{
+          display:"grid",
+          gridTemplateColumns:"repeat(2,minmax(0,1fr))",
+          gap:14,
+          alignItems:"stretch",
+          width:"100%",
+          gridColumn:"1 / -1",
+          marginTop:10,
+          marginBottom:12
+          }}>
+              <button onClick={handlePDF} 
+               style={{
+                width:"100%",
+                 background:"#111111",
+                 border:"3px solid #766f6f",
+                 color:"#d1d5db",
+                 borderRadius:12,
+                 minHeight:50,
+                 fontSize:14,
+                 fontWeight:800,
+                 fontFamily:"Barlow Condensed, sans-serif",
+                 letterSpacing:1,
+                 textTransform:"uppercase",
+                 flex:1,
+                 cursor:"pointer",
+                 boxShadow:"0 0 10px rgba(255,255,255,0.04)"
+
+                }}
+                >
+
+                {pdfDone ? "✓ PDF SCARICATO" : "📄 SCARICA PDF"}
+              </button>
+              <button onClick={handleXML}
+                style={{
+                  width:"100%",
+                  background:"#111111",
+                  border:"3px solid #365a44",
+                  color:"#d1d5db",
+                  borderRadius:12,
+                  minHeight:50,
+                  fontSize:14,
+                  fontWeight:800,
+                  fontFamily:"Barlow Condensed, sans-serif",
+                  letterSpacing:1,
+                  textTransform:"uppercase",
+                  flex:1,
+                  cursor:"pointer"
+
+                }}>
+                 📄 SCARICA XML
+              </button>
+            </div>
+
+        
       </div>
 
       {showXmlModal && (
@@ -2386,9 +2434,11 @@ export default function App() {
                const testo = `🔧 *DS84 OFFICINE* — Preventivo\n🚗 ${viewPrev.veicolo}\n\nPuò visualizzare e accettare il preventivo al seguente link:\n${link}`;
                const numero = viewPrev.telefono ? `39${viewPrev.telefono.replace(/\s/g,'')}` : '';
                window.open(`https://wa.me/${numero}?text=${encodeURIComponent(testo)}`);
-            }} style={{background:"#25D366",color:"#fff",border:"none",borderRadius:10,padding:"14px",fontSize:15,fontWeight:800,cursor:"pointer",fontFamily:"'Barlow Condensed',sans-serif",letterSpacing:1}}>
+            }} style={{background:"#25D366",color:"#fff",border:"none",borderRadius:10,padding:"18px 16px",fontSize:18,fontWeight:800,cursor:"pointer",fontFamily:"'Barlow Condensed',sans-serif",letterSpacing:1}}>
                 📲 INVIA SU WHATSAPP
             </button>
+
+            
             
             {viewPrev?.tipo_pratica === "fattura" && (
             <button
@@ -2404,12 +2454,12 @@ export default function App() {
                  setScreen("lavori");
               }}
               style={{
-                background:"#720000",
-                color:"#fff",
-                border:"none",
+                background:"transparent",
+                color:"#ffffff",
+                border:"3px solid #fffffff6",
                 borderRadius:10,
-                padding:"14px",
-                fontSize:15,
+                padding:"12px",
+                fontSize:13,
                 fontWeight:700
               }}
             >
@@ -2418,7 +2468,7 @@ export default function App() {
             )}
 
             
-            <button onClick={()=>onDeleteFromArchivio(viewPrev)} style={{background:"#f43f3f",border:`1px solid #3f1212`,color:"#fff",borderRadius:8,padding:"10px",fontSize:14,cursor:"pointer",fontFamily:"'Barlow',sans-serif"}}>
+            <button onClick={()=>onDeleteFromArchivio(viewPrev)} style={{background:"transparent",border:"2px dashed #ff5a36",color:"#de5a5add",borderRadius:8,padding:"10px",fontSize:14,cursor:"pointer",fontFamily:"'Barlow',sans-serif"}}>
               🗑 ELIMINA PREVENTIVO
             </button>
           </div>
