@@ -1856,7 +1856,7 @@ function DocumentazionePubblica({token}) {
           fontSize:32,
           marginBottom:8
         }}>
-          📸 Documentazione lavoro
+           Documentazione lavoro
         </h1>
 
         <div style={{
