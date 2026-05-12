@@ -2711,7 +2711,7 @@ export default function App() {
                 cursor:"pointer"
               }}
             >
-               💾 SALVA DOCUMENTAZIONE
+               💾 SALVA 
             </button>
 
             <button
@@ -2747,7 +2747,7 @@ export default function App() {
                 
               }}
             >
-               📧 INVIA DOCUMENTAZIONE VIA EMAIL
+               📧 INVIA EMAIL
             </button>
 
              
