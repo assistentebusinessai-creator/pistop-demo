@@ -1700,11 +1700,13 @@ function DocumentazionePubblica({token}) {
       .eq("token", token)
       .single()
       .then(({ data }) => {
-        if (data?.dati?.documentazione_lavoro) {
+        if (data?.dati) {
           setDoc({
             ...data.dati.documentazione_lavoro,
             veicolo: data.dati.veicolo,
-            cliente: data.dati.cliente
+            cliente: data.dati.cliente,
+            note: data.dati.documentazione_lavoro?.note || "",
+            foto: data.dati.documentazione_lavoro?.foto || []
           });
         }
       });
