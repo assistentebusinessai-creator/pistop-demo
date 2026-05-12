@@ -26,10 +26,14 @@ export default async function handler(req, res) {
   };
 
   for (const row of data || []) {
-    await webpush.sendNotification(
-      row.subscription,
-      JSON.stringify(messaggio)
-    );
+    try {
+      await webpush.sendNotification(
+        row.subscription,
+        JSON.stringify(messaggio)
+      );
+    } catch (err) {
+      console.error("Errore invio push a una subscription:", err);
+    }
   }
 
   res.json({ ok: true });
