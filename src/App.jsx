@@ -2638,9 +2638,10 @@ export default function App() {
                   gridTemplateColumns:"repeat(auto-fill,minmax(120px,1fr))",
                   gap:12,
                   maxHeight:190,
-                   overflowY:"auto",
-                   paddingRight:4,
-                    alignContent:"start"
+                  overflowY:"scroll",
+                  overflowX:"hidden",
+                  paddingRight:4,
+                  alignContent:"start"
                     
 
 
