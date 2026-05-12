@@ -1753,7 +1753,10 @@ function DocumentazionePubblica({token}) {
 
         <div style={{
           opacity:.7,
-          marginBottom:24
+          marginBottom:36,
+          fontSize:18,
+          fontWeight:600,
+          letterSpacing:1.2
         }}>
           {doc.veicolo} — {doc.cliente}
         </div>
@@ -1794,7 +1797,7 @@ function DocumentazionePubblica({token}) {
 
             <div style={{
               opacity:.8,
-              marginBottom:28,
+              marginBottom:40,
               lineHeight:1.6,
               fontSize:15
             }}>
@@ -2425,7 +2428,10 @@ export default function App() {
             </div>
 
             <textarea
-              value={lavoriData.note}
+              value={
+                lavoriData.note ||
+                "Documentazione fotografica relativa all'intervento eseguito sul veicolo."
+              }
               onChange={(e) => setLavoriData({...lavoriData, note:e.target.value})}
               placeholder="Es: foto dei componenti sostituiti, prodotti utilizzati, dettagli dell’intervento..."
               rows={5}
