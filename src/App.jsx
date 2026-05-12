@@ -17,21 +17,36 @@ const VAPID_PUBLIC = import.meta.env.VITE_VAPID_PUBLIC_KEY;
 async function registraPushNotifiche() {
   try {
     if (!('serviceWorker' in navigator) || !('PushManager' in window)) return;
-    
+
     const reg = await navigator.serviceWorker.register('/sw.js');
+
     const permission = await Notification.requestPermission();
     if (permission !== 'granted') return;
 
-    const sub = await reg.pushManager.subscribe({
-      userVisibleOnly: true,
-      applicationServerKey: VAPID_PUBLIC
-    });
+    let sub = await reg.pushManager.getSubscription();
 
-    await supabase.from('push_subscription').insert([
-      { subscription: sub.toJSON() }
-    ]);
+    if (!sub) {
+      sub = await reg.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: VAPID_PUBLIC
+      });
+    }
 
-  } catch(e) {
+    const subscriptionJson = sub.toJSON();
+
+    await supabase
+      .from('push_subscription')
+      .upsert(
+        {
+          endpoint: subscriptionJson.endpoint,
+          sottoscrizione: subscriptionJson
+        },
+        {
+          onConflict: 'endpoint'
+        }
+      );
+
+  } catch (e) {
     console.error('Push registration error:', e);
   }
 }
