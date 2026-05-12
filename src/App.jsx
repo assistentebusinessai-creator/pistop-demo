@@ -1757,6 +1757,7 @@ function DocumentazionePubblica({token}) {
         }}>
           {doc.veicolo} — {doc.cliente}
         </div>
+        {/*
 
         {doc.note && (
           <>
@@ -1780,6 +1781,7 @@ function DocumentazionePubblica({token}) {
             </div>
           </>
         )}
+        */}
 
         <>
           <div style={{
@@ -1789,7 +1791,20 @@ function DocumentazionePubblica({token}) {
             opacity:.6,
             marginBottom:12
           }}>
-            Foto intervento
+
+            <div style={{
+              opacity:.8,
+              marginBottom:20,
+              lineHeight:1.6,
+              fontSize:15
+            }}>
+                Documentazione fotografica relativa all’intervento eseguito sul veicolo.
+            </div>
+
+
+
+
+            
           </div>
 
           <div style={{
@@ -2584,11 +2599,11 @@ export default function App() {
 
             le inviamo la documentazione relativa al lavoro effettuato sul suo veicolo.
 
-            Nel link qui sotto potrà visualizzare le foto dell’intervento e le eventuali note tecniche associate al lavoro svolto.
+            Per visualizzarla, clicchi sul seguente link:
 
             ${linkDoc}
 
-            Grazie per aver scelto DS84 Officina.`);
+            Grazie per aver scelto DS84 Officine.`);
 
                 window.location.href = `mailto:${viewPrev?.email || ""}?subject=${subject}&body=${body}`;
               }}
