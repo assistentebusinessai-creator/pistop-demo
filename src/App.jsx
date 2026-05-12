@@ -2544,7 +2544,7 @@ export default function App() {
               }
               onChange={(e) => setLavoriData({...lavoriData, note:e.target.value})}
               placeholder="Es: foto dei componenti sostituiti, prodotti utilizzati, dettagli dell’intervento..."
-              rows={5}
+              rows={3}
               style={{
                 width:"100%",
                 background:BG,
@@ -2637,7 +2637,7 @@ export default function App() {
                   display:"grid",
                   gridTemplateColumns:"repeat(auto-fill,minmax(120px,1fr))",
                   gap:12,
-                  maxHeight:280,
+                  maxHeight:190,
                    overflowY:"auto",
                    paddingRight:4
                 }}>
@@ -2656,7 +2656,7 @@ export default function App() {
                         alt=""
                         style={{
                           width:"100%",
-                          height:120,
+                          height:85,
                           objectFit:"cover",
                           display:"block"
                         }}
