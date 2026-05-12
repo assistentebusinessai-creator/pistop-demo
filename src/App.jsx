@@ -2572,6 +2572,42 @@ export default function App() {
                💾 SALVA DOCUMENTAZIONE
             </button>
 
+            <button
+              onClick={() => {
+                const linkDoc = `${window.location.origin}/documentazione/${viewPrev?.token}`;
+
+                const subject = encodeURIComponent(
+                  "Documentazione lavoro veicolo"
+                );
+
+                const body = encodeURIComponent(`Gentile cliente,
+
+            le inviamo la documentazione relativa al lavoro effettuato sul suo veicolo.
+
+            Nel link qui sotto potrà visualizzare le foto dell’intervento e le eventuali note tecniche associate al lavoro svolto.
+
+            ${linkDoc}
+
+            Grazie per aver scelto DS84 Officina.`);
+
+                window.location.href = `mailto:${viewPrev?.email || ""}?subject=${subject}&body=${body}`;
+              }}
+              style={{
+                background:"#1f1f1f",
+                color:"#fff",
+                border:"1px solid #333",
+                borderRadius:10,
+                padding:"14px",
+                fontSize:15,
+                fontWeight:800,
+                cursor:"pointer",
+                marginTop:10,
+                width:"100%"
+              }}
+            >
+               📧 INVIA DOCUMENTAZIONE VIA EMAIL
+            </button>
+
              </div>
           </div>
         </div>
