@@ -1756,35 +1756,59 @@ function DocumentazionePubblica({token}) {
         </div>
 
         {doc.note && (
-          <div style={{
-            background:"#1b1b1b",
-            padding:16,
-            borderRadius:12,
-            marginBottom:24,
-            lineHeight:1.6
-          }}>
-            {doc.note}
-          </div>
+          <>
+            <div style={{
+              fontSize:14,
+              letterSpacing:1,
+              textTransform:"uppercase",
+              opacity: .6,
+              marginBottom:8
+            }}>
+              Note lavoro
+            </div>
+            <div style={{
+              background:"#1b1b1b",
+              padding:16,
+              borderRadius:12,
+              marginBottom:24,
+              lineHeight:1.6
+            }}>
+              {doc.note}
+            </div>
+          </>
         )}
 
-        <div style={{
-          display:"grid",
-          gridTemplateColumns:"repeat(auto-fill,minmax(220px,1fr))",
-          gap:16
-        }}>
-          {(doc.foto || []).map((foto, i) => (
-            <img
-              key={i}
-              src={foto.preview || foto.url}
-              alt=""
-              style={{
-                width:"100%",
-                borderRadius:14,
-                display:"block"
-              }}
-            />
-          ))}
-        </div>
+        <>
+          <div style={{
+            fontSize:14,
+            letterSpacing:1,
+            textTransform:"uppercase",
+            opacity:.6,
+            marginBottom:12
+          }}>
+            Foto intervento
+          </div>
+
+          <div style={{
+            display:"grid",
+            gridTemplateColumns:"repeat(auto-fill,minmax(220px,1fr))",
+            gap:16
+          }}>
+            {(doc.foto || []).map((foto, i) => (
+              <img
+                key={i}
+                src={foto.preview}
+                alt=""
+                style={{
+                  width:"100%",
+                  borderRadius:14,
+                  objectFit:"cover",
+                  border:"1px solid #2a2a2a"
+                }}
+              />
+            ))}
+          </div>
+        </>
       </div>
     </div>
   );
