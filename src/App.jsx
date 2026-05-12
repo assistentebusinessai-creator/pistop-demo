@@ -1918,24 +1918,38 @@ function DocumentazionePubblica({token}) {
             
           </div>
 
-          <div style={{
+         <div style={{
             display:"grid",
-            gridTemplateColumns:"repeat(auto-fill,minmax(220px,260px))",
-            justifyContent:"start",
-            gap:16
+            gridTemplateColumns:"repeat(auto-fit,minmax(140px,1fr))",
+            gap:10
           }}>
             {(doc.foto || []).map((foto, i) => (
-              <img
+              <a
                 key={i}
-                src={foto.preview || foto.url}
-                alt=""
+                href={foto.preview || foto.url}
+                target="_blank"
+                rel="noopener noreferrer"
                 style={{
-                  width:"100%",
-                  borderRadius:14,
-                  objectFit:"cover",
-                  border:"1px solid #2a2a2a"
+                  display:"block",
+                  borderRadius:12,
+                  overflow:"hidden",
+                  border:"1px solid #2a2a2a",
+                  background:"#1b1b1b"
+
                 }}
-              />
+              >
+                <img
+                  src={foto.preview || foto.url}
+                  alt=""
+                  style={{
+                    width:"100%",
+                    height:130,
+                    objectFit:"cover",
+                    display:"block"
+                  }}
+                />
+              </a>
+
             ))}
           </div>
         </>
