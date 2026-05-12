@@ -21,7 +21,7 @@ export default async function handler(req, res) {
 
   const messaggio = {
     title: stato === 'accettato' ? '✅ Preventivo Accettato!' : '❌ Preventivo Rifiutato',
-    body: `${veicolo}`,
+    body: `${veicolo || "Veicolo non specificato"}`,
     url: '/archivio'
   };
 
