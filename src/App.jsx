@@ -2751,8 +2751,10 @@ export default function App() {
             </button>
 
              
-          </div>
-        </div>
+            </div>
+           </div>
+         </div>
+       </div>
       )}
 
       {screen==="cliente" && (
