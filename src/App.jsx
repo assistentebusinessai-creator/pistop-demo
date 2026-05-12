@@ -1700,6 +1700,9 @@ function DocumentazionePubblica({token}) {
       .eq("token", token)
       .single()
       .then(({ data }) => {
+        console.log("TOKEN DOCUMENTAZIONE:", token);
+        console.log("DATA DOCUMENTAZIONE:", data);
+
         if (data?.dati) {
           setDoc({
             ...data.dati.documentazione_lavoro,
