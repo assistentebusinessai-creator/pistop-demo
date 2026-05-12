@@ -2690,6 +2690,13 @@ export default function App() {
 
 
                )}
+              
+              <div style={{
+                 display:"grid",
+                 gridTemplateColumns:"1fr 1fr",
+                 gap:10,
+                 marginTop:14
+              }}>
 
                <button
               onClick={salvaDocumentazioneLavoro}
@@ -2699,7 +2706,7 @@ export default function App() {
                 border:"none",
                 borderRadius:10,
                 padding:"14px",
-                fontSize:15,
+                fontSize:14,
                 fontWeight:800,
                 cursor:"pointer"
               }}
@@ -2733,11 +2740,11 @@ export default function App() {
                 border:"1px solid #333",
                 borderRadius:10,
                 padding:"14px",
-                fontSize:15,
+                fontSize:14,
                 fontWeight:800,
                 cursor:"pointer",
-                marginTop:10,
-                width:"100%"
+                
+                
               }}
             >
                📧 INVIA DOCUMENTAZIONE VIA EMAIL
