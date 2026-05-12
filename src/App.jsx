@@ -1690,6 +1690,101 @@ const BottomNav = ({active,onChange,hasPrev,desktopTop=false}) => (
 );
 
 
+function DocumentazionePubblica({token}) {
+  const [doc, setDoc] = useState(null);
+
+  useEffect(() => {
+    supabase
+      .from("preventivi")
+      .select("dati")
+      .eq("token", token)
+      .single()
+      .then(({ data }) => {
+        if (data?.dati?.documentazione_lavoro) {
+          setDoc({
+            ...data.dati.documentazione_lavoro,
+            veicolo: data.dati.veicolo,
+            cliente: data.dati.cliente
+          });
+        }
+      });
+  }, [token]);
+
+  if (!doc) {
+    return (
+      <div style={{
+        minHeight:"100vh",
+        background:"#111",
+        color:"#fff",
+        display:"flex",
+        alignItems:"center",
+        justifyContent:"center"
+      }}>
+        Caricamento documentazione...
+      </div>
+    );
+  }
+
+  return (
+    <div style={{
+      minHeight:"100vh",
+      background:"#111",
+      color:"#fff",
+      padding:20
+    }}>
+      <div style={{
+        maxWidth:900,
+        margin:"0 auto"
+      }}>
+        <h1 style={{
+          fontSize:32,
+          marginBottom:8
+        }}>
+          📸 Documentazione lavoro
+        </h1>
+
+        <div style={{
+          opacity:.7,
+          marginBottom:24
+        }}>
+          {doc.veicolo} — {doc.cliente}
+        </div>
+
+        {doc.note && (
+          <div style={{
+            background:"#1b1b1b",
+            padding:16,
+            borderRadius:12,
+            marginBottom:24,
+            lineHeight:1.6
+          }}>
+            {doc.note}
+          </div>
+        )}
+
+        <div style={{
+          display:"grid",
+          gridTemplateColumns:"repeat(auto-fill,minmax(220px,1fr))",
+          gap:16
+        }}>
+          {(doc.foto || []).map((foto, i) => (
+            <img
+              key={i}
+              src={foto.preview || foto.url}
+              alt=""
+              style={{
+                width:"100%",
+                borderRadius:14,
+                display:"block"
+              }}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function PreventivoPublico({token}) {
   const [prev, setPrev] = useState(null);
   const [stato, setStato] = useState(null);
@@ -1781,6 +1876,13 @@ export default function App() {
     const token = urlPath.split('/preventivo/')[1];
     return <PreventivoPublico token={token} />;
   }
+
+  if (urlPath.startsWith('/documentazione/')) {
+    const token = urlPath.split('/documentazione/')[1];
+    return <DocumentazionePubblica token={token} />;
+  }
+
+
   const [db,setDb]=useState({preventivi:[],clienti:[],nextNum:1});
   const [dbLoaded,setDbLoaded]=useState(false);
   const [screen,setScreen]=useState("home");
@@ -2364,21 +2466,7 @@ export default function App() {
                 📸 Carica foto lavoro
               </label>
 
-              <button
-              onClick={salvaDocumentazioneLavoro}
-              style={{
-                background:"#25D366",
-                color:"#fff",
-                border:"none",
-                borderRadius:10,
-                padding:"14px",
-                fontSize:15,
-                fontWeight:800,
-                cursor:"pointer"
-              }}
-            >
-               💾 SALVA DOCUMENTAZIONE
-            </button>
+              
 
               {lavoriData.foto.length > 0 && (
                 <div style={{
@@ -2435,6 +2523,22 @@ export default function App() {
 
 
                )}
+
+               <button
+              onClick={salvaDocumentazioneLavoro}
+              style={{
+                background:"#25D366",
+                color:"#fff",
+                border:"none",
+                borderRadius:10,
+                padding:"14px",
+                fontSize:15,
+                fontWeight:800,
+                cursor:"pointer"
+              }}
+            >
+               💾 SALVA DOCUMENTAZIONE
+            </button>
 
              </div>
           </div>
