@@ -2197,7 +2197,10 @@ export default function App() {
               onClick={() => {
                 setLavoriData({
                   note: viewPrev.documentazione_lavoro?.note || "",
-                  foto: viewPrev.documentazione_lavoro?.foto || []
+                  foto: (viewPrev.documentazione_lavoro?.foto || []).map(f => ({
+                    ...f,
+                    preview: f.preview || f.url
+                  }))
                 });
 
                  setScreen("lavori");
