@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import { LISTINO } from "./listino";
 import { generaXmlFatturaPA } from "./fatturaXml";
 import { createClient } from '@supabase/supabase-js'
+import { fontFamily } from "html2canvas/dist/types/css/property-descriptors/font-family";
+import { letterSpacing } from "html2canvas/dist/types/css/property-descriptors/letter-spacing";
 
 const supabase = createClient(
   "https://ytfnepbphttounnurcqa.supabase.co",
@@ -1380,24 +1382,67 @@ function Preview({prev,onSalva,onEdit,onBack,saved}) {
         </button>
       </div>
 
-      <div style={{display:"flex",gap:10}}>
+      <div style={{
+        display:"grid",
+        gridTemplateColumns:"1fr 1fr",
+        gap:12,
+        marginTop:18
+
+      }}>
         <BtnSoft onClick={onEdit} 
           style={{
-            flex:1,
-            textAlign:"center",
-            background:"#1a1a1a",
-            border:"1px solid #ea580c",
-            color:"#f97316",
-            fontWeight:800,
-            fontFamily:"Barlow Condensed, sans-serif",
-            letterSpacing:1,
-            textTransform:"uppercase"
+              minHeight:64,
+              borderRadius:14,
+              background:"#1a1a1a",
+              border:"1px solid #ea580c",
+              color:"#f97316",
+              fontWeight:900,
+              fontSize:18,
+              fontFamily:"Barlow Condensed, sans-serif",
+              letterSpacing:1,
+              textTransform:"uppercase"
+          
           }}
         >✏️ Modifica</BtnSoft>
-        {!saved && <Btn onClick={onSalva} style={{flex:2,display:"flex",alignItems:"center",justifyContent:"center",gap:6}}>
+
+        {!saved && <Btn onClick={onSalva} 
+        style={{
+          display:"flex",
+          alignItems:"center",
+          justifyContent:"center",
+          gap:6,
+          minHeight:64,
+          borderRadius:14,
+          background:"#14532d",
+          border:"1px solid #166534",
+          color:"#86efac",
+          fontWeight:900,
+          fontFamily:"Barlow Condensed, sans-serif",
+          letterSpacing:1,
+          textTransform:"uppercase",
+          fontSize:18,
+          cursor:"pointer"
+          }}>
+
           <span>💾</span> SALVA IN ARCHIVIO
         </Btn>}
-        {saved && <div style={{flex:2,background:"#14532d",border:"1px solid #166534",color:"#86efac",borderRadius:10,padding:"13px",fontSize:14,fontWeight:700,textAlign:"center",fontFamily:"'Barlow Condensed',sans-serif"}}>✓ Salvato</div>}
+        {saved && <div style={{
+          display:"flex",
+          alignItems:"center",
+          justifyContent:"center",
+          gap:6,
+          minHeight:64,
+          background:"#14532d",
+          border:"1px solid #166534",
+          color:"#86efac",
+          borderRadius:14,
+          fontSize:18,
+          fontWeight:900,
+          letterSpacing:1,
+          textTransform:"uppercase",
+          fontFamily:"'Barlow Condensed',sans-serif",
+
+          }}>✓ Salvato</div>}
       </div>
 
       {showXmlModal && (
@@ -2359,7 +2404,7 @@ export default function App() {
                  setScreen("lavori");
               }}
               style={{
-                background:"#1E293B",
+                background:"#720000",
                 color:"#fff",
                 border:"none",
                 borderRadius:10,
@@ -2373,8 +2418,8 @@ export default function App() {
             )}
 
             
-            <button onClick={()=>onDeleteFromArchivio(viewPrev)} style={{background:"none",border:`1px solid #3f1212`,color:"#ef4444",borderRadius:8,padding:"10px",fontSize:12,cursor:"pointer",fontFamily:"'Barlow',sans-serif"}}>
-              🗑 Elimina preventivo
+            <button onClick={()=>onDeleteFromArchivio(viewPrev)} style={{background:"#f43f3f",border:`1px solid #3f1212`,color:"#fff",borderRadius:8,padding:"10px",fontSize:14,cursor:"pointer",fontFamily:"'Barlow',sans-serif"}}>
+              🗑 ELIMINA PREVENTIVO
             </button>
           </div>
         )}
