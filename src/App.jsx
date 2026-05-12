@@ -1794,7 +1794,7 @@ function DocumentazionePubblica({token}) {
 
             <div style={{
               opacity:.8,
-              marginBottom:20,
+              marginBottom:28,
               lineHeight:1.6,
               fontSize:15
             }}>
@@ -1809,7 +1809,8 @@ function DocumentazionePubblica({token}) {
 
           <div style={{
             display:"grid",
-            gridTemplateColumns:"repeat(auto-fill,minmax(220px,1fr))",
+            gridTemplateColumns:"repeat(auto-fill,minmax(220px,260px))",
+            justifyContent:"start",
             gap:16
           }}>
             {(doc.foto || []).map((foto, i) => (
