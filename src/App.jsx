@@ -2639,7 +2639,11 @@ export default function App() {
                   gap:12,
                   maxHeight:190,
                    overflowY:"auto",
-                   paddingRight:4
+                   paddingRight:4,
+                    alignContent:"start"
+                    
+
+
                 }}>
                   {lavoriData.foto.map(foto => (
                     <div
