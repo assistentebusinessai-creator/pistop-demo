@@ -2397,7 +2397,7 @@ export default function App() {
 
       {/* Body */}
       <div style={{
-        padding: 16,
+        padding: screen === "lavori" ? "6px 16px 16px" : 16,
         paddingBottom: "calc(120px + env(safe-area-inset-bottom))",
         animation: "fadeIn .2s ease"
       }}>
