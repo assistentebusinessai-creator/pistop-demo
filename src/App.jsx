@@ -2804,7 +2804,9 @@ export default function App() {
       )}
 
       {/* Bottom nav */}
-      {window.innerWidth < 768 && (
+      {window.innerWidth < 768 &&
+        screen !== "view" &&
+        screen !== "lavori" && (
         
        
        <BottomNav active={screen==="home"?"home":screen==="archivio"||screen==="view"?"archivio":screen==="cliente" ? "cliente" :"nuovo"}
