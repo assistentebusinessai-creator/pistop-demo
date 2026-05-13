@@ -2102,7 +2102,12 @@ export default function App() {
 
     loadDB().then(d=>{
        setDb(d); 
-       setDbLoaded(true);    
+       setDbLoaded(true);
+        const params = new URLSearchParams(window.location.search);
+
+        if (params.get("screen") === "archivio") {
+           setScreen("archivio");
+        }
       });
   },[]);
 
