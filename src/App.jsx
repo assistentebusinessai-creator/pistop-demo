@@ -1661,6 +1661,7 @@ function Preview({prev,onSalva,onEdit,onBack,saved}) {
 function Archivio({db,onBack,onOpen}) {
 
   const [filter,setFilter]=useState("");
+  const [storicoAperto, setStoricoAperto] = useState(null);
   const [listaSupabase,setListaSupabase]=useState(db.preventivi || []);
 
   useEffect(() => {
@@ -1687,11 +1688,18 @@ function Archivio({db,onBack,onOpen}) {
   }, []);
 
   const lista = [...listaSupabase].sort((a,b)=>b.data.localeCompare(a.data));
-  const filtered = filter ? lista.filter(p=>
-    p.veicolo?.toLowerCase().includes(filter.toLowerCase())||
-    p.cliente?.toLowerCase().includes(filter.toLowerCase())||
-    p.numero?.toLowerCase().includes(filter.toLowerCase())
-  ) : lista;
+  const search = filter.toLowerCase();
+
+  const filtered = filter
+    ? lista.filter(p =>
+        p.veicolo?.toLowerCase().includes(search) ||
+        p.cliente?.toLowerCase().includes(search) ||
+        p.numero?.toLowerCase().includes(search) ||
+        p.telefono?.toLowerCase().includes(search) ||
+        p.targa?.toLowerCase().includes(search) ||
+        p.telaio?.toLowerCase().includes(search)
+      )
+    : lista;
 
   const byMonth = filtered.reduce((acc,p)=>{
     const k=mKey(p.data); if(!acc[k])acc[k]=[]; acc[k].push(p); return acc;
@@ -1709,7 +1717,7 @@ function Archivio({db,onBack,onOpen}) {
 
       <div style={{display:"flex",alignItems:"center",background:C1,border:`1px solid ${BR}`,borderRadius:10,overflow:"hidden"}}>
         <span style={{padding:"0 12px",color:MT}}>🔍</span>
-        <input value={filter} onChange={e=>setFilter(e.target.value)} placeholder="Cerca per cliente, veicolo, numero..."
+        <input value={filter} onChange={e=>setFilter(e.target.value)} placeholder="Cerca cliente, telefono, targa, telaio..."
           style={{flex:1,background:"none",border:"none",color:TX,fontSize:14,padding:"12px 0",fontFamily:"'Barlow',sans-serif"}}/>
       </div>
 
