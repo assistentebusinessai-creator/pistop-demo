@@ -2094,14 +2094,16 @@ export default function App() {
     };
   }, []);
 
+  registraPushNotifiche();
 
+   
   useEffect(()=>{
-    registraPushNotifiche();
+    
 
     loadDB().then(d=>{
        setDb(d); 
-       setDbLoaded(true);
-    });
+       setDbLoaded(true);    
+      });
   },[]);
 
   const persist = d => { setDb(d); saveDB(d); };
