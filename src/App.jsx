@@ -1485,8 +1485,8 @@ function Preview({prev,onSalva,onEdit,onBack,saved}) {
 
                 {pdfDone ? "✓ PDF SCARICATO" : "📄 SCARICA PDF"}
               
-            </button>
-
+              </button>
+         
         
       </div>
 
@@ -1631,7 +1631,7 @@ function Preview({prev,onSalva,onEdit,onBack,saved}) {
         </div>
       )}
     </div>
-
+  </div>
 
   );
 }
