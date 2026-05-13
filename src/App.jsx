@@ -1753,11 +1753,7 @@ function Archivio({db,onBack,onOpen}) {
         <div style={{marginLeft:"auto",fontFamily:"'Barlow Condensed',sans-serif",fontSize:16,color:A}}>{fmt(totAll)}</div>
       </div>
 
-      <div style={{display:"flex",alignItems:"center",background:C1,border:`1px solid ${BR}`,borderRadius:10,overflow:"hidden"}}>
-        <span style={{padding:"0 12px",color:MT}}>🔍</span>
-        <input value={filter} onChange={e=>setFilter(e.target.value)} placeholder="Cerca cliente, telefono, targa, telaio..."
-          style={{flex:1,background:"none",border:"none",color:TX,fontSize:14,padding:"12px 0",fontFamily:"'Barlow',sans-serif"}}/>
-      </div>
+      
       
       <div style={{display:"flex",alignItems:"center",background:C1,border:`1px solid ${BR}`,borderRadius:10,overflow:"hidden"}}>
         <span style={{padding:"0 12px",color:MT}}>🔍</span>
@@ -1833,7 +1829,7 @@ function Archivio({db,onBack,onOpen}) {
         </div>
       )}
 
-      {months.map(mk=>{
+      {!filter.trim() && months.map(mk=>{
         const mese=byMonth[mk];
         const totM=mese.reduce((s,p)=>s+tot(p.voci),0);
         return (
