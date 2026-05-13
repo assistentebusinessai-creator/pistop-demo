@@ -1662,6 +1662,7 @@ function Archivio({db,onBack,onOpen}) {
 
   const [filter,setFilter]=useState("");
   const [storicoAperto, setStoricoAperto] = useState(null);
+  const [schedeClienti, setSchedeClienti] = useState([]);
   const [listaSupabase,setListaSupabase]=useState(db.preventivi || []);
 
   useEffect(() => {
@@ -1700,6 +1701,43 @@ function Archivio({db,onBack,onOpen}) {
         p.telaio?.toLowerCase().includes(search)
       )
     : lista;
+  useEffect(() => {
+    if (!filter.trim()) {
+      setSchedeClienti([]);
+      return;
+    }
+
+    const mapClienti = {};
+
+    filtered.forEach(p => {
+      const key =
+        p.telefono ||
+        p.targa ||
+        p.telaio ||
+        p.cliente ||
+        p.id;
+
+      if (!mapClienti[key]) {
+        mapClienti[key] = {
+          id: key,
+          cliente: p.cliente || "Cliente senza nome",
+          telefono: p.telefono || "",
+          targa: p.targa || "",
+          telaio: p.telaio || "",
+          veicolo: p.veicolo || "",
+          count: 0,
+          totale: 0,
+          ultimoPreventivo: p
+        };
+      }
+
+      mapClienti[key].count += 1;
+      mapClienti[key].totale += tot(p.voci);
+    });
+
+    setSchedeClienti(Object.values(mapClienti));
+  }, [filter]);
+    
 
   const byMonth = filtered.reduce((acc,p)=>{
     const k=mKey(p.data); if(!acc[k])acc[k]=[]; acc[k].push(p); return acc;
@@ -1720,6 +1758,73 @@ function Archivio({db,onBack,onOpen}) {
         <input value={filter} onChange={e=>setFilter(e.target.value)} placeholder="Cerca cliente, telefono, targa, telaio..."
           style={{flex:1,background:"none",border:"none",color:TX,fontSize:14,padding:"12px 0",fontFamily:"'Barlow',sans-serif"}}/>
       </div>
+      
+      <div style={{display:"flex",alignItems:"center",background:C1,border:`1px solid ${BR}`,borderRadius:10,overflow:"hidden"}}>
+        <span style={{padding:"0 12px",color:MT}}>🔍</span>
+
+        <input
+          value={filter}
+          onChange={e=>setFilter(e.target.value)}
+          placeholder="Cerca cliente, telefono, targa, telaio..."
+          style={{
+            flex:1,
+            background:"none",
+            border:"none",
+            color:TX,
+            fontSize:14,
+            padding:"12px 0",
+            fontFamily:"'Barlow',sans-serif"
+          }}
+        />
+      </div>
+
+      {filter.trim() && schedeClienti.length > 0 && (
+        <div style={{display:"flex",flexDirection:"column",gap:10}}>
+          {schedeClienti.map(s => (
+            <div
+              key={s.id}
+              style={{
+                background:C1,
+                border:`1px solid ${BR}`,
+                borderRadius:12,
+                padding:14
+              }}
+            >
+              <div style={{
+                fontFamily:"'Barlow Condensed',sans-serif",
+                fontSize:20,
+                fontWeight:900,
+                color:TX,
+                textTransform:"uppercase"
+              }}>
+                {s.cliente}
+              </div>
+
+              <div style={{fontSize:12,color:MT2,marginTop:4}}>
+                {s.veicolo || "Veicolo non indicato"}
+                {s.targa ? ` · ${s.targa}` : ""}
+              </div>
+
+              {s.telaio && (
+                <div style={{fontSize:11,color:MT,marginTop:3}}>
+                  Telaio: {s.telaio}
+                </div>
+              )}
+
+              <div style={{display:"flex",justifyContent:"space-between",marginTop:10}}>
+                <span style={{fontSize:12,color:MT}}>
+                  {s.count} lavori trovati
+                </span>
+
+                <span style={{fontSize:14,color:A,fontWeight:900}}>
+                  {fmt(s.totale)}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
 
       {months.length===0 && (
         <div style={{textAlign:"center",padding:"40px 0",color:MT}}>
