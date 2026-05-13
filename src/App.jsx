@@ -2094,9 +2094,15 @@ export default function App() {
     };
   }, []);
 
-  registraPushNotifiche();
 
-  useEffect(()=>{ loadDB().then(d=>{ setDb(d); setDbLoaded(true); }); },[]);
+  useEffect(()=>{
+    registraPushNotifiche();
+
+    loadDB().then(d=>{
+       setDb(d); 
+       setDbLoaded(true);
+    });
+  },[]);
 
   const persist = d => { setDb(d); saveDB(d); };
 
