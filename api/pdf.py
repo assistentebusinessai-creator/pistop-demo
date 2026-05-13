@@ -38,7 +38,7 @@ def genera(dati):
     telaio = dati.get("telaio", "").upper().strip()
     if telaio:
         c.setFont("Helvetica", 10)
-        c.drawString(45, 627, telaio)
+        c.drawString(40, 627, telaio)
 
     # 🔥 VEICOLO SPLITTATO
     veicolo =(dati.get("modello", "") or dati.get("marca", "")).upper()
@@ -147,7 +147,7 @@ def genera(dati):
         righe_descrizione = simpleSplit(descrizione, "Helvetica", 10, 300)
 
         line_height = 10
-        altezza_voce = max(step_riga, len(righe_descrizione) * line_height)
+        altezza_voce = max(step_riga, len(righe_descrizione) * line_height + 4)
 
         # centro verticale della voce
         y_centro = y - ((altezza_voce - line_height) / 2)
