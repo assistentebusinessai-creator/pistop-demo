@@ -1818,6 +1818,83 @@ function Archivio({db,onBack,onOpen}) {
                   {fmt(s.totale)}
                 </span>
               </div>
+              {storicoAperto === s.id && (
+                <div style={{
+                  marginTop:14,
+                  borderTop:`1px solid ${BR}`,
+                  paddingTop:12,
+                  display:"flex",
+                  flexDirection:"column",
+                  gap:8
+                }}>
+
+                  {filtered
+                    .filter(p =>
+                      (p.telefono && p.telefono === s.telefono) ||
+                      (p.targa && p.targa === s.targa) ||
+                      (p.telaio && p.telaio === s.telaio) ||
+                      (p.cliente && p.cliente === s.cliente)
+                    )
+                    .map(p => (
+                      <div
+                        key={p.id}
+                        onClick={(e)=>{
+                          e.stopPropagation();
+                          onOpen(p);
+                        }}
+                        style={{
+                          background:"#111",
+                          border:`1px solid ${BR}`,
+                          borderRadius:10,
+                          padding:10,
+                          cursor:"pointer"
+                        }}
+                      >
+
+                        <div style={{
+                          display:"flex",
+                          justifyContent:"space-between",
+                          alignItems:"center"
+                        }}>
+                          <div style={{
+                            fontSize:13,
+                            fontWeight:700,
+                            color:TX
+                          }}>
+                            {p.veicolo}
+                          </div>
+
+                          <div style={{
+                            fontSize:13,
+                            fontWeight:900,
+                            color:A
+                          }}>
+                            {fmt(tot(p.voci))}
+                          </div>
+                        </div>
+
+                        <div style={{
+                          fontSize:11,
+                          color:MT,
+                          marginTop:4
+                        }}>
+                          {new Date(p.data).toLocaleDateString("it-IT")}
+                        </div>
+
+                        <div style={{
+                          fontSize:11,
+                          color:MT2,
+                          marginTop:4
+                        }}>
+                          {p.descrizione_lavoro}
+                        </div>
+
+                      </div>
+                    ))
+                  }
+
+                </div>
+              )}
             </div>
           ))}
         </div>
