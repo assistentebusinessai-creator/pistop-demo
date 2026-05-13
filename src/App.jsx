@@ -1485,7 +1485,7 @@ function Preview({prev,onSalva,onEdit,onBack,saved}) {
 
                 {pdfDone ? "✓ PDF SCARICATO" : "📄 SCARICA PDF"}
               
-            </div>
+            </button>
 
         
       </div>
@@ -2496,6 +2496,7 @@ export default function App() {
 
     const preventivoAggiornato = {
       ...viewPrev,
+      documentazione_salvata: true,
       documentazione_lavoro: documentazione
     };
 
@@ -2917,11 +2918,14 @@ export default function App() {
                 cursor:"pointer"
               }}
             >
-               💾 SALVA 
+              {viewPrev?.documentazione_salvata ? "✅ SALVATO" : "💾 SALVA"} 
             </button>
 
             <button
-              onClick={() => {
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
                 const linkDoc = `${window.location.origin}/documentazione/${viewPrev?.token}`;
 
                 const subject = encodeURIComponent(
