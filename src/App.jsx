@@ -1825,7 +1825,7 @@ function Archivio({db,onBack,onOpen}) {
                           onOpen(p);
                         }}
                         style={{
-                          background:"#151515"
+                          background:"#151515",
                           border:`1px solid ${A}`,
                            borderLeft:`4px solid ${A}`,
                           borderRadius:10,
