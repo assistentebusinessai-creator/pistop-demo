@@ -2488,7 +2488,7 @@ export default function App() {
                 border:"3px solid #766f6f",
                 borderRadius:10,
                 padding:"12px",
-                fontSize:13,
+                fontSize:14,
                 fontWeight:700,
                 fontFamily:"'Barlow Condensed',sans-serif"
               }}
