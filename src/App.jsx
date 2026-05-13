@@ -2489,7 +2489,8 @@ export default function App() {
                 borderRadius:10,
                 padding:"12px",
                 fontSize:13,
-                fontWeight:700
+                fontWeight:700,
+                fontFamily:"'Barlow Condensed',sans-serif"
               }}
             >
               📷 DOCUMENTAZIONE LAVORO
