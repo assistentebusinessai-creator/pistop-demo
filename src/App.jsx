@@ -1486,6 +1486,31 @@ function Preview({prev,onSalva,onEdit,onBack,saved}) {
                 {pdfDone ? "✓ PDF SCARICATO" : "📄 SCARICA PDF"}
               
               </button>
+
+              {saved && (
+                <button
+                  onClick={handleXML}
+                  style={{
+                    width:"100%",
+                    background:"#111111",
+                    border:"3px solid #766f6f",
+                    color:"#d1d5db",
+                    borderRadius:12,
+                    minHeight:50,
+                    fontSize:14,
+                    fontWeight:800,
+                    fontFamily:"Barlow Condensed, sans-serif",
+                    letterSpacing:1,
+                    textTransform:"uppercase",
+                    cursor:"pointer"
+                  }}
+                >
+                   📄 SCARICA XML
+                </button>
+              )}
+
+
+
          
         
       </div>
