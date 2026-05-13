@@ -118,6 +118,7 @@ const scaricaPDF = async (p) => {
       modello: p.veicolo,
       marca: p.veicolo,
       targa: p.targa,
+      telaio: p.telaio || "",
       numero: p.numero,
       data: new Date(p.data).toLocaleDateString('it-IT'),
       descrizione_lavoro: p.descrizione_lavoro,
