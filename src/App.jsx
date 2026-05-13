@@ -2485,7 +2485,7 @@ export default function App() {
               style={{
                 background:"transparent",
                 color:"#ffffff",
-                border:"3px solid #fffffff6",
+                border:"3px solid #766f6f",
                 borderRadius:10,
                 padding:"12px",
                 fontSize:13,
