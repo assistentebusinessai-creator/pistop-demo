@@ -142,20 +142,24 @@ def genera(dati):
         righe_descrizione = simpleSplit(descrizione, "Helvetica", 10, 300)
 
         line_height = 10
+        altezza_voce = max(step_riga, len(righe_descrizione) * line_height)
+
+        # centro verticale della voce
+        y_centro = y - ((altezza_voce - line_height) / 2)
+
+        # descrizione con ritorno a capo dentro la colonna
         for i, riga in enumerate(righe_descrizione):
             c.drawString(45, y - (i * line_height), riga)
 
-        # quantità (centrata/destra)
+        # quantità allineata al centro verticale della voce
         qta_txt = str(int(qta)) if qta.is_integer() else str(qta).replace(".", ",")
-        c.drawRightString(372, y, qta_txt)
+        c.drawRightString(372, y_centro, qta_txt)
 
         if mostra_prezzi:
             prezzo_txt = f"{prezzo:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
-            c.drawRightString(445, y, prezzo_txt)
+            c.drawRightString(445, y_centro, prezzo_txt)
 
-        
-
-        y -= max(step_riga, len(righe_descrizione) * line_height)
+        y -= altezza_voce
 
 
     tot_iva = tot_imponibile * 0.22

@@ -926,7 +926,7 @@ function EditPreventivo({prev,onChange,onPreview,onBack}) {
       <Card>
         <div style={{fontSize:12,color:"rgba(255,255,255,0.85)",letterSpacing:1.5,textTransform:"uppercase",fontFamily:"'Barlow Condensed',sans-serif",marginBottom:10}}>Dati cliente</div>
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
-          {[{k:"cliente",ph:"Nome cliente",label:"Cliente"},{k:"telefono",ph:"Telefono",label:"Telefono"},{k:"veicolo",ph:"Veicolo",label:"Veicolo"},{k:"targa",ph:"Targa",label:"Targa"}].map(f=>(
+          {[{k:"cliente",ph:"Nome cliente",label:"Cliente"},{k:"telefono",ph:"Telefono",label:"Telefono"},{k:"veicolo",ph:"Veicolo",label:"Veicolo"},{k:"targa",ph:"Targa",label:"Targa"},{k:"telaio",ph:"Telaio / VIN",label:"Telaio"}].map(f=>(
             <div key={f.k}>
               <div style={{fontSize:12,color:"rgba(255,255,255,0.85)",marginBottom:3,letterSpacing:1}}>{f.label.toUpperCase()}</div>
               <input
@@ -2457,7 +2457,7 @@ export default function App() {
         )}
         {screen==="view" && viewPrev && (
           <div style={{display:"flex",flexDirection:"column",gap:14}}>
-            <Preview prev={viewPrev} onEdit={()=>{setDraft(viewPrev); setSavedId(null); setScreen("edit")}} onBack={()=>setScreen("archivio")} saved={true}/>
+            <Preview prev={viewPrev} onEdit={()=>{setDraft(viewPrev); setSavedId(viewPrev.id); setScreen("edit")}} onBack={()=>setScreen("archivio")} saved={true}/>
             <button onClick={() => {
                const link = `https://assistente-officinaprev.vercel.app/preventivo/${viewPrev.token}`;
                const testo = `🔧 *DS84 OFFICINE* — Preventivo\n🚗 ${viewPrev.veicolo}\n\nPuò visualizzare e accettare il preventivo al seguente link:\n${link}`;
