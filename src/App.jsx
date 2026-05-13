@@ -39,7 +39,7 @@ async function registraPushNotifiche() {
       .upsert(
         {
           endpoint: subscriptionJson.endpoint,
-          sottoscrizione: subscriptionJson
+          subsciption: subscriptionJson
         },
         {
           onConflict: 'endpoint'
