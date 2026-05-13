@@ -35,6 +35,11 @@ def genera(dati):
     c.setFont("Helvetica", 10)
     c.drawString(522, 627, targa)
 
+    telaio = dati.get("telaio", "").upper().strip()
+    if telaio:
+        c.setFont("Helvetica", 8)
+        c.drawString(288, 650, telaio)
+
     # 🔥 VEICOLO SPLITTATO
     veicolo =(dati.get("modello", "") or dati.get("marca", "")).upper()
 
