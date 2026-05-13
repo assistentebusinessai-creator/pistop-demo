@@ -1778,14 +1778,16 @@ function Archivio({db,onBack,onOpen}) {
         <div style={{display:"flex",flexDirection:"column",gap:10}}>
           {schedeClienti.map(s => (
             <div
-              key={s.id}
-              style={{
-                background:C1,
-                border:`1px solid ${BR}`,
-                borderRadius:12,
-                padding:14
-              }}
-            >
+               key={s.id}
+               onClick={() => setStoricoAperto(storicoAperto === s.id ? null : s.id)}
+               style={{
+                 background:C1,
+                 border:`1px solid ${BR}`,
+                 borderRadius:12,
+                 padding:14,
+                 cursor:"pointer"
+               }}
+             >
               <div style={{
                 fontFamily:"'Barlow Condensed',sans-serif",
                 fontSize:20,
