@@ -1820,6 +1820,7 @@ function Archivio({db,onBack,onOpen}) {
               </div>
               {storicoAperto === s.id && (
                 <div style={{
+                  
                   marginTop:14,
                   borderTop:`1px solid ${BR}`,
                   paddingTop:12,
@@ -1843,10 +1844,11 @@ function Archivio({db,onBack,onOpen}) {
                           onOpen(p);
                         }}
                         style={{
-                          background:"#111",
-                          border:`1px solid ${BR}`,
+                          background:"#151515"
+                          border:`1px solid ${A}`,
+                           borderLeft:`4px solid ${A}`,
                           borderRadius:10,
-                          padding:10,
+                          padding:12,
                           cursor:"pointer"
                         }}
                       >
@@ -1861,7 +1863,7 @@ function Archivio({db,onBack,onOpen}) {
                             fontWeight:700,
                             color:TX
                           }}>
-                            {p.veicolo}
+                            {(p.veicolo || "VEICOLO NON INDICATO").toUpperCase()}
                           </div>
 
                           <div style={{
