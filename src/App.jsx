@@ -1192,7 +1192,7 @@ function EditPreventivo({prev,onChange,onPreview,onBack}) {
 // ─────────────────────────────────────────
 //  SCREEN: PREVIEW & AZIONI
 // ─────────────────────────────────────────
-function Preview({prev,onSalva,onEdit,onBack,saved}) {
+function Preview({prev,onSalva,onEdit,onBack,saved,readonlyStorico}) {
   const [copied,setCopied]=useState(false);
   const [pdfDone,setPdfDone]=useState(false);
   const [editingDesc, setEditingDesc] = useState(false);
@@ -1397,7 +1397,7 @@ function Preview({prev,onSalva,onEdit,onBack,saved}) {
         marginTop:18
 
       }}>
-         {!saved && <Btn onClick={onSalva} 
+         {!readonlyStorico && !saved && <Btn onClick={onSalva} 
         style={{
           display:"flex",
           alignItems:"center",
@@ -1418,7 +1418,7 @@ function Preview({prev,onSalva,onEdit,onBack,saved}) {
 
           <span>💾</span> SALVA IN ARCHIVIO
         </Btn>}
-        {saved && <div style={{
+        {!readonlyStorico && saved && <div style={{
           display:"flex",
           alignItems:"center",
           justifyContent:"center",
@@ -1436,7 +1436,7 @@ function Preview({prev,onSalva,onEdit,onBack,saved}) {
 
         }}
         >✓ Salvato</div>}
-
+      {!readonlyStorico && (
         <BtnSoft onClick={onEdit} 
           style={{
               minHeight:50,
@@ -1452,6 +1452,7 @@ function Preview({prev,onSalva,onEdit,onBack,saved}) {
           
           }}
         >✏️ Modifica</BtnSoft>
+        )}
 
         <div style={{
           display:"grid",
@@ -2673,7 +2674,7 @@ export default function App() {
         )}
         {screen==="view" && viewPrev && (
           <div style={{display:"flex",flexDirection:"column",gap:14}}>
-            <Preview prev={viewPrev} onEdit={()=>{setDraft(viewPrev); setSavedId(viewPrev.id); setScreen("edit")}} onBack={()=>setScreen("archivio")} saved={true}/>
+            <Preview prev={viewPrev} onEdit={()=>{setDraft(viewPrev); setSavedId(viewPrev.id); setScreen("edit")}} onBack={()=>setScreen("archivio")} saved={true} readonlyStorico={readonlyStorico}/>
             <button onClick={() => {
                const link = `https://assistente-officinaprev.vercel.app/preventivo/${viewPrev.token}`;
                const testo = `🔧 *DS84 OFFICINE* — Preventivo\n🚗 ${viewPrev.veicolo}\n\nPuò visualizzare e accettare il preventivo al seguente link:\n${link}`;
