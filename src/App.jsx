@@ -2972,7 +2972,10 @@ export default function App() {
 
             Grazie per aver scelto DS84 Officine.`);
 
-                window.location.href = `mailto:${viewPrev?.email || ""}?subject=${subject}&body=${body}`;
+                window.open(
+                   `mailto:${viewPrev?.email || ""}?subject=${subject}&body=${body}`,
+                   "_self"
+                );
               }}
               style={{
                 background:"#1f1f1f",
