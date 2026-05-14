@@ -2675,6 +2675,7 @@ export default function App() {
         {screen==="view" && viewPrev && (
           <div style={{display:"flex",flexDirection:"column",gap:14}}>
             <Preview prev={viewPrev} onEdit={()=>{setDraft(viewPrev); setSavedId(viewPrev.id); setScreen("edit")}} onBack={()=>setScreen("archivio")} saved={true} readonlyStorico={readonlyStorico}/>
+         {!readonlyStorico && (
             <button onClick={() => {
                const link = `https://assistente-officinaprev.vercel.app/preventivo/${viewPrev.token}`;
                const testo = `🔧 *DS84 OFFICINE* — Preventivo\n🚗 ${viewPrev.veicolo}\n\nPuò visualizzare e accettare il preventivo al seguente link:\n${link}`;
@@ -2683,6 +2684,7 @@ export default function App() {
             }} style={{background:"#25D366",color:"#fff",border:"none",borderRadius:10,padding:"18px 16px",fontSize:18,fontWeight:800,cursor:"pointer",fontFamily:"'Barlow Condensed',sans-serif",letterSpacing:1}}>
                 📲 INVIA SU WHATSAPP
             </button>
+          )}
 
             
             
