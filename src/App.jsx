@@ -1717,11 +1717,12 @@ function Archivio({db,onBack,onOpen}) {
     loadArchivio();
   }, []);
 
-  const lista = [...listaSupabase].sort((a,b)=>b.data.localeCompare(a.data));
+  const listaCompleta = [...listaSupabase].sort((a,b)=>b.data.localeCompare(a.data));
+  const lista = listaCompleta.filter(p => !p.nascosto_archivio);
   const search = filter.toLowerCase();
 
   const filtered = filter
-    ? lista.filter(p =>
+    ? listaCompleta.filter(p =>
         p.veicolo?.toLowerCase().includes(search) ||
         p.cliente?.toLowerCase().includes(search) ||
         p.numero?.toLowerCase().includes(search) ||
@@ -2580,28 +2581,35 @@ export default function App() {
     setScreen("view");
   };
     const onDeleteFromArchivio = async (p) => {
-    const ok = confirm("Eliminare questo preventivo dall'archivio?");
-    if (!ok) return;
+      const ok = confirm("Nascondere questo preventivo dall'archivio?");
+      if (!ok) return;
 
-    const { error } = await supabase
-      .from("preventivi")
-      .delete()
-      .eq("dati->>id", p.id);
+      const preventivoAggiornato = {
+        ...p,
+        nascosto_archivio: true
+      };
 
-    if (error) {
-      console.error("Errore eliminazione preventivo:", error);
-      alert("Errore eliminazione preventivo");
-      return;
-    }
+      const { error } = await supabase
+        .from("preventivi")
+        .update({ dati: preventivoAggiornato })
+        .eq("dati->>id", p.id);
 
-    persist({
-      ...db,
-      preventivi: db.preventivi.filter(x => x.id !== p.id)
-    });
+      if (error) {
+        console.error("Errore nascondi preventivo:", error);
+        alert("Errore nel nascondere il preventivo");
+        return;
+      }
 
-    setViewPrev(null);
-    setScreen("archivio");
-  };
+      persist({
+        ...db,
+        preventivi: db.preventivi.map(x =>
+          x.id === p.id ? preventivoAggiornato : x
+        )
+      });
+
+      setViewPrev(null);
+      setScreen("archivio");
+    };
 
   const salvaDocumentazioneLavoro = async () => {
     if (!viewPrev?.id) {
