@@ -2820,10 +2820,11 @@ export default function App() {
             </button>
             )}
 
-            
+         {!readonlyStorico && (
             <button onClick={()=>onDeleteFromArchivio(viewPrev)} style={{background:"transparent",border:"2px dashed #ff5a36",color:"#de5a5add",borderRadius:8,padding:"10px",fontSize:14,cursor:"pointer",fontFamily:"'Barlow',sans-serif"}}>
               🗑 ELIMINA PREVENTIVO
             </button>
+          )}
           </div>
         )}
       </div>
