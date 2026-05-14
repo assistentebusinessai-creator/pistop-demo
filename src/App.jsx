@@ -1773,7 +1773,23 @@ function Archivio({db,onBack,onOpen}) {
   },{});
   const months = Object.keys(byMonth).sort().reverse();
   const totAll = lista.reduce((s,p)=>s+tot(p.voci),0);
+  
+  const aggiornaStatoCliente = async (p, nuovoStato) => {
+    const { error } = await supabase
+      .from("preventivi")
+      .update({ stato_cliente: nuovoStato })
+      .eq("dati->>id", p.id);
 
+    if (error) {
+      alert("Errore aggiornamento stato");
+      return;
+    }
+
+    setListaSupabase(listaSupabase.map(x =>
+      x.id === p.id ? { ...x, stato_cliente: nuovoStato } : x
+    ));
+  };
+  
   return (
     <div style={{display:"flex",flexDirection:"column",gap:14}}>
       <div style={{display:"flex",alignItems:"center",gap:12}}>
@@ -1973,6 +1989,63 @@ function Archivio({db,onBack,onOpen}) {
                     {p.stato_cliente==='accettato' ? '✓ Accettato' : p.stato_cliente==='rifiutato' ? '✗ Rifiutato' : '⏳ In attesa'}
                   </span>
                 </div>
+                </div>
+
+                <div
+                  onClick={(e) => e.stopPropagation()}
+                  style={{
+                    display:"flex",
+                    justifyContent:"flex-end",
+                    gap:8,
+                    marginTop:8
+                  }}
+                >
+                  <button
+                    onClick={()=>aggiornaStatoCliente(p,"accettato")}
+                    style={{
+                      background:"#14532d",
+                      color:"#86efac",
+                      border:"none",
+                      borderRadius:6,
+                      padding:"4px 8px",
+                      fontWeight:900,
+                      cursor:"pointer"
+                    }}
+                  >
+                    ✓
+                  </button>
+
+                  <button
+                    onClick={()=>aggiornaStatoCliente(p,"in_attesa")}
+                    style={{
+                      background:"#2a2a2a",
+                      color:"#aaa",
+                      border:"none",
+                      borderRadius:6,
+                      padding:"4px 8px",
+                      fontWeight:900,
+                      cursor:"pointer"
+                    }}
+                  >
+                    ⏳
+                  </button>
+
+                  <button
+                    onClick={()=>aggiornaStatoCliente(p,"rifiutato")}
+                    style={{
+                      background:"#3f1212",
+                      color:"#ef4444",
+                      border:"none",
+                      borderRadius:6,
+                      padding:"4px 8px",
+                      fontWeight:900,
+                      cursor:"pointer"
+                    }}
+                  >
+                    ✕
+                  </button>
+                </div>
+                
               </div>
             ))}
           </div>
