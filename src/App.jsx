@@ -1989,7 +1989,7 @@ function Archivio({db,onBack,onOpen}) {
                     {p.stato_cliente==='accettato' ? '✓ Accettato' : p.stato_cliente==='rifiutato' ? '✗ Rifiutato' : '⏳ In attesa'}
                   </span>
                 </div>
-                </div>
+                
 
                 <div
                   onClick={(e) => e.stopPropagation()}
