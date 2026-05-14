@@ -1295,6 +1295,28 @@ function Preview({prev,onSalva,onEdit,onBack,saved,readonlyStorico}) {
           </div>
           <div style={{textAlign:"right"}}>
             <div style={{fontSize:11,color:"#888",fontWeight:600,letterSpacing:1}}>PREVENTIVO</div>
+            {readonlyStorico && (
+              <div style={{
+                marginTop:6,
+                display:"inline-block",
+                fontSize:10,
+                fontWeight:900,
+                borderRadius:6,
+                padding:"3px 7px",
+                background:
+                  prev.stato_cliente === "accettato" ? "#14532d" :
+                  prev.stato_cliente === "rifiutato" ? "#3f1212" :
+                  "#2a2a2a",
+                color:
+                  prev.stato_cliente === "accettato" ? "#86efac" :
+                  prev.stato_cliente === "rifiutato" ? "#ef4444" :
+                  "#aaa"
+              }}>
+                {prev.stato_cliente === "accettato" ? "✓ ACCETTATO" :
+                 prev.stato_cliente === "rifiutato" ? "✗ RIFIUTATO" :
+                 "⏳ IN ATTESA"}
+              </div>
+            )}
             <div style={{fontWeight:800,fontSize:13}}>{prev.numero}</div>
             <div style={{fontSize:11,color:"#888"}}>{fmtDate(prev.data)}</div>
           </div>
