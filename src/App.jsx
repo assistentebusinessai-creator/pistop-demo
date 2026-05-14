@@ -2410,9 +2410,17 @@ export default function App() {
   const onGenerated = (aiResult, inputOrig, usaListino = false, extra = {}) => {
     const num = prevN(db.nextNum);
 
-    const veicoloPulito = (aiResult.veicolo || "")
+    let veicoloPulito = (aiResult.veicolo || "")
       .replace(/\b(19|20)\d{2}\b/g, "")
       .trim();
+
+    if (
+      veicoloPulito.toLowerCase() === "marca modello cilindrata" ||
+      veicoloPulito.toLowerCase() === "marca modello" ||
+      veicoloPulito.toLowerCase() === "veicolo"
+    ) {
+      veicoloPulito = "";
+    }
     const p = {
       id: nId(), numero: num, data: new Date().toISOString(),
       inputOriginale: inputOrig, stato: "bozza",
