@@ -2423,7 +2423,8 @@ export default function App() {
       tipo_pratica: extra.tipo_pratica || "",
       bozza_id: extra.bozza_id || null,
       targa: extra.targa || aiResult.targa || "",
-      veicolo: veicoloPulito, descrizione_lavoro: aiResult.descrizione_lavoro,
+      veicolo: veicoloPulito || "Veicolo non specificato",
+      descrizione_lavoro: aiResult.descrizione_lavoro,
       voci: aiResult.voci.map(v => {
         const descrizione = (v.descrizione || "").toLowerCase();
         const tipo = (v.tipo || "").toLowerCase();
