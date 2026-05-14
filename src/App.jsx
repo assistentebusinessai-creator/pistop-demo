@@ -1847,7 +1847,7 @@ function Archivio({db,onBack,onOpen}) {
                         key={p.id}
                         onClick={(e)=>{
                           e.stopPropagation();
-                          onOpen(p);
+                          onOpen(p, { readonlyStorico: true });
                         }}
                         style={{
                           background:"#151515",
@@ -2259,6 +2259,7 @@ export default function App() {
   const [draft,setDraft]=useState(null);
   const [savedId,setSavedId]=useState(null);
   const [viewPrev,setViewPrev]=useState(null);
+  const [readonlyStorico, setReadonlyStorico] = useState(false);
   const [lavoriData, setLavoriData] = useState({
     note: "",
     foto: []
@@ -2477,7 +2478,11 @@ export default function App() {
     }
   };
 
-  const onOpenFromArchivio = p => { setViewPrev(p); setScreen("view"); };
+  const onOpenFromArchivio = (p, opts = {}) => {
+    setViewPrev(p);
+    setReadonlyStorico(!!opts.readonlyStorico);
+    setScreen("view");
+  };
     const onDeleteFromArchivio = async (p) => {
     const ok = confirm("Eliminare questo preventivo dall'archivio?");
     if (!ok) return;
