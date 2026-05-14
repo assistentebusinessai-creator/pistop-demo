@@ -371,7 +371,7 @@ function Dashboard({db,onNuovo,onArchivio, onCliente}) {
         return;
       }
 
-      setPreventiviHome((data || []).map(r => r.dati));
+      setPreventiviHome((data || []).map(r => r.dati).filter(p => !p.nascosto_archivio));
     };
 
     loadHomePreventivi();
