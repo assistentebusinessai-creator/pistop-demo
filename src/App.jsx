@@ -947,9 +947,10 @@ function EditPreventivo({prev,onChange,onPreview,onBack}) {
                 data-nav="true"
                 value={prev[f.k] || ""}
                 onChange={e => {
-                  const value = f.k === "targa"
-                    ? e.target.value.toUpperCase()
-                    : e.target.value;
+                  const upperKeys = ["cliente", "telefono", "veicolo", "targa", "telaio"];
+                   const value = upperKeys.includes(f.k)
+                     ? e.target.value.toUpperCase()
+                     : e.target.value;
 
                   onChange({ ...prev, [f.k]: value });
                 }}
@@ -1057,7 +1058,7 @@ function EditPreventivo({prev,onChange,onPreview,onBack}) {
 
                     ...prev,
 
-                    [f.k]: e.target.value
+                    [f.k]: e.target.value.toUpperCase()
 
                   })}
 
