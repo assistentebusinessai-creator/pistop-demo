@@ -143,7 +143,7 @@ def genera(dati):
 
     if num_voci <= 12:
         font_voci = 9
-        line_height = 7
+        line_height = 7,5
     elif num_voci <= 18:
         font_voci = 8
         line_height = 6.5
