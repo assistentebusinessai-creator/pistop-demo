@@ -131,32 +131,42 @@ def genera(dati):
     else:
         step_riga = 12
 
-    for voce in voci:
+    overflow_voci = []
+    num_voci = len(voci)
+
+    if num_voci <= 12:
+        font_voci = 9
+        line_height = 7
+    elif num_voci <= 18:
+        font_voci = 8
+        line_height = 6.5
+    else:
+        font_voci = 7.5
+        line_height = 6
+
+    y_min_voci = 330
+
+    for idx, voce in enumerate(voci):
         descrizione = voce.get("descrizione", "").upper()
         qta = float(voce.get("qta", 0) or 0)
         prezzo = float(voce.get("prezzo", 0) or 0)
 
         imponibile = qta * prezzo
-
         tot_imponibile += imponibile
 
-        c.setFont("Helvetica", 10)
+        c.setFont("Helvetica", font_voci)
 
-        
-        # descrizione con ritorno a capo dentro la colonna
-        righe_descrizione = simpleSplit(descrizione, "Helvetica", 10, 300)
+        righe_descrizione = simpleSplit(descrizione, "Helvetica", font_voci, 300)
+        altezza_voce = max(8, len(righe_descrizione) * line_height + 1)
 
-        line_height = 10
-        altezza_voce = max(step_riga, len(righe_descrizione) * line_height + 4)
+        if y - altezza_voce < y_min_voci:
+             break
 
-        # centro verticale della voce
         y_centro = y - ((altezza_voce - line_height) / 2)
 
-        # descrizione con ritorno a capo dentro la colonna
         for i, riga in enumerate(righe_descrizione):
             c.drawString(45, y - (i * line_height), riga)
 
-        # quantità allineata al centro verticale della voce
         qta_txt = str(int(qta)) if qta.is_integer() else str(qta).replace(".", ",")
         c.drawRightString(372, y_centro, qta_txt)
 
@@ -165,7 +175,6 @@ def genera(dati):
             c.drawRightString(445, y_centro, prezzo_txt)
 
         y -= altezza_voce
-
 
     tot_iva = tot_imponibile * 0.22
     tot_finale = tot_imponibile + tot_iva
@@ -190,7 +199,8 @@ def genera(dati):
     page = reader.pages[0]
     page.merge_page(overlay.pages[0])
     writer.add_page(page)
-
+    
+    
     output = io.BytesIO()
     writer.write(output)
 
