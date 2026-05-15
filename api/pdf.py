@@ -65,10 +65,10 @@ def genera(dati):
         c.setFont("Helvetica", 9)
         c.drawString(23, 650, cap)
 
-    località= dati.get("località", "").upper()
-    if località:
+    localita = dati.get("localita", "").upper()
+    if localita:
         c.setFont("Helvetica", 9)
-        c.drawString(65, 650, comune)
+        c.drawString(65, 650, localita)
 
     provincia = dati.get("provincia", "").upper()
     if provincia:
