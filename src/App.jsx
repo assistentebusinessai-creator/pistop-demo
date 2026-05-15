@@ -1379,6 +1379,9 @@ function Preview({prev,onSalva,onEdit,onBack,saved,readonlyStorico}) {
           codiceFiscale: cliente.codice_fiscale || "",
           partitaIva: cliente.piva || "",
           indirizzo: cliente.indirizzo || "",
+          cap: cliente.cap || "",
+          comune: cliente.comune || "",
+          provincia: cliente.provincia || "",
           codiceDestinatario: cliente.identificativo || "0000000",
           pec: cliente.email || ""
         }));
