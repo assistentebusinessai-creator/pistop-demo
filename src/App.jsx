@@ -2737,6 +2737,7 @@ export default function App() {
       };
 
       persist(newDb);
+      setDraft(draftDaSalvare);
       setSavedId(draftDaSalvare.id);
 
     } catch (e) {
