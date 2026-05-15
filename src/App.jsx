@@ -997,7 +997,7 @@ function EditPreventivo({prev,onChange,onPreview,onBack}) {
 
               {k:"cap",label:"CAP"},
 
-              {k:"localita",label:"Località"},
+              {k:"comune",label:"Comune"},
 
               {k:"provincia",label:"Provincia"},
 
@@ -1376,14 +1376,14 @@ function Preview({prev,onSalva,onEdit,onBack,saved,readonlyStorico}) {
       if (!error && cliente) {
         setDatiFiscali(prevDati => ({
           ...prevDati,
-          codiceFiscale: cliente.codice_fiscale || "",
-          partitaIva: cliente.piva || "",
-          indirizzo: cliente.indirizzo || "",
-          cap: cliente.cap || "",
-          comune: cliente.comune || "",
-          provincia: cliente.provincia || "",
+          codiceFiscale: cliente.codice_fiscale || prev.cf_piva || "",
+          partitaIva: cliente.piva || prev.cf_piva || "",
+          indirizzo: cliente.indirizzo || prev.via || "",
+          cap: cliente.cap || prev.cap || "",
+          comune: cliente.comune || prev.comune || prev.localita || "",
+          provincia: cliente.provincia || prev.provincia || "",
           codiceDestinatario: cliente.identificativo || "0000000",
-          pec: cliente.email || ""
+          pec: cliente.email || prev.email || ""
         }));
       } else {
         console.error("Errore recupero cliente XML:", error);
