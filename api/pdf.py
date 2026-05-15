@@ -164,7 +164,7 @@ def genera(dati):
         c.setFont("Helvetica", font_voci)
 
         righe_descrizione = simpleSplit(descrizione, "Helvetica", font_voci, 300)
-        extra_spazio = 3 if len(righe_descrizione) > 1 else 1
+        extra_spazio = 1 if len(righe_descrizione) > 1 else 1
         altezza_voce = max(8, len(righe_descrizione) * line_height + extra_spazio)
 
         if y - altezza_voce < y_min_voci:
