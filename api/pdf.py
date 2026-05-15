@@ -53,7 +53,32 @@ def genera(dati):
 
     telefono = dati.get("tel", "").upper()
     c.drawString(180, 650, telefono)
+    
+    
+    via = dati.get("via", "").upper()
+    if via:
+        c.setFont("Helvetica", 9)
+        c.drawString(23, 662, via)
 
+    cap = dati.get("cap", "").upper()
+    if cap:
+        c.setFont("Helvetica", 9)
+        c.drawString(23, 650, cap)
+
+    località= dati.get("località", "").upper()
+    if località:
+        c.setFont("Helvetica", 9)
+        c.drawString(65, 650, comune)
+
+    provincia = dati.get("provincia", "").upper()
+    if provincia:
+        c.setFont("Helvetica", 9)
+        c.drawString(145, 650, provincia)
+
+    km = dati.get("km", "").upper()
+    if km:
+        c.setFont("Helvetica", 9)
+        c.drawString(465, 650, km)
     descrizione = dati.get("descrizione_lavoro", "").upper().strip()
 
     # 1) Spezza prima per frasi
