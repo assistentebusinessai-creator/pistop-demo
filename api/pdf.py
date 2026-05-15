@@ -71,7 +71,7 @@ def genera(dati):
     text = c.beginText()
     text.setTextOrigin(45, 562)
     text.setFont("Helvetica-Bold", 10)
-    text.setLeading(13)
+    text.setLeading(10 if len(righe_finali) > 4 else 13)
 
     for riga in righe_finali:
         text.textLine(riga)
@@ -157,7 +157,7 @@ def genera(dati):
         c.setFont("Helvetica", font_voci)
 
         righe_descrizione = simpleSplit(descrizione, "Helvetica", font_voci, 300)
-        altezza_voce = max(8, len(righe_descrizione) * line_height + 1)
+        altezza_voce = max(8, len(righe_descrizione) * line_height + 3)
 
         if y - altezza_voce < y_min_voci:
              break
