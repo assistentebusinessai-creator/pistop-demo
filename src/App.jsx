@@ -1057,7 +1057,7 @@ function EditPreventivo({prev,onChange,onPreview,onBack}) {
 
                     background:BG,
 
-                    border:`1px solid ${BORDER}`,
+                    border:`1px solid ${BR}`,
 
                     color:"#fff",
 
