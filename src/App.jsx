@@ -2675,27 +2675,9 @@ export default function App() {
             .from("clienti")
             .update(datiClienteUpdate)
             .eq("id", draft.client_id);
-        } else if (draft.cliente?.trim()) {
-          const { data: nuovoCliente, error: erroreCliente } = await supabase
-            .from("clienti")
-            .insert([{
-              ...datiClienteUpdate,
-              origine: "manuale",
-              fiscal_complete: false
-            }])
-            .select()
-            .single();
-
-          if (erroreCliente) {
-            console.error("Errore creazione cliente:", erroreCliente);
-          } else if (nuovoCliente?.id) {
-            draftDaSalvare = {
-              ...draftDaSalvare,
-              client_id: nuovoCliente.id
-            };
-          }
+        
         }
-      }
+       } 
 
       let error;
 
