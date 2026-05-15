@@ -2656,42 +2656,19 @@ export default function App() {
       const token = nId() + nId();
       const isUpdate = db.preventivi.some(p => p.id === draft.id);
 
-      let draftDaSalvare = { ...draft };
-
-      const datiClienteUpdate = {};
-
-      if (draft.cliente?.trim()) datiClienteUpdate.nome = draft.cliente;
-      if (draft.telefono?.trim()) datiClienteUpdate.telefono = draft.telefono;
-      if (draft.email?.trim()) datiClienteUpdate.email = draft.email;
-      if (draft.via?.trim()) datiClienteUpdate.indirizzo = draft.via;
-      if (draft.cap?.trim()) datiClienteUpdate.cap = draft.cap;
-      if (draft.localita?.trim()) datiClienteUpdate.comune = draft.localita;
-      if (draft.provincia?.trim()) datiClienteUpdate.provincia = draft.provincia;
-      if (draft.cf_piva?.trim()) datiClienteUpdate.codice_fiscale = draft.cf_piva;
-
-      if (Object.keys(datiClienteUpdate).length > 0) {
-        if (draft.client_id) {
-          await supabase
-            .from("clienti")
-            .update(datiClienteUpdate)
-            .eq("id", draft.client_id);
-        
-        }
-       } 
-
       let error;
 
       if (isUpdate) {
         const result = await supabase
           .from("preventivi")
-          .update({ dati: draftDaSalvare })
-          .eq("dati->>id", draftDaSalvare.id);
+          .update({ dati: draft })
+          .eq("dati->>id", draft.id);
 
         error = result.error;
       } else {
         const result = await supabase
           .from("preventivi")
-          .insert([{ dati: draftDaSalvare, stato_cliente: "in_attesa", token }]);
+          .insert([{ dati: draft, stato_cliente: "in_attesa", token }]);
 
         error = result.error;
       }
@@ -2701,11 +2678,11 @@ export default function App() {
         return;
       }
 
-      if (draftDaSalvare.bozza_id) {
+      if (draft.bozza_id) {
         const { error: erroreBozza } = await supabase
           .from("preventivi_bozze")
           .delete()
-          .eq("id", draftDaSalvare.bozza_id);
+          .eq("id", draft.bozza_id);
 
         if (erroreBozza) {
           console.error("Errore eliminazione bozza QR:", erroreBozza);
@@ -2714,13 +2691,12 @@ export default function App() {
 
       const newDb = {
         ...db,
-        preventivi: [draftDaSalvare, ...db.preventivi.filter(p => p.id !== draftDaSalvare.id)],
+        preventivi: [draft, ...db.preventivi.filter(p => p.id !== draft.id)],
         nextNum: db.nextNum + 1
       };
 
       persist(newDb);
-      setDraft(draftDaSalvare);
-      setSavedId(draftDaSalvare.id);
+      setSavedId(draft.id);
 
     } catch (e) {
       console.error("Errore salvataggio:", e);
