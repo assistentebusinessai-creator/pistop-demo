@@ -3067,32 +3067,17 @@ export default function App() {
               {viewPrev?.documentazione_salvata ? "✅ SALVATO" : "💾 SALVA"} 
             </button>
 
-            <button
-              type="button"
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                const linkDoc = `${window.location.origin}/documentazione/${viewPrev?.token}`;
-
-                const subject = encodeURIComponent(
-                  "Documentazione lavoro veicolo"
-                );
-
-                const body = encodeURIComponent(`Gentile cliente,
+            <a
+               href={`mailto:${viewPrev?.email || ""}?subject=${encodeURIComponent("Documentazione lavoro veicolo")}&body=${encodeURIComponent(`Gentile cliente,
 
             le inviamo la documentazione relativa al lavoro effettuato sul suo veicolo.
 
             Per visualizzarla, clicchi sul seguente link:
 
-            ${linkDoc}
+           ${window.location.origin}/documentazione/${viewPrev?.token}
 
-            Grazie per aver scelto DS84 Officine.`);
-
-                window.open(
-                   `mailto:${viewPrev?.email || ""}?subject=${subject}&body=${body}`,
-                   "_self"
-                );
-              }}
+           Grazie per aver scelto DS84 Officine.`)}`}
+  
               style={{
                 background:"#1f1f1f",
                 color:"#fff",
@@ -3107,7 +3092,7 @@ export default function App() {
               }}
             >
                📧 INVIA EMAIL
-            </button>
+            </a>
 
              
             </div>
