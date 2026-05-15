@@ -58,12 +58,12 @@ export function generaXmlFatturaPA(preventivo, datiCliente = {}) {
         ${datiCliente.partitaIva ? `
         <IdFiscaleIVA>
           <IdPaese>IT</IdPaese>
-          <IdCodice>${xmlEscape(datiCliente.partitaIva)}</IdCodice>
+          <IdCodice>${xmlEscape(upper(datiCliente.partitaIva))}</IdCodice>
         </IdFiscaleIVA>
         ` : ""}
 
         ${datiCliente.codiceFiscale ? `
-        <CodiceFiscale>${xmlEscape(datiCliente.codiceFiscale)}</CodiceFiscale>
+        <CodiceFiscale>${xmlEscape(upper(datiCliente.codiceFiscale))}</CodiceFiscale>
         ` : ""}
 
         <Anagrafica>
