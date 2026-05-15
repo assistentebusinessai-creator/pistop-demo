@@ -63,15 +63,22 @@ def genera(dati):
     frasi = [f + "." for f in frasi_raw]
 
     # 3) Wrappa ogni frase separatamente dentro il box
+    desc_font = 9 if len(frasi) > 3 else 10
+    desc_leading = 9 if len(frasi) > 3 else 13
+
     righe_finali = []
     for frase in frasi:
-        righe = simpleSplit(frase, "Helvetica", 10, 360)
+        righe = simpleSplit(frase, "Helvetica", desc_font, 360)
         righe_finali.extend(righe)
+
+    if len(righe_finali) > 4:
+        desc_font = 8.5
+        desc_leading = 8.8
 
     text = c.beginText()
     text.setTextOrigin(45, 562)
-    text.setFont("Helvetica-Bold", 10)
-    text.setLeading(10 if len(righe_finali) > 4 else 13)
+    text.setFont("Helvetica-Bold", desc_font)
+    text.setLeading(desc_leading)
 
     for riga in righe_finali:
         text.textLine(riga)
@@ -136,7 +143,7 @@ def genera(dati):
 
     if num_voci <= 12:
         font_voci = 9
-        line_height = 7,5
+        line_height = 7
     elif num_voci <= 18:
         font_voci = 8
         line_height = 6.5
@@ -157,7 +164,8 @@ def genera(dati):
         c.setFont("Helvetica", font_voci)
 
         righe_descrizione = simpleSplit(descrizione, "Helvetica", font_voci, 300)
-        altezza_voce = max(8, len(righe_descrizione) * line_height + 3)
+        extra_spazio = 3 if len(righe_descrizione) > 1 else 1
+        altezza_voce = max(8, len(righe_descrizione) * line_height + extra_spazio)
 
         if y - altezza_voce < y_min_voci:
              break
