@@ -119,6 +119,18 @@ const scaricaPDF = async (p) => {
       marca: p.veicolo,
       targa: p.targa,
       telaio: p.telaio || "",
+      via: p.via || "",
+      cap: p.cap || "",
+      località: p.località || "",
+      provincia: p.provincia || "",
+      email: p.email || "",
+      cf_piva: p.cf_piva || "",
+      km: p.km || "",
+      data_immatricolazione: p.data_immatricolazione || "",
+      data_consegna: p.data_consegna || "",
+      data_ordine: p.data_ordine || "",
+      numero_ordine: p.numero_ordine || "",
+      tipo_ordine: p.tipo_ordine || "",
       numero: p.numero,
       data: new Date(p.data).toLocaleDateString('it-IT'),
       descrizione_lavoro: p.descrizione_lavoro,
@@ -997,7 +1009,7 @@ function EditPreventivo({prev,onChange,onPreview,onBack}) {
 
               {k:"cap",label:"CAP"},
 
-              {k:"comune",label:"Comune"},
+              {k:"località",label:"Località"},
 
               {k:"provincia",label:"Provincia"},
 
@@ -1357,7 +1369,7 @@ function Preview({prev,onSalva,onEdit,onBack,saved,readonlyStorico}) {
     partitaIva: "",
     indirizzo: "",
     cap: "",
-    comune: "",
+    località: "",
     provincia: "",
     codiceDestinatario: "0000000",
     pec: ""
@@ -1380,7 +1392,7 @@ function Preview({prev,onSalva,onEdit,onBack,saved,readonlyStorico}) {
           partitaIva: cliente.piva || prev.cf_piva || "",
           indirizzo: cliente.indirizzo || prev.via || "",
           cap: cliente.cap || prev.cap || "",
-          comune: cliente.comune || prev.comune || prev.localita || "",
+          località : cliente.località || prev.località || prev.localita || "",
           provincia: cliente.provincia || prev.provincia || "",
           codiceDestinatario: cliente.identificativo || "0000000",
           pec: cliente.email || prev.email || ""
@@ -1715,7 +1727,7 @@ function Preview({prev,onSalva,onEdit,onBack,saved,readonlyStorico}) {
             {[
               ["indirizzo", "Indirizzo cliente"],
               ["cap", "CAP"],
-              ["comune", "Comune"],
+              ["località", "Località"],
               ["provincia", "Provincia"],
               ["codiceFiscale", "Codice fiscale / Partita IVA"],
               ["codiceDestinatario", "Codice destinatario"],
