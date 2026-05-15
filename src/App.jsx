@@ -4,6 +4,7 @@ import { generaXmlFatturaPA } from "./fatturaXml";
 import { createClient } from '@supabase/supabase-js'
 
 
+
 const supabase = createClient(
   "https://ytfnepbphttounnurcqa.supabase.co",
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl0Zm5lcGJwaHR0b3VubnVyY3FhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzczMzQ1NTAsImV4cCI6MjA5MjkxMDU1MH0.KQ79ZTz3S3TK6TK3i5U1Tk5k2xEOlzIoLVorP5vmbVE"
