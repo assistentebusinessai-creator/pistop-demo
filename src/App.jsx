@@ -790,7 +790,7 @@ function EditPreventivo({prev,onChange,onPreview,onBack}) {
   const formRef = useRef(null);
   const firstFieldRef = useRef(null);
   const [mostraPrezziPDF, setMostraPrezziPDF] = useState(!!prev.mostraPrezziPDF);
-
+  const [showDettagliExtra, setShowDettagliExtra] = useState(false);
   useEffect(() => {
     setTimeout(() => firstFieldRef.current?.focus(), 120);
   }, []);
@@ -957,7 +957,129 @@ function EditPreventivo({prev,onChange,onPreview,onBack}) {
               />
             </div>
           ))}
+        
+        
+        
+
+          <div style={{display:"flex",alignItems:"end"}}>
+            <button
+              type="button"
+              onClick={() => setShowDettagliExtra(!showDettagliExtra)}
+              style={{
+                width:"100%",
+                background:"#1a1a1a",
+                border:"1px solid #333",
+                color:"#f59e0b",
+                borderRadius:10,
+                padding:"12px",
+                fontSize:13,
+                fontWeight:700,
+                cursor:"pointer"
+              }}
+            >
+              {showDettagliExtra
+                ? "− NASCONDI DETTAGLI"
+                : "+ DETTAGLI"}
+            </button>
+          </div>
+
         </div>
+        
+        {showDettagliExtra && (
+          <div style={{
+            marginTop:14,
+            display:"grid",
+            gridTemplateColumns:"1fr 1fr",
+            gap:8
+          }}>
+            {[
+              {k:"via",label:"Via"},
+
+              {k:"cap",label:"CAP"},
+
+              {k:"localita",label:"Località"},
+
+              {k:"provincia",label:"Provincia"},
+
+              {k:"email",label:"Email"},
+
+              {k:"cf_piva",label:"Codice fiscale / P.IVA"},
+
+              {k:"km",label:"KM percorsi"},
+
+              {k:"data_immatricolazione",label:"Data immatricolazione"},
+
+              {k:"data_consegna",label:"Data consegna"},
+
+              {k:"data_ordine",label:"Data ordine"},
+
+              {k:"numero_ordine",label:"Numero ordine"},
+
+              {k:"tipo_ordine",label:"Tipo ordine"}
+
+            ].map(f => (
+
+              <div key={f.k}>
+
+                <div style={{
+
+                  fontSize:12,
+
+                  color:"rgba(255,255,255,0.85)",
+
+                  marginBottom:3,
+
+                  letterSpacing:1
+
+                }}>
+
+                  {f.label.toUpperCase()}
+
+                </div>
+
+                <input
+
+                  value={prev[f.k] || ""}
+
+                  onChange={e => onChange({
+
+                    ...prev,
+
+                    [f.k]: e.target.value
+
+                  })}
+
+                  placeholder={f.label}
+
+                  style={{
+
+                    width:"100%",
+
+                    background:BG,
+
+                    border:`1px solid ${BORDER}`,
+
+                    color:"#fff",
+
+                    borderRadius:10,
+
+                    padding:"12px",
+
+                    fontSize:15
+
+                  }}
+
+                />
+
+              </div>
+
+            ))}
+
+          </div>
+
+        )}
+        
+        
       </Card>
 
       {/* Voci */}
