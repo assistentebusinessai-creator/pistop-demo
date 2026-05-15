@@ -10,7 +10,8 @@ const xmlEscape = (value = "") =>
 
 const formatPrezzo = (value = 0) =>
   Number(value || 0).toFixed(2);
-
+  
+const upper = (v = "") => String(v).toUpperCase().trim();
 export function generaXmlFatturaPA(preventivo, datiCliente = {}) {
   return `<?xml version="1.0" encoding="UTF-8"?>
 <p:FatturaElettronica versione="FPR12"
@@ -66,16 +67,16 @@ export function generaXmlFatturaPA(preventivo, datiCliente = {}) {
         ` : ""}
 
         <Anagrafica>
-          <Denominazione>${xmlEscape(datiCliente.nome || "Cliente")}</Denominazione>
+          <Denominazione>${xmlEscape(upper(datiCliente.nome || "Cliente"))}</Denominazione>
         </Anagrafica>
 
       </DatiAnagrafici>
 
       <Sede>
-        <Indirizzo>${xmlEscape(datiCliente.indirizzo || "")}</Indirizzo>
+        <Indirizzo>${xmlEscape(upper(datiCliente.indirizzo || ""))}</Indirizzo>
         <CAP>${xmlEscape(datiCliente.cap || "00000")}</CAP>
-        <Comune>${xmlEscape(datiCliente.comune || "")}</Comune>
-        <Provincia>${xmlEscape(datiCliente.provincia || "")}</Provincia>
+        <Comune>${xmlEscape(upper(datiCliente.localita || ""))}</Comune>
+        <Provincia>${xmlEscape(upper(datiCliente.provincia || ""))}</Provincia>
         <Nazione>IT</Nazione>
       </Sede>
 
@@ -98,7 +99,7 @@ export function generaXmlFatturaPA(preventivo, datiCliente = {}) {
     ${preventivo.voci.map((v, i) => `
       <DettaglioLinee>
         <NumeroLinea>${i + 1}</NumeroLinea>
-        <Descrizione>${xmlEscape(v.descrizione)}</Descrizione>
+        <Descrizione>${xmlEscape(upper(v.descrizione))}</Descrizione>
         <Quantita>${Number(v.qta || 1).toFixed(2)}</Quantita>
         <PrezzoUnitario>${formatPrezzo(v.prezzo)}</PrezzoUnitario>
         <PrezzoTotale>${Number((v.qta || 1) * v.prezzo).toFixed(2)}</PrezzoTotale>
