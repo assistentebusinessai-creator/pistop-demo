@@ -2664,6 +2664,53 @@ export default function App() {
     };
     setDraft(p); setSavedId(null); setScreen("edit");
   };
+  
+  const sincronizzaClienteVeicolo = async (draft) => {
+    let clienteId = draft.client_id || null;
+
+    if (draft.cliente && draft.cliente.trim()) {
+      if (!clienteId) {
+        const { data: existing } = await supabase
+          .from('clienti')
+          .select('id')
+          .ilike('nome', draft.cliente.trim())
+          .limit(1)
+          .maybeSingle();
+
+        if (existing) {
+          clienteId = existing.id;
+        } else {
+          const { data: nuovo } = await supabase
+            .from('clienti')
+            .insert([{ nome: draft.cliente.toUpperCase().trim(), telefono: draft.telefono || '', origine: 'manuale' }])
+            .select('id')
+            .single();
+          if (nuovo) clienteId = nuovo.id;
+        }
+      }
+    }
+
+    if (draft.targa && draft.targa.trim()) {
+      const targa = draft.targa.toUpperCase().trim();
+      const { data: veicolo } = await supabase
+        .from('veicoli')
+        .select('id')
+        .eq('targa', targa)
+        .maybeSingle();
+
+      if (veicolo) {
+        await supabase.from('veicoli')
+          .update({ modello: draft.veicolo || null, cliente_id: clienteId })
+          .eq('targa', targa);
+      } else {
+        await supabase.from('veicoli')
+          .insert([{ targa, modello: draft.veicolo || null, cliente_id: clienteId }]);
+      }
+    }
+
+    return clienteId;
+  };
+
 
   const onSalva = async () => {
     try {
@@ -2691,6 +2738,16 @@ export default function App() {
         console.error("Errore Supabase:", error);
         return;
       }
+      const clienteId = await sincronizzaClienteVeicolo(draft);
+      const targa = draft.targa ? draft.targa.toUpperCase().trim() : null;
+      const totale = (draft.voci || []).reduce((sum, v) => 
+        sum + (parseFloat(v.prezzo) || 0) * (parseFloat(v.qta) || 0), 0);
+
+     await supabase.from('preventivi')
+       .update({ targa, totale, cliente_id: clienteId })
+       .eq('dati->>id', draft.id);
+
+      
 
       if (draft.bozza_id) {
         const { error: erroreBozza } = await supabase
