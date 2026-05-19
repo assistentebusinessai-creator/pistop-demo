@@ -58,7 +58,7 @@ def genera(dati):
     via = dati.get("via", "").upper()
     if via:
         c.setFont("Helvetica", 10)
-        c.drawString(50, 625, via)
+        c.drawString(200, 675, via)
 
     cap = dati.get("cap", "").upper()
     if cap:
