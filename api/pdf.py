@@ -58,7 +58,7 @@ def genera(dati):
     via = dati.get("via", "").upper()
     if via:
         c.setFont("Helvetica", 10)
-        c.drawString(225, 675, via)
+        c.drawString(210, 675, via)
 
     cap = dati.get("cap", "").upper()
     if cap:
@@ -78,7 +78,7 @@ def genera(dati):
     km = dati.get("km", "").upper()
     if km:
         c.setFont("Helvetica", 10)
-        c.drawString(455, 627, km)
+        c.drawString(447, 627, km)
     descrizione = dati.get("descrizione_lavoro", "").upper().strip()
 
     # 1) Spezza prima per frasi
