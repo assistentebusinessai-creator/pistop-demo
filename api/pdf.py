@@ -58,12 +58,12 @@ def genera(dati):
     via = dati.get("via", "").upper()
     if via:
         c.setFont("Helvetica", 10)
-        c.drawString(200, 675, via)
+        c.drawString(210, 675, via)
 
     cap = dati.get("cap", "").upper()
     if cap:
-        c.setFont("Helvetica", 9)
-        c.drawString(23, 650, cap)
+        c.setFont("Helvetica", 10)
+        c.drawString(250, 675, cap)
 
     localita = dati.get("localita", "").upper()
     if localita:
