@@ -73,7 +73,7 @@ def genera(dati):
     provincia = dati.get("provincia", "").upper()
     if provincia:
         c.setFont("Helvetica", 10)
-        c.drawString(600, 675, provincia)
+        c.drawString(525, 675, provincia)
 
     km = dati.get("km", "").upper()
     if km:
