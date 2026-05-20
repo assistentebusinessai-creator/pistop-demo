@@ -1394,7 +1394,7 @@ function Preview({prev,onSalva,onEdit,onBack,saved,readonlyStorico}) {
           partitaIva: cliente.piva || prev.cf_piva || "",
           indirizzo: cliente.indirizzo || prev.via || "",
           cap: cliente.cap || prev.cap || "",
-          localita : cliente.localita || prev.localita || prev.località || "",
+          localita : cliente.località || prev.localita || prev.località || "",
           provincia: cliente.provincia || prev.provincia || "",
           codiceDestinatario: cliente.identificativo || "0000000",
           pec: cliente.email || prev.email || ""
