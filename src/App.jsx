@@ -1011,7 +1011,7 @@ function EditPreventivo({prev,onChange,onPreview,onBack}) {
 
               {k:"cap",label:"CAP"},
 
-              {k:"località",label:"Località"},
+              {k:"localita",label:"Località"},
 
               {k:"provincia",label:"Provincia"},
 
