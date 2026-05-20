@@ -122,7 +122,7 @@ const scaricaPDF = async (p) => {
       telaio: p.telaio || "",
       via: p.via || "",
       cap: p.cap || "",
-      località: p.località || "",
+      localita: p.localita || "",
       provincia: p.provincia || "",
       email: p.email || "",
       cf_piva: p.cf_piva || "",
