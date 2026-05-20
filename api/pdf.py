@@ -73,12 +73,22 @@ def genera(dati):
     provincia = dati.get("provincia", "").upper()
     if provincia:
         c.setFont("Helvetica", 10)
-        c.drawString(525, 675, provincia)
+        c.drawString(515, 675, provincia)
 
     km = dati.get("km", "").upper()
     if km:
         c.setFont("Helvetica", 10)
         c.drawString(447, 627, km)
+
+    immatricolazione = dati.get("immatricolazione", "").upper()
+    if immatricolazione:
+        c.setFont("Helvetica", 9)
+        c.drawString(465, 638, immatricolazione)
+
+    
+
+
+    
     descrizione = dati.get("descrizione_lavoro", "").upper().strip()
 
     # 1) Spezza prima per frasi
