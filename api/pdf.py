@@ -38,7 +38,7 @@ def genera(dati):
     telaio = dati.get("telaio", "").upper().strip()
     if telaio:
         c.setFont("Helvetica", 10)
-        c.drawString(28, 627, telaio)
+        c.drawString(23, 627, telaio)
 
     # 🔥 VEICOLO SPLITTATO
     veicolo =(dati.get("modello", "") or dati.get("marca", "")).upper()
