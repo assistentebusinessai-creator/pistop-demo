@@ -68,7 +68,7 @@ def genera(dati):
     localita = dati.get("localita", "").upper()
     if localita:
         c.setFont("Helvetica", 10)
-        c.drawString(480, 675, localita)
+        c.drawString(445, 675, localita)
 
     provincia = dati.get("provincia", "").upper()
     if provincia:
