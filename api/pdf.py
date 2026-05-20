@@ -83,7 +83,7 @@ def genera(dati):
     immatricolazione = dati.get("data_immatricolazione", "").upper()
     if immatricolazione:
         c.setFont("Helvetica", 10)
-        c.drawString(53, 603, immatricolazione)
+        c.drawString(70, 603, immatricolazione)
 
     
 
