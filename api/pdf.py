@@ -38,7 +38,7 @@ def genera(dati):
     telaio = dati.get("telaio", "").upper().strip()
     if telaio:
         c.setFont("Helvetica", 10)
-        c.drawString(30, 627, telaio)
+        c.drawString(28, 627, telaio)
 
     # 🔥 VEICOLO SPLITTATO
     veicolo =(dati.get("modello", "") or dati.get("marca", "")).upper()
@@ -67,13 +67,13 @@ def genera(dati):
 
     localita = dati.get("localita", "").upper()
     if localita:
-        c.setFont("Helvetica", 9)
+        c.setFont("Helvetica", 10)
         c.drawString(480, 675, localita)
 
     provincia = dati.get("provincia", "").upper()
     if provincia:
         c.setFont("Helvetica", 10)
-        c.drawString(515, 675, provincia)
+        c.drawString(550, 675, provincia)
 
     km = dati.get("km", "").upper()
     if km:
@@ -82,7 +82,7 @@ def genera(dati):
 
     immatricolazione = dati.get("immatricolazione", "").upper()
     if immatricolazione:
-        c.setFont("Helvetica", 9)
+        c.setFont("Helvetica", 10)
         c.drawString(465, 638, immatricolazione)
 
     
