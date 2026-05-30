@@ -2571,6 +2571,8 @@ export default function App() {
       bozza_id: extra.bozza_id || null,
       targa: extra.targa || aiResult.targa || "",
       veicolo: veicoloPulito || "Veicolo non specificato",
+      km: extra.km || "",
+      data_immatricolazione: extra.anno || "",
       descrizione_lavoro: aiResult.descrizione_lavoro,
       voci: aiResult.voci.map(v => {
         const descrizione = (v.descrizione || "").toLowerCase();
