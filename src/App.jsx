@@ -3333,7 +3333,7 @@ export default function App() {
           <iframe
             src="https://officina-qr-form.vercel.app"
             title="Form cliente"
-            allow="microphone"
+            allow="microphone *; camera *"
             style={{
               width:"100vw",
               height: "100%",
