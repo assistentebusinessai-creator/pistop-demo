@@ -2572,7 +2572,7 @@ export default function App() {
       targa: extra.targa || aiResult.targa || "",
       veicolo: veicoloPulito || "Veicolo non specificato",
       km: extra.km || "",
-      localita: extra.localita || extra.località || ""
+      localita: extra.localita || extra.località || "",
       data_immatricolazione: extra.data_immatricolazione || "",
       descrizione_lavoro: aiResult.descrizione_lavoro,
       voci: aiResult.voci.map(v => {
