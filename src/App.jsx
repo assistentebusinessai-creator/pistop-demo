@@ -2574,6 +2574,11 @@ export default function App() {
       km: extra.km || "",
       localita: extra.localita || extra.località || "",
       data_immatricolazione: extra.data_immatricolazione || "",
+      via: extra.via || "",
+      cap: extra.cap || "",  
+      provincia: extra.provincia || "",
+      email: extra.email || "",
+      cf_piva: extra.cf_piva || "",
       descrizione_lavoro: aiResult.descrizione_lavoro,
       voci: aiResult.voci.map(v => {
         const descrizione = (v.descrizione || "").toLowerCase();
