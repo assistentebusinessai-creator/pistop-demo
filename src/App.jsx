@@ -2898,12 +2898,12 @@ export default function App() {
         background: C1,
         border: `1px solid ${BR}`,
         borderRadius: 16,
-        padding: 24,
+        padding: 20,
         width: "100%",
         maxWidth: 340
       }}>
         <Logo h={44} />
-        <h2 style={{color: MT, marginTop: 20}}>ACCESSO OFFICINA</h2>
+        <h2 style={{color: MT, marginTop: 18}}>ACCESSO OFFICINA</h2>
 
         <input
           placeholder="Utente"
