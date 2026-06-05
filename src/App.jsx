@@ -2900,7 +2900,7 @@ export default function App() {
         borderRadius: 16,
         padding: 24,
         width: "100%",
-        maxWidth: 420
+        maxWidth: 340
       }}>
         <Logo h={44} />
         <h2 style={{color: MT, marginTop: 20}}>ACCESSO OFFICINA</h2>
