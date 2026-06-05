@@ -2892,14 +2892,16 @@ export default function App() {
       alignItems: "center",
       justifyContent: "center",
       fontFamily: "Barlow Condensed, sans-serif",
-      padding: 20
+      padding: 20,
+      boxSizing: "border-box"
     }}>
       <div style={{
         background: C1,
         border: `1px solid ${BR}`,
         borderRadius: 16,
         padding: 20,
-        width: "100%",
+        width: "90%",
+        boxSizing: "border-box",
         maxWidth: 340
       }}>
         <Logo h={44} />
