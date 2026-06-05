@@ -2488,6 +2488,17 @@ export default function App() {
     return <DocumentazionePubblica token={token} />;
   }
 
+  const LOGIN_OFFICINA = "DS84";
+  const LOGIN_PASSWORD = "Pitstopapp";
+
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    localStorage.getItem("pitstop_login") === "ok"
+  );
+
+  const [loginOfficina, setLoginOfficina] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+  const [loginError, setLoginError] = useState("");
+
 
   const [db,setDb]=useState({preventivi:[],clienti:[],nextNum:1});
   const [dbLoaded,setDbLoaded]=useState(false);
@@ -2872,7 +2883,65 @@ export default function App() {
     </div>
   );
 
+  if (!isLoggedIn) return (
+    <div style={{
+      minHeight: "100vh",
+      width: "100vw",
+      background: BG,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      fontFamily: "Barlow Condensed, sans-serif",
+      padding: 20
+    }}>
+      <div style={{
+        background: C1,
+        border: `1px solid ${BR}`,
+        borderRadius: 16,
+        padding: 24,
+        width: "100%",
+        maxWidth: 420
+      }}>
+        <Logo h={44} />
+        <h2 style={{color: MT, marginTop: 20}}>ACCESSO OFFICINA</h2>
 
+        <input
+          placeholder="Utente"
+          value={loginOfficina}
+          onChange={e => setLoginOfficina(e.target.value)}
+          style={{width:"100%", padding:14, marginBottom:12, boxSizing:"border-box", border: `1px solid ${BR}`}}
+        />
+
+        <input
+          type="password"
+          placeholder="Password"
+          value={loginPassword}
+          onChange={e => setLoginPassword(e.target.value)}
+          style={{width:"100%", padding:14, marginBottom:12, boxSizing:"border-box", border: `1px solid ${BR}`}}
+        />
+
+        {loginError && <div style={{color:"#e53e3e", marginBottom:12}}>{loginError}</div>}
+
+        <button
+          onClick={() => {
+            if (
+              loginOfficina.trim().toLowerCase() === LOGIN_OFFICINA.toLowerCase() &&
+              loginPassword === LOGIN_PASSWORD
+            ) {
+              localStorage.setItem("pitstop_login", "ok");
+              setIsLoggedIn(true);
+              setLoginError("");
+            } else {
+              setLoginError("Credenziali non corrette");
+            }
+          }}
+          style={{width:"100%", padding:14, cursor:"pointer"}}
+        >
+          ACCEDI
+        </button>
+      </div>
+    </div>
+  );
      
   return (
     <div style={{
