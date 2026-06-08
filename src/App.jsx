@@ -2613,6 +2613,14 @@ export default function App() {
 
   const onGenerated = (aiResult, inputOrig, usaListino = false, extra = {}) => {
     const num = prevN(db.nextNum);
+    const demoId =
+      new URLSearchParams(window.location.search).get("demo") ||
+      localStorage.getItem("pitstop_demo_id") ||
+      "demo-generale";
+
+    localStorage.setItem("pitstop_demo_id", demoId);
+
+
 
     let veicoloPulito = (aiResult.veicolo || "")
       .replace(/\b(19|20)\d{2}\b/g, "")
@@ -2644,6 +2652,7 @@ export default function App() {
       provincia: extra.provincia || "",
       email: extra.email || "",
       cf_piva: extra.cf_piva || "",
+      demo_id: demoId,
       descrizione_lavoro: aiResult.descrizione_lavoro,
       voci: aiResult.voci.map(v => {
         const descrizione = (v.descrizione || "").toLowerCase();
