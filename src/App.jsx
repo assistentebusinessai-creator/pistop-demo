@@ -2545,6 +2545,8 @@ export default function App() {
     "demo-generale";
 
   localStorage.setItem("pitstop_demo_id", demoId);
+  console.log("DEMO LETTO:", demoId);
+  console.log("URL:", window.location.href);
 
 
   const [db,setDb]=useState({preventivi:[],clienti:[],nextNum:1});
