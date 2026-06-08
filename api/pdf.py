@@ -259,7 +259,7 @@ class handler(BaseHTTPRequestHandler):
             pdf_bytes = genera(dati)
             self.send_response(200)
             self.send_header("Content-Type","application/pdf")
-            self.send_header("Content-Disposition", f'attachment; filename="preventivo_{dati.get("numero","DS84")}.pdf"')
+            self.send_header("Content-Disposition", f'attachment; filename="preventivo_{dati.get("numero","demo")}.pdf"')
             self.send_header("Content-Length", str(len(pdf_bytes)))
             self.end_headers()
             self.wfile.write(pdf_bytes)
