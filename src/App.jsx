@@ -1447,7 +1447,7 @@ function Preview({prev,onSalva,onEdit,onBack,saved,readonlyStorico}) {
                  "⏳ IN ATTESA"}
               </div>
             )}
-            <div style={{fontWeight:800,fontSize:13}}>{prev.numero}</div>
+            
             <div style={{fontSize:11,color:"#888"}}>{fmtDate(prev.data)}</div>
           </div>
         </div>
