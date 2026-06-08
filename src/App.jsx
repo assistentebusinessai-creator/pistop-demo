@@ -6,8 +6,8 @@ import { createClient } from '@supabase/supabase-js'
 
 
 const supabase = createClient(
-  "https://ytfnepbphttounnurcqa.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl0Zm5lcGJwaHR0b3VubnVyY3FhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzczMzQ1NTAsImV4cCI6MjA5MjkxMDU1MH0.KQ79ZTz3S3TK6TK3i5U1Tk5k2xEOlzIoLVorP5vmbVE"
+  "https://nsqxwmrorjmzghzmkkwh.supabase.co",
+  "sb_publishable_jkA51jjVftyCdQALtjY8SA_ynDAcEb4"
 )
 
 // ─────────────────────────────────────────
@@ -316,16 +316,7 @@ function getSuggerimentiVoce(tipo, contesto) {
 //  DS84 LOGO SVG
 // ─────────────────────────────────────────
 const Logo = ({h=64}) => (
-  <div style={{display:"flex",alignItems:"center",gap:0}}>
-    <div style={{lineHeight:1}}>
-      <div style={{fontSize:h*0.55,fontWeight:900,fontFamily:"'Barlow Condensed',sans-serif",letterSpacing:-0.5}}>
-        <span style={{color:G}}>D</span>
-        <span style={{color:"#fff"}}>S</span>
-        <span style={{color:R,fontStyle:"italic"}}>84</span>
-      </div>
-      <div style={{color:MT2,fontSize:h*0.22,letterSpacing:3,marginTop:1,fontFamily:"'Barlow Condensed',sans-serif"}}>OFFICINE</div>
-    </div>
-  </div>
+  <img src="/pitsto.png" style={{height:h}} alt="PitStop" />
 );
 
 // ─────────────────────────────────────────
@@ -2488,7 +2479,7 @@ export default function App() {
     return <DocumentazionePubblica token={token} />;
   }
 
-  const LOGIN_OFFICINA = "DS84";
+  const LOGIN_OFFICINA = "demo";
   const LOGIN_PASSWORD = "Pitstopapp";
 
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -3410,7 +3401,7 @@ export default function App() {
 
          
           <iframe
-            src="https://officina-qr-form.vercel.app"
+            src="https://pitstop-qr-form.vercel.app"
             title="Form cliente"
             allow="microphone *; camera *"
             style={{
