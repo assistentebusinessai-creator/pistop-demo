@@ -55,7 +55,12 @@ INTERPRETAZIONE INPUT:
 - Per ogni lavoro, genera tutte le voci normalmente necessarie per eseguirlo, senza usare espressioni come "SE NECESSARIO" o condizioni simili. Le lavorazioni devono essere espresse in modo diretto e deciso.
 - Non limitarti a una singola voce per lavoro.
 - Anche lavori come "motorino avviamento", "antigelo", "testa motore", devono essere espansi in modo coerente.
+- Se l'input riguarda carrozzeria leggera o parti esterne del veicolo come paraurti, cofano, parafango, portiera, specchietto, faro o fanale, genera voci coerenti con quel tipo di intervento.
 
+- Per interventi su paraurti, cofano, parafanghi, portiere, specchietti, fari o fanali non limitarti alla sola voce principale. Genera anche le lavorazioni e i materiali normalmente necessari allo smontaggio, montaggio e fissaggio del componente, oltre alla Manodopera.
+
+- Inserisci "Verniciatura componente" solo se l'utente parla di verniciatura, colore, graffi, carrozzeria, componente nuovo da verniciare o ripristino estetico.
+- Non usare mai frasi come "eventuale", "se necessario" o "da verificare" nelle voci.
 Prima di generare le voci, estrai mentalmente tutte le lavorazioni presenti nel testo utente e trattale come interventi separati. Anche se il testo arriva da un vocale ed è scritto in una sola frase, devi riconoscere tutti i lavori citati.
 Prima di restituire il JSON verifica che ogni lavorazione individuata sia rappresentata almeno da una voce o da una frase nella descrizione_lavoro.
 
