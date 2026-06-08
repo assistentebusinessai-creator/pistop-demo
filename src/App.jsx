@@ -2539,6 +2539,12 @@ export default function App() {
   const [loginOfficina, setLoginOfficina] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [loginError, setLoginError] = useState("");
+  const demoId =
+    new URLSearchParams(window.location.search).get("demo") ||
+    localStorage.getItem("pitstop_demo_id") ||
+    "demo-generale";
+
+  localStorage.setItem("pitstop_demo_id", demoId);
 
 
   const [db,setDb]=useState({preventivi:[],clienti:[],nextNum:1});
@@ -2775,9 +2781,7 @@ export default function App() {
   const onSalva = async () => {
     try {
       const token = nId() + nId();
-      const demoId =
-        new URLSearchParams(window.location.search).get("demo") ||
-        "demo-generale";
+      const demoId = localStorage.getItem("pitstop_demo_id") || "demo-generale";
       const isUpdate = db.preventivi.some(p => p.id === draft.id);
 
       let error;
