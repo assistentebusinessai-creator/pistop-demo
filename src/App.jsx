@@ -401,7 +401,7 @@ function Dashboard({db,onNuovo,onArchivio, onCliente}) {
       }}>
         <div style={{fontSize:11,color:"rgba(255,255,255,0.85)",letterSpacing:2,textTransform:"uppercase",marginBottom:4,fontFamily:"'Barlow Condensed',sans-serif"}}>Questo mese · {mLabel(mk)}</div>
         <div style={{fontSize:42,fontWeight:900,color:G,fontFamily:"'Barlow Condensed',sans-serif",lineHeight:1}}>{"€ --"}</div>
-        <div style={{fontSize:13,color:"rgba(255,255,255,0.85)",marginTop:6}}>-- preventivi · Anno {fmtK(totAnno)}</div>
+        <div style={{fontSize:13,color:"rgba(255,255,255,0.85)",marginTop:6}}>-- preventivi · Anno Versione demo </div>
         <button onClick={onCliente} style={{
           marginTop:16,
           width:"100%",
@@ -428,7 +428,7 @@ function Dashboard({db,onNuovo,onArchivio, onCliente}) {
         }}>
           <div style={{fontSize:14,color:"rgba(255,255,255,0.85)",letterSpacing:1.5,textTransform:"uppercase",fontFamily:"'Barlow Condensed',sans-serif"}}>Preventivi oggi</div>
           <div style={{fontSize:34,fontWeight:900,color:TX,fontFamily:"'Barlow Condensed',sans-serif",marginTop:2}}>
-            {preventiviHome.filter(p=>p.data.startsWith(new Date().toISOString().slice(0,10))).length}
+            {"--"}
           </div>
         </Card>
         <Card style={{
@@ -438,7 +438,7 @@ function Dashboard({db,onNuovo,onArchivio, onCliente}) {
           boxShadow: "0 4px 14px rgba(0,0,0,0.28)",
         }} onClick={onArchivio}>
           <div style={{fontSize:14,color:"rgba(255,255,255,0.85)",letterSpacing:1.5,textTransform:"uppercase",fontFamily:"'Barlow Condensed',sans-serif"}}>Totale archivio</div>
-          <div style={{fontSize:34,fontWeight:900,color:TX,fontFamily:"'Barlow Condensed',sans-serif",marginTop:2}}>{preventiviHome.length}</div>
+          <div style={{fontSize:34,fontWeight:900,color:TX,fontFamily:"'Barlow Condensed',sans-serif",marginTop:2}}>{"--"}</div>
         </Card>
       </div>
 
