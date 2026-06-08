@@ -66,7 +66,7 @@ const mKey  = iso => { const d=new Date(iso); return `${d.getFullYear()}-${Strin
 const mLabel= k => { const[y,m]=k.split("-"); return ["Gen","Feb","Mar","Apr","Mag","Giu","Lug","Ago","Set","Ott","Nov","Dic"][+m-1]+" "+y; };
 const tot   = (voci=[]) => voci.reduce((s,v)=>(s+(+(v.prezzo)||0)*(+(v.qta)||1)),0);
 const nId   = () => Date.now().toString(36)+Math.random().toString(36).slice(2,5);
-const prevN = n => `DS84-${new Date().getFullYear()}-${String(n).padStart(3,"0")}`;
+const prevN = n => `PITSTOP-${new Date().getFullYear()}-${String(n).padStart(3,"0")}`;
 
 // ─────────────────────────────────────────
 //  STORAGE
