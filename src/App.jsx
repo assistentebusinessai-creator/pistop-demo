@@ -498,6 +498,11 @@ function Nuovo({onGenerated,onBack}) {
     const params = new URLSearchParams(window.location.search);
     const generaBozzaId = params.get("generaBozza");
 
+    const demoIdFromUrl = params.get("demo");
+    if (demoIdFromUrl) {
+      localStorage.setItem("pitstop_demo_id", demoIdFromUrl);
+    }
+
     if (!generaBozzaId || bozzeQr.length === 0) return;
 
     const bozza = bozzeQr.find(
