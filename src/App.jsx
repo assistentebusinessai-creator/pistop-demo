@@ -3483,7 +3483,11 @@ export default function App() {
 
          
           <iframe
-            src="https://pitstop-qr-form.vercel.app"
+            src={`https://pitstop-qr-form.vercel.app/?demo=${encodeURIComponent(
+             new URLSearchParams(window.location.search).get("demo") ||
+             localStorage.getItem("pitstop_demo_id") ||
+             "demo-generale"
+            )}`}
             title="Form cliente"
             allow="microphone *; camera *"
             style={{
