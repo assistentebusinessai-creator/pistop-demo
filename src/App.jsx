@@ -1661,6 +1661,27 @@ function Preview({prev,onSalva,onEdit,onBack,saved,readonlyStorico}) {
               </button>
 
 
+              <button
+                onClick={() => alert("Funzione disponibile nella versione completa di PITSTOP. Nella versione definitiva potrai generare il file XML pronto per la fatturazione elettronica.")}
+                style={{
+                  background:"#22c55e",
+                  color:"#000",
+                  border:"none",
+                  borderRadius:12,
+                  minHeight:50,
+                  fontSize:14,
+                  fontWeight:800,
+                  fontFamily:"Barlow Condensed, sans-serif",
+                  letterSpacing:1,
+                  textTransform:"uppercase",
+                  cursor:"pointer",
+                  marginTop:10
+                }}
+              >
+                🧾 SCARICA XML
+              </button>
+
+              {/*}
               {saved && (
                 <button
                   onClick={handleXML}
@@ -1682,6 +1703,7 @@ function Preview({prev,onSalva,onEdit,onBack,saved,readonlyStorico}) {
                    📄 SCARICA XML
                 </button>
               )}
+              */}  
 
 
 
