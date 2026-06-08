@@ -3061,7 +3061,7 @@ export default function App() {
               setSavedId(null);
               setScreen("nuovo");
             }}
-            onArchivio={()=>setScreen("archivio")}
+            onArchivio={()=>alert("Nella versione completa di PITSTOP ogni officina dispone di un archivio personale, sincronizzato e accessibile da qualsiasi dispositivo.")}
             onCliente={() => setScreen("cliente")}
           />
         )}
