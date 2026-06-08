@@ -400,8 +400,8 @@ function Dashboard({db,onNuovo,onArchivio, onCliente}) {
         padding: 16
       }}>
         <div style={{fontSize:11,color:"rgba(255,255,255,0.85)",letterSpacing:2,textTransform:"uppercase",marginBottom:4,fontFamily:"'Barlow Condensed',sans-serif"}}>Questo mese · {mLabel(mk)}</div>
-        <div style={{fontSize:42,fontWeight:900,color:G,fontFamily:"'Barlow Condensed',sans-serif",lineHeight:1}}>{fmtK(totMese)}</div>
-        <div style={{fontSize:13,color:"rgba(255,255,255,0.85)",marginTop:6}}>{mese.length} preventiv{mese.length===1?"o":"i"} · Anno {fmtK(totAnno)}</div>
+        <div style={{fontSize:42,fontWeight:900,color:G,fontFamily:"'Barlow Condensed',sans-serif",lineHeight:1}}>{"€ --"}</div>
+        <div style={{fontSize:13,color:"rgba(255,255,255,0.85)",marginTop:6}}>-- preventivi · Anno {fmtK(totAnno)}</div>
         <button onClick={onCliente} style={{
           marginTop:16,
           width:"100%",
