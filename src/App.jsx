@@ -1756,6 +1756,7 @@ function Preview({prev,onSalva,onEdit,onBack,saved,readonlyStorico}) {
 
             <button
               onClick={() => {
+                /*
                 const xml = generaXmlFatturaPA(prev, {
                   nome: prev.cliente,
                   telefono: prev.telefono,
@@ -1772,7 +1773,12 @@ function Preview({prev,onSalva,onEdit,onBack,saved,readonlyStorico}) {
 
                 URL.revokeObjectURL(url);
                 setShowXmlModal(false);
+                */
+               alert("Funzione disponibile nella versione completa di PITSTOP.");
               }}
+                
+
+               
               style={{
                 marginTop:8,
                 background:"#22c55e",
@@ -3049,10 +3055,13 @@ export default function App() {
             <Preview prev={viewPrev} onEdit={()=>{setDraft(viewPrev); setSavedId(viewPrev.id); setScreen("edit")}} onBack={()=>setScreen("archivio")} saved={true} readonlyStorico={readonlyStorico}/>
          {!readonlyStorico && (
             <button onClick={() => {
+               /*
                const link = `https://assistente-officinaprev.vercel.app/preventivo/${viewPrev.token}`;
                const testo = `🔧 *DS84 OFFICINE* — Preventivo\n🚗 ${viewPrev.veicolo}\n\nPuò visualizzare e accettare il preventivo al seguente link:\n${link}`;
                const numero = viewPrev.telefono ? `39${viewPrev.telefono.replace(/\s/g,'')}` : '';
                window.open(`https://wa.me/${numero}?text=${encodeURIComponent(testo)}`);
+               */
+              alert("Funzione disponibile nella versione completa di PITSTOP.");
             }} style={{background:"#25D366",color:"#fff",border:"none",borderRadius:10,padding:"18px 16px",fontSize:18,fontWeight:800,cursor:"pointer",fontFamily:"'Barlow Condensed',sans-serif",letterSpacing:1}}>
                 📲 INVIA SU WHATSAPP
             </button>
