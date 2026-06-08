@@ -164,7 +164,7 @@ const whatsappTxt = p => {
   t+=`${"─".repeat(28)}\n`;
   t+=`💰 *TOTALE: ${fmt(tot(p.voci))}*\n`;
   if(p.note_tecniche) t+=`\nℹ️ ${p.note_tecniche}`;
-  t+=`\n\n_DS84 OFFICINE — Preventivo valido 30 giorni_`;
+  t+=`\n\n PITSTOP — Preventivo valido 30 giorni_`;
   return t;
 };
 
@@ -1417,11 +1417,11 @@ function Preview({prev,onSalva,onEdit,onBack,saved,readonlyStorico}) {
           <div style={{display:"flex",alignItems:"center",gap:10}}>
             <div style={{width:44,height:44,background:"#111",borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center"}}>
               <div style={{fontFamily:"'Barlow Condensed',sans-serif",fontWeight:900,fontSize:14,lineHeight:1,textAlign:"center"}}>
-                <span style={{color:G}}>D</span><span style={{color:"#fff"}}>S</span><span style={{color:R,fontStyle:"italic"}}>84</span>
-                <div style={{color:"#888",fontSize:10,letterSpacing:2}}>OFFICINE</div>
+                <span style={{color:G}}>PIT</span><span style={{color:"#fff"}}>STOP</span><span style={{color:R,fontStyle:"italic"}}></span>
+               <div style={{color:"#888",fontSize:10,letterSpacing:2}}>OFFICINE</div>
               </div>
             </div>
-            <div><div style={{fontWeight:800,fontSize:14}}>DS84 OFFICINE</div><div style={{fontSize:11,color:"#666"}}>Officina meccanica</div></div>
+            <div><div style={{fontWeight:800,fontSize:14}}>PITSTOP</div><div style={{fontSize:11,color:"#666"}}>Officina meccanica</div></div>
           </div>
           <div style={{textAlign:"right"}}>
             <div style={{fontSize:11,color:"#888",fontWeight:600,letterSpacing:1}}>PREVENTIVO</div>
