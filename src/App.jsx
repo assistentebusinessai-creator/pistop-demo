@@ -1315,14 +1315,14 @@ function EditPreventivo({prev,onChange,onPreview,onBack}) {
       <label style={{display:'flex', alignItems:'center', gap:8, marginBottom:12, color:'white'}}>
         <input
           type="checkbox"
-          checked={mostraPrezziPDF}
-          onChange={(e) => setMostraPrezziPDF(e.target.checked)}
+          checked={true}
+          disabled
         />
         <span>MOSTRA PREZZI NEL PREVENTIVO</span>
       </label>
 
       <Btn 
-        onClick={() => onPreview({ ...prev, mostraPrezziPDF })}
+        onClick={() => onPreview({ ...prev, mostraPrezziPDF: true })}
         data-nav="true"
         tabIndex={0} 
         
