@@ -3026,7 +3026,7 @@ export default function App() {
 
         <div style={{fontSize:13,lineHeight:1.15,color:"rgba(255,255,255,0.85)",textAlign:"right",fontFamily:"'Barlow Condensed',sans-serif"}}>
           <div>{new Date().toLocaleDateString("it-IT",{weekday:"short",day:"numeric",month:"short"})}</div>
-          <div style={{color:G,fontWeight:800,fontSize:18}}>{db.preventivi.filter(p=>mKey(p.data)===mKey(new Date().toISOString())).length} prev. questo mese</div>
+          <div style={{color:G,fontWeight:800,fontSize:18}}>VERSIONE DEMO</div>
         </div>
       </div>
 
