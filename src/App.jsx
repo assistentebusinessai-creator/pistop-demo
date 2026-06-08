@@ -365,9 +365,15 @@ function Dashboard({db,onNuovo,onArchivio, onCliente}) {
 
   useEffect(() => {
     const loadHomePreventivi = async () => {
+      const demoId =
+        new URLSearchParams(window.location.search).get("demo") ||
+        localStorage.getItem("pitstop_demo_id") ||
+        "demo-generale";
+
       const { data, error } = await supabase
-        .from("preventivi")
-        .select("dati")
+        .from("preventivi_bozze")
+        .select("*")
+        .eq("demo_id", demoId)
         .order("created_at", { ascending: false });
 
       if (error) {
