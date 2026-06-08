@@ -581,7 +581,8 @@ function Nuovo({onGenerated,onBack}) {
       onGenerated(r, testoDaGenerare, usaListino, {
         ... bozzaFinale,
         cliente: bozzaFinale?.cliente || bozzaFinale?.nome || "",
-        bozza_id: bozzaFinale?.bozza_id || bozzaFinale?.id || null
+        bozza_id: bozzaFinale?.bozza_id || bozzaFinale?.id || null,
+        demo_id: bozzaFinale?.demo_id || null
       });
 
     } catch(e) {
@@ -2652,7 +2653,7 @@ export default function App() {
       provincia: extra.provincia || "",
       email: extra.email || "",
       cf_piva: extra.cf_piva || "",
-      demo_id: demoId,
+      demo_id: extra.demo_id || demoId,
       descrizione_lavoro: aiResult.descrizione_lavoro,
       voci: aiResult.voci.map(v => {
         const descrizione = (v.descrizione || "").toLowerCase();
