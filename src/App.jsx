@@ -2788,7 +2788,11 @@ export default function App() {
   const onSalva = async () => {
     try {
       const token = nId() + nId();
-      const demoId = localStorage.getItem("pitstop_demo_id") || "demo-generale";
+      const demoId =
+        new URLSearchParams(window.location.search).get("demo") ||
+        draft.demo_id ||
+        localStorage.getItem("pitstop_demo_id") ||
+        "demo-generale";
       draft.dem_id = demoId;
       const isUpdate = db.preventivi.some(p => p.id === draft.id);
 
