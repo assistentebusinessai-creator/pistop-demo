@@ -1640,6 +1640,27 @@ function Preview({prev,onSalva,onEdit,onBack,saved,readonlyStorico}) {
               
               </button>
 
+              <button
+                onClick={() => alert("Funzione disponibile nella versione completa di PITSTOP. Nella versione definitiva potrai inviare il preventivo direttamente al cliente su WhatsApp e ricevere la conferma di lettura.")}
+                style={{
+                  background:"#25D366",
+                  color:"#fff",
+                  border:"none",
+                  borderRadius:12,
+                  minHeight:50,
+                  fontSize:14,
+                  fontWeight:800,
+                  fontFamily:"Barlow Condensed, sans-serif",
+                  letterSpacing:1,
+                  textTransform:"uppercase",
+                  cursor:"pointer",
+                  marginTop:10
+                }}
+              >
+                📲 INVIA SU WHATSAPP
+              </button>
+
+
               {saved && (
                 <button
                   onClick={handleXML}
