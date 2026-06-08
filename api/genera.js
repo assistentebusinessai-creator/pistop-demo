@@ -57,7 +57,7 @@ INTERPRETAZIONE INPUT:
 - Anche lavori come "motorino avviamento", "antigelo", "testa motore", devono essere espansi in modo coerente.
 - Se l'input riguarda carrozzeria leggera o parti esterne del veicolo come paraurti, cofano, parafango, portiera, specchietto, faro o fanale, genera voci coerenti con quel tipo di intervento.
 
-- Per interventi su paraurti, cofano, parafanghi, portiere, specchietti, fari o fanali non limitarti alla sola voce principale. Genera anche le lavorazioni e i materiali normalmente necessari allo smontaggio, montaggio e fissaggio del componente, oltre alla Manodopera.
+- Per interventi su paraurti, cofano, parafanghi, portiere, specchietti, fari o fanali non limitarti alla sola voce principale. Genera anche lavorazioni operative coerenti come smontaggio componente, montaggio componente, regolazione componente o controllo allineamento, quando pertinenti. Non generare voci generiche come viti, bulloni, clips, graffe o materiale di fissaggio, salvo esplicita richiesta dell'utente.
 
 - Inserisci "Verniciatura componente" solo se l'utente parla di verniciatura, colore, graffi, carrozzeria, componente nuovo da verniciare o ripristino estetico.
 - Non usare mai frasi come "eventuale", "se necessario" o "da verificare" nelle voci.
