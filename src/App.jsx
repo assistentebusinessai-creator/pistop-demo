@@ -2443,6 +2443,7 @@ function PreventivoPublico({token}) {
       });
   }, [token]);
 
+
   const rispondi = async (risposta) => {
     const testo = risposta === 'accettato' 
       ? "Confermi di accettare il preventivo?" 
@@ -2774,6 +2775,9 @@ export default function App() {
   const onSalva = async () => {
     try {
       const token = nId() + nId();
+      const demoId =
+        new URLSearchParams(window.location.search).get("demo") ||
+        "demo-generale";
       const isUpdate = db.preventivi.some(p => p.id === draft.id);
 
       let error;
@@ -2788,7 +2792,7 @@ export default function App() {
       } else {
         const result = await supabase
           .from("preventivi")
-          .insert([{ dati: draft, stato_cliente: "in_attesa", token }]);
+          .insert([{ dati: draft, stato_cliente: "in_attesa", token, demo_id: demoId }]);
 
         error = result.error;
       }
