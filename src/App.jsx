@@ -2784,6 +2784,7 @@ export default function App() {
     try {
       const token = nId() + nId();
       const demoId = localStorage.getItem("pitstop_demo_id") || "demo-generale";
+      draft.dem_id = demoId;
       const isUpdate = db.preventivi.some(p => p.id === draft.id);
 
       let error;
@@ -2791,7 +2792,7 @@ export default function App() {
       if (isUpdate) {
         const result = await supabase
           .from("preventivi")
-          .update({ dati: draft })
+          .update({ dati: draft, demo_id: demoId })
           .eq("dati->>id", draft.id);
 
         error = result.error;
