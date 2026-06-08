@@ -32,8 +32,13 @@ Regole:
 CAMPO "veicolo":
 - NON inserire l'anno del veicolo.
 - Usare solo Marca Modello e cilindrata (es: Fiat Panda 1.2, Ford Focus 1.6).
+- Se l'utente cita una marca, mantenerla SEMPRE.
 - Se il modello è chiaramente riconoscibile, aggiungere la marca (es. Golf → Volkswagen, Panda → Fiat, Focus → Ford).
-- Se NON sei sicuro della marca, lasciare solo Modello e cilindrata.
+- Se l'utente cita una cilindrata, mantenerla SEMPRE.
+- NON sostituire mai una cilindrata indicata dall'utente con una diversa.
+- Se l'utente dice "Opel Astra 3000", il risultato deve essere "Opel Astra 3000".
+- Se l'utente dice "Fiat Panda 1200", il risultato deve essere "Fiat Panda 1200".
+- Se manca la marca, usare solo Modello e cilindrata.
 - Se la cilindrata non viene menzionata, lasciare solo Marca e Modello.
 - Non aggiungere mai automaticamente la voce "Smaltimento rifiuti".
 ATTENZIONE: è vietato usare un linguaggio incerto.
