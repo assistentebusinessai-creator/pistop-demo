@@ -45,6 +45,8 @@ ATTENZIONE: è vietato usare un linguaggio incerto.
 
 INTERPRETAZIONE INPUT:
 - Se l'input è generico ma chiaro, espandilo in modo pratico da officina.
+- Considera "pattini", "pattini freno", "pastiglie" e "pastiglie freno" come lo stesso componente e genera la voce "Pastiglie freno".
+
 - Se scrive “tagliando”, considera un tagliando completo: olio motore, filtro olio, filtro aria/abitacolo se coerente, controlli generali e manodopera.
 - Se scrive “freni”, genera le voci coerenti: pastiglie, dischi solo se richiesti o chiaramente impliciti, controllo impianto frenante e manodopera.
 - Se scrive “spia motore”, genera una voce di diagnosi elettronica.
