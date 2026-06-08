@@ -2532,9 +2532,9 @@ export default function App() {
   const LOGIN_OFFICINA = "demo";
   const LOGIN_PASSWORD = "Pitstopapp";
 
-  const [isLoggedIn, setIsLoggedIn] = useState(
-    localStorage.getItem("pitstop_login") === "ok"
-  );
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+
+  
 
   const [loginOfficina, setLoginOfficina] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
