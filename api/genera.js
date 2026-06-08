@@ -52,6 +52,7 @@ INTERPRETAZIONE INPUT:
 - Anche lavori come "motorino avviamento", "antigelo", "testa motore", devono essere espansi in modo coerente.
 
 Prima di generare le voci, estrai mentalmente tutte le lavorazioni presenti nel testo utente e trattale come interventi separati. Anche se il testo arriva da un vocale ed è scritto in una sola frase, devi riconoscere tutti i lavori citati.
+Prima di restituire il JSON verifica che ogni lavorazione individuata sia rappresentata almeno da una voce o da una frase nella descrizione_lavoro.
 
 CLASSIFICAZIONE VOCI:
 - Le voci di controllo, verifica o smaltimento NON devono avere tipo "manodopera".
