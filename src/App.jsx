@@ -2793,7 +2793,7 @@ export default function App() {
         draft.demo_id ||
         localStorage.getItem("pitstop_demo_id") ||
         "demo-generale";
-      draft.dem_id = demoId;
+      draft.demo_id = demoId;
       const isUpdate = db.preventivi.some(p => p.id === draft.id);
 
       let error;
