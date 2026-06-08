@@ -1,6 +1,6 @@
 {
-  "name": "DS84 Officina",
-  "short_name": "DS84",
+  "name": "PitStop Demo",
+  "short_name": "PitStop",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#000000",
