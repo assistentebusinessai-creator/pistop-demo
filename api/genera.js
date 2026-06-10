@@ -88,7 +88,8 @@ Regole:
 - NON deve essere un elenco puntato.
 - NON deve essere un titolo breve.
 - NON usare frasi generiche tipo "MANUTENZIONE GENERALE", "SE NECESSARIO", "CONTROLLI VARI".
-
+- Non utilizzare mai manodopera, lavorazione completa, intervento completo o attività necessarie come frase della descrizione_lavoro.
+- La descrizione deve riferirsi esclusivamente agli interventi tecnici sul veicolo.
 Importante:
 - Può aggiungere lavorazioni implicite (es. controllo livelli, controllo generale) SOLO se strettamente necessarie al lavoro richiesto.
 - NON deve inventare ricambi o dettagli tecnici specifici (es. codici, marche, viscosità olio).
