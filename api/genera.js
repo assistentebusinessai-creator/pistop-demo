@@ -53,7 +53,7 @@ INTERPRETAZIONE INPUT:
 - Non inventare lavori non richiesti o non coerenti.
 - se l'utente scrive più lavori nella stessa frase, separali mentalmente e genera voci per ciascuno (es. "tagliando e freni" → voci per entrambi).
 - Non limitarti al primo lavoro menzionato se l'input suggerisce più lavorazioni (es. "tagliando e freni" → voci per entrambi).
-- Ogni lavoro scritto deve essere trattato come un intervento completo da officina.
+
 - Per ogni lavoro, genera tutte le voci normalmente necessarie per eseguirlo, senza usare espressioni come "SE NECESSARIO" o condizioni simili. Le lavorazioni devono essere espresse in modo diretto e deciso.
 - Non limitarti a una singola voce per lavoro.
 - Anche lavori come "motorino avviamento", "antigelo", "testa motore", devono essere espansi in modo coerente.
