@@ -19,7 +19,7 @@ Genera questo JSON:
 {
   "veicolo": "Marca Modello Cilindrata",
   "targa": "",
-  "descrizione_lavoro": "blocco descrittivo professionale in MAIUSCOLO, su 2-4 righe, coerente con le voci"",
+  "descrizione_lavoro": "blocco descrittivo professionale in MAIUSCOLO, su 2-4 righe, coerente con le voci",
   "voci": [
     { "id":"1", "descrizione":"testo voce", "tipo":"ricambio", "qta":1, "prezzo":0, "unita":"pz" }
   ],
@@ -44,11 +44,39 @@ CAMPO "veicolo":
 ATTENZIONE: è vietato usare un linguaggio incerto.
 
 INTERPRETAZIONE INPUT:
+
+
+REGOLA FONDAMENTALE MULTI-LAVORO:
+L'input dell'utente può contenere più lavori nella stessa frase.
+Devi prima individuare TUTTE le lavorazioni citate e poi generare voci per ognuna.
+
+Esempio:
+"tagliando, freni che cigolano, distribuzione"
+
+Deve generare voci per:
+1. TAGLIANDO
+2. CONTROLLO/SISTEMA FRENANTE PER RUMORE O CIGOLIO
+3. DISTRIBUZIONE / KIT DISTRIBUZIONE
+
+È vietato ignorare una lavorazione citata.
+È vietato trasformare un sintomo in una sola riparazione certa.
+
+Se l'utente scrive "freni che cigolano", "rumore freni", "freni rumorosi":
+- genera sempre una voce "Controllo impianto frenante"
+- genera una voce "Pastiglie freno" solo come lavorazione coerente
+- NON limitarti alle sole pastiglie anteriori
+- NON inventare "dischi freno" se non richiesti, salvo che l'utente dica dischi, vibrazione, frenata irregolare o sostituzione completa freni
+
+Se l'utente scrive "distribuzione", "kit distribuzione", "cinghia distribuzione":
+- genera sempre un blocco lavoro separato
+- genera voci coerenti come "Kit distribuzione", "Pompa acqua" se coerente con kit distribuzione, e manodopera finale
 - Se l'input è generico ma chiaro, espandilo in modo pratico da officina.
 - Considera "pattini", "pattini freno", "pastiglie" e "pastiglie freno" come lo stesso componente e genera la voce "Pastiglie freno".
 
 - Se scrive “tagliando”, considera un tagliando completo: olio motore, filtro olio, filtro aria/abitacolo se coerente, controlli generali e manodopera.
-- Se scrive “freni”, genera le voci coerenti: pastiglie, dischi solo se richiesti o chiaramente impliciti, controllo impianto frenante e manodopera.
+- Se scrive “freni” in modo generico, genera controllo impianto frenante e pastiglie freno.
+- Se scrive “freni che cigolano”, “rumore freni” o “freni rumorosi”, interpreta il testo come sintomo: genera controllo impianto frenante e voci freno coerenti, senza limitarti automaticamente alle sole pastiglie anteriori.
+- Genera dischi freno solo se l’utente li cita o se parla di vibrazione, disco rovinato, frenata irregolare o sostituzione completa freni.
 - Se scrive “spia motore”, genera una voce di diagnosi elettronica.
 - Non inventare lavori non richiesti o non coerenti.
 - se l'utente scrive più lavori nella stessa frase, separali mentalmente e genera voci per ciascuno (es. "tagliando e freni" → voci per entrambi).
@@ -90,6 +118,7 @@ Regole:
 - NON usare frasi generiche tipo "MANUTENZIONE GENERALE", "SE NECESSARIO", "CONTROLLI VARI".
 - Non utilizzare mai manodopera, lavorazione completa, intervento completo o attività necessarie come frase della descrizione_lavoro.
 - La descrizione deve riferirsi esclusivamente agli interventi tecnici sul veicolo.
+
 Importante:
 - Può aggiungere lavorazioni implicite (es. controllo livelli, controllo generale) SOLO se strettamente necessarie al lavoro richiesto.
 - NON deve inventare ricambi o dettagli tecnici specifici (es. codici, marche, viscosità olio).
