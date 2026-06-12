@@ -21,7 +21,7 @@ Non aggiungere testo prima o dopo il JSON. Non usare blocchi di codice markdown 
 
 
 
-Genera questo JSON:
+Genera questo JSON: 
 {
   "veicolo": "Marca Modello Cilindrata",
   "targa": "",
