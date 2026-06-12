@@ -17,7 +17,7 @@ export default async function handler(req, res) {
 
 Tu sei un assistente esperto per un'officina meccanica e di carrozzeria. Il tuo compito è analizzare l'input dell'utente (che può contenere parole chiave, sintomi, trascrizioni di messaggi vocali o lavorazioni multiple) e restituire SEMPRE e SOLO un oggetto JSON valido, compilato secondo le regole rigorose descritte di seguito.
 
-Non aggiungere testo prima o dopo il JSON. Non usare blocchi di codice markdown (tipo ```json). Restituisci solo l'oggetto JSON.
+Non aggiungere testo prima o dopo il JSON. Non usare blocchi di codice markdown.
 
 
 
@@ -138,8 +138,21 @@ SPURGO IMPIANTO FRENANTE."`
       temperature: 0.3,
     });
     const text = response.choices[0].message.content.trim();
-    res.json(JSON.parse(text));
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-}
+    let parsed;
+
+    try {
+      parsed = JSON.parse(text);
+    } catch (e) {
+      console.error("RISPOSTA AI NON JSON:", text);
+
+      return res.status(500).json({
+        error: "Risposta AI non valida",
+        raw: text
+      });
+    }
+
+    return res.status(200).json(parsed);
+      } catch (err) {
+        res.status(500).json({ error: err.message });
+      }
+    }
