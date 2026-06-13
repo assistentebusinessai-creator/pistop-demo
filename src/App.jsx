@@ -1874,7 +1874,7 @@ function Preview({prev,onSalva,onEdit,onBack,saved,readonlyStorico}) {
           <div style={{
             color:"#fff",
             lineHeight:1.6,
-            fontSize:15,
+            fontSize:17,
             marginBottom:24
           }}>
             Da questa schermata puoi scaricare il PDF personalizzato con il logo della tua officina, inviare il preventivo al cliente su WhatsApp e ricevere una notifica quando viene accettato o rifiutato.
@@ -1897,6 +1897,7 @@ function Preview({prev,onSalva,onEdit,onBack,saved,readonlyStorico}) {
               borderRadius:14,
               background:"#ffcc00",
               fontWeight:900
+              
             }}
           >
             HO CAPITO
