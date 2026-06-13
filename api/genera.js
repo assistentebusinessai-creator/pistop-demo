@@ -124,6 +124,12 @@ Regole:
 - NON usare frasi generiche tipo "MANUTENZIONE GENERALE", "SE NECESSARIO", "CONTROLLI VARI".
 - Non utilizzare mai manodopera, lavorazione completa, intervento completo o attività necessarie come frase della descrizione_lavoro.
 - La descrizione deve riferirsi esclusivamente agli interventi tecnici sul veicolo.
+- NON aggiungere mai "DEL VEICOLO" nella prima frase. 
+  Scrivi solo il tipo di intervento (es. "PREVENTIVO DI LAVORAZIONE PER TAGLIANDO COMPLETO.")
+- L'ultima frase della descrizione_lavoro deve concludere 
+  con la lavorazione più significativa, non con un ricambio minore.
+
+
 
 Importante:
 - Può aggiungere lavorazioni implicite (es. controllo livelli, controllo generale) SOLO se strettamente necessarie al lavoro richiesto.
