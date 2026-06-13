@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { LISTINO } from "./listino";
 import { generaXmlFatturaPA } from "./fatturaXml";
 import { createClient } from '@supabase/supabase-js'
-
+import FAQModal from "./components/FAQModal";
 
 
 const supabase = createClient(
@@ -1076,7 +1076,8 @@ function EditPreventivo({prev,onChange,onPreview,onBack}) {
               background:"#ffcc00",
               color:"#000",
               fontWeight:900,
-              cursor:"pointer",
+              cursor:"pointer"
+              
               
             }}
           >    HO CAPITO
@@ -3566,7 +3567,18 @@ export default function App() {
 
         <div style={{fontSize:13,lineHeight:1.15,color:"rgba(255,255,255,0.85)",textAlign:"right",fontFamily:"'Barlow Condensed',sans-serif"}}>
           <div>{new Date().toLocaleDateString("it-IT",{weekday:"short",day:"numeric",month:"short"})}</div>
-          <div style={{color:G,fontWeight:800,fontSize:18}}>VERSIONE DEMO</div>
+          <div
+            style={{
+              display:"flex",
+              flexDirection:"column",
+              alignItems:"flex-end",
+              gap:6
+            }}
+          >
+          
+
+          <FAQModal />
+        </div>
         </div>
       </div>
 
