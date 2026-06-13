@@ -1058,7 +1058,7 @@ function EditPreventivo({prev,onChange,onPreview,onBack}) {
             marginBottom:25
             
           }}>
-             Qui puoi trovare i dettgali aggiunti vocalmente nel form: chilometri, immatricolazione, date e note del cliente.
+             Qui puoi trovare i dettagli aggiunti vocalmente nel form: chilometri, immatricolazione, date e note del cliente.
              <br /><br />
              Puoi modificarle o aggiungerle manualmente prima di creare il preventivo. 
           </div>
@@ -3077,6 +3077,11 @@ export default function App() {
         setScreen("home");
         return;
       }
+
+      if (event.data?.type === "PITSTOP_TOUR_SCELTO") {
+        localStorage.setItem("pitstop_tour", event.data.value);
+        return;
+      }
       if (event.data?.type === "GENERA_DA_BOZZA_QR") {
         console.log("Genera da bozza QR:", event.data.bozzaId);
         setScreen("home");
@@ -3991,7 +3996,7 @@ export default function App() {
              new URLSearchParams(window.location.search).get("demo") ||
              localStorage.getItem("pitstop_demo_id") ||
              "demo-generale"
-            )}`}
+            )}&tour=${encodeURIComponent(localStorage.getItem("pitstop_tour") || "")}`}
             title="Form cliente"
             allow="microphone *; camera *"
             style={{
