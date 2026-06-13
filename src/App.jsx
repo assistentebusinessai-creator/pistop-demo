@@ -1058,7 +1058,7 @@ function EditPreventivo({prev,onChange,onPreview,onBack}) {
             marginBottom:25
             
           }}>
-             Qui puoi trovare i dettagli aggiunti vocalmente nel form: chilometri, immatricolazione, date e note del cliente.
+             Cliccando +DETTAGLI puoi trovare i dettagli aggiunti vocalmente nel form: chilometri, immatricolazione, date e note del cliente.
              <br /><br />
              Puoi modificarle o aggiungerle manualmente prima di creare il preventivo. 
           </div>
