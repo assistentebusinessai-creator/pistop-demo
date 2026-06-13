@@ -85,6 +85,8 @@ const saveDB = async (d) => {
 // ─────────────────────────────────────────
 //  AI CALL
 // ─────────────────────────────────────────
+
+
 async function aiGenera(input) {
   const r = await fetch("/api/genera", {
     method: "POST",
@@ -100,6 +102,9 @@ async function aiGenera(input) {
 
   return await r.json();
 }
+
+
+
 
 // ─────────────────────────────────────────
 //  PDF HTML GENERATOR
@@ -813,6 +818,7 @@ function EditPreventivo({prev,onChange,onPreview,onBack}) {
   const firstFieldRef = useRef(null);
   const [mostraPrezziPDF, setMostraPrezziPDF] = useState(!!prev.mostraPrezziPDF);
   const [showDettagliExtra, setShowDettagliExtra] = useState(false);
+  const [tourMainStep, setTourMainStep] = useState(prev.tourMainDone ? 0 : 1);
   useEffect(() => {
     setTimeout(() => firstFieldRef.current?.focus(), 120);
   }, []);
@@ -855,7 +861,17 @@ function EditPreventivo({prev,onChange,onPreview,onBack}) {
     return v.tipo === "manodopera" || isLiquido;
   };
 
-  const updateVoce=(id,k,v)=>onChange({...prev,voci:prev.voci.map(x=>x.id===id?{...x,[k]:v}:x)});
+  const updateVoce = (id,k,v) => { 
+    if (tourMainStep === 0 && !prev.tourVociDone) {
+      onChange({ ...prev, tourVociDone: true });
+      setTourMainStep(2);
+      return;
+    }
+    onChange({
+      ...prev,
+      voci:prev.voci.map(x=>
+        x.id===id?{...x,[k]:v}:x)});
+  };
   const removeVoce=id=>onChange({...prev,voci:prev.voci.filter(x=>x.id!==id)});
   const addVoce = () => setPickerOpen(v => !v);
   const totale2=tot(prev.voci);
@@ -981,13 +997,109 @@ function EditPreventivo({prev,onChange,onPreview,onBack}) {
             </div>
           ))}
         
-        
+          {tourMainStep === 1 && (
+            <>
+              <div style={{
+                position:"fixed",
+                inset:0,
+                background:"rgba(0,0,0,0.68)",
+                zIndex:9998
+              }} />
+
+              <div style={{
+                position:"fixed",
+                left:"50%",
+                top:"50%",
+                transform:"translate(-50%, -50%)",
+                zIndex:9999,
+                width:"min(340px, calc(100% - 36px))",
+                borderRadius:18,
+                background:"rgba(28,28,28,0.96)",
+                border:"1px solid rgba(255,204,0,0.38)",
+                boxShadow:"0 18px 50px rgba(0,0,0,0.55)",
+                padding:18,
+                color:"#fff"
+              }}>
+
+          
+
+          <div style={{
+            width:25,
+            height:25,
+            borderRadius:"50%",
+            background:"#ffcc00",
+            color:"#000",
+            display:"flex",
+            alignItems:"center",
+            justifyContent:"center",
+            fontSize:15,
+            fontWeight:900,
+            marginBottom:6
+          }}>
+            ⚡
+          </div>
+
+          
+
+          <div style={{
+            fontSize:28,
+            fontWeight:800,
+            marginBottom:20,
+            color:"#ffcc00",
+            letterSpacing:1.5
+          }}>
+            Dettagli Extra
+          </div>
+
+          <div style={{
+            fontSize:17,
+            lineHeight:1.55,
+            color:"#ffffff",
+            marginBottom:25
+            
+          }}>
+             Qui puoi trovare i dettgali aggiunti vocalmente nel form: chilometri, immatricolazione, date e note del cliente.
+             <br /><br />
+             Puoi modificarle o aggiungerle manualmente prima di creare il preventivo. 
+          </div>
+
+          <button
+            onClick={() => {
+              onChange({ ...prev, tourMainDone: true });                      
+              setTourMainStep(0);
+            }}
+            style={{
+              width:"100%",
+              padding:"10px",
+              borderRadius:12,
+              border:"none",
+              background:"#ffcc00",
+              color:"#000",
+              fontWeight:900,
+              cursor:"pointer",
+              
+            }}
+          >    HO CAPITO
+            
+          </button>
+
+          </div>
+         </> 
+          )}
+          
+          
         
 
           <div style={{display:"flex",alignItems:"end"}}>
             <button
               type="button"
-              onClick={() => setShowDettagliExtra(!showDettagliExtra)}
+              onClick={() => {
+                setShowDettagliExtra(!showDettagliExtra);
+
+                if (tourMainStep === 1) {
+                  setTourMainStep(0);
+                }
+              }}
               style={{
                 width:"100%",
                 background:"#1a1a1a",
@@ -1321,18 +1433,229 @@ function EditPreventivo({prev,onChange,onPreview,onBack}) {
         <span>MOSTRA PREZZI NEL PREVENTIVO</span>
       </label>
 
+
+
+      {tourMainStep === 2 && (
+        <>
+          <div style={{
+            position:"fixed",
+            inset:0,
+            background:"rgba(0,0,0,0.68)",
+            zIndex:9998
+          }} />
+
+          <div style={{
+            position:"fixed",
+            left:"50%",
+            top:"50%",
+            transform:"translate(-50%, -50%)",
+            zIndex:9999,
+            width:"min(340px, calc(100% - 36px))",
+            borderRadius:18,
+            background:"rgba(28,28,28,0.96)",
+            border:"1px solid rgba(255,204,0,0.38)",
+            boxShadow:"0 18px 50px rgba(0,0,0,0.55)",
+            padding:18,
+            color:"#fff"
+          }}>
+            <div style={{
+            width:25,
+            height:25,
+            borderRadius:"50%",
+            background:"#ffcc00",
+            color:"#000",
+            display:"flex",
+            alignItems:"center",
+            justifyContent:"center",
+            fontSize:15,
+            fontWeight:700,
+            marginBottom:20
+          }}>
+            ⚡
+          </div>
+
+            <div style={{
+              fontSize:26,
+              fontWeight:700,
+              marginBottom:20,
+              color:"#ffcc00"
+            }}>
+              Personalizza le voci
+            </div>
+
+            <div style={{
+              fontSize:17,
+              lineHeight:1.55,
+              marginBottom:20
+            }}>
+              Le voci sono state generate automaticamente.
+              Puoi modificare prezzi, quantità, descrizioni oppure eliminare ciò che non ti serve.
+              <br /><br />
+              Nella versione completa, PitStop memorizzerà le tue modifiche per i lavori futuri.
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setTourMainStep(0)}
+              style={{
+                width:"100%",
+                padding:"12px",
+                borderRadius:12,
+                border:"none",
+                background:"#ffcc00",
+                color:"#000",
+                fontWeight:900,
+                cursor:"pointer"
+              }}
+            >
+              CONTINUA
+            </button>
+          </div>
+        </>
+      )}
+      
+
+
+       {tourMainStep === 3 && (
+
+        <>
+          <div style={{
+            position:"fixed",
+            inset:0,
+            background:"rgba(0,0,0,0.68)",
+            zIndex:9998
+          }} />
+        
+            <div style={{
+            position:"fixed",
+            left:"50%",
+            top:"50%",
+            transform:"translate(-50%, -50%)",
+            zIndex:9999,
+            width:"min(340px, calc(100% - 36px))",
+            borderRadius:18,
+            background:"rgba(28,28,28,0.96)",
+            border:"1px solid rgba(255,204,0,0.38)",
+            boxShadow:"0 18px 50px rgba(0,0,0,0.55)",
+            padding:18,
+            color:"#fff"
+          }}>
+
+          
+
+          <div style={{
+            width:30,
+            height:30,
+            borderRadius:"50%",
+            background:"#ffcc00",
+            color:"#000",
+            display:"flex",
+            alignItems:"center",
+            justifyContent:"center",
+            fontSize:16,
+            fontWeight:900,
+            marginBottom:20
+          }}>
+            ⚡
+          </div>
+
+          
+
+          <div style={{
+            fontSize:26,
+            fontWeight:700,
+            marginBottom:20,
+            color:"#ffcc00",
+            letterSpacing:1.5
+          }}>
+            Controllo finale
+          </div>
+
+          <div style={{
+            fontSize:17,
+            lineHeight:1.40,
+            color:"#ffffff",
+            marginBottom:20
+            
+          }}>
+              Ora vedrai il preventivo così come apparirà al cliente.
+              <br /><br />
+               Se qualcosa non ti convince, potrai sempre tornare qui e modificarlo prima dell'invio.
+          </div>
+
+          <button
+            onClick={() => {
+              onPreview({ 
+                ...prev,
+                 mostraPrezziPDF,
+                tourMainDone: true,
+                tourFinalDone: true
+               });
+            }}
+            style={{
+              width:"100%",
+              padding:"10px",
+              borderRadius:12,
+              border:"none",
+              background:"#ffcc00",
+              color:"#000",
+              fontWeight:900,
+            
+            }}
+          >    HO CAPITO
+            
+          </button>
+
+          </div>
+        </>
+        
+        )}
+
+        
+
+        
+
       <Btn 
-        onClick={() => onPreview({ ...prev, mostraPrezziPDF: true })}
+       type="button"
+        onClick={(e) => {
+          e.preventDefault();
+          if (!prev.tourFinalDone) {
+            setTourMainStep(3);
+            return;
+
+
+          }
+          onPreview({ ...prev, mostraPrezziPDF });
+        }}
         data-nav="true"
         tabIndex={0} 
         
         style={{width:"100%",padding:"15px",fontSize:18,display:"flex",alignItems:"center",justifyContent:"center",gap:8}} 
       >  
         <span>📄</span> ANTEPRIMA & SALVA
+
+
+       
+
+
+
+
+
       </Btn>
+
+         
+
     </div>
+    
+        
+
+          
+
+
   );
 }
+
+
 
 // ─────────────────────────────────────────
 //  SCREEN: PREVIEW & AZIONI
@@ -1342,7 +1665,12 @@ function Preview({prev,onSalva,onEdit,onBack,saved,readonlyStorico}) {
   const [pdfDone,setPdfDone]=useState(false);
   const [editingDesc, setEditingDesc] = useState(false);
   const [desc, setDesc] = useState(prev.descrizione_lavoro || "");
-  
+  const [tourPreviewStep, setTourPreviewStep] = useState(prev.tourPreviewDone ? 0 : 1);
+  const [tourAzioniMostrato, setTourAzioniMostrato] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const totale2=tot(prev.voci);
 
@@ -1421,7 +1749,162 @@ function Preview({prev,onSalva,onEdit,onBack,saved,readonlyStorico}) {
   return (
     <div style={{display:"flex",flexDirection:"column",gap:14}}>
 
-      
+    {tourPreviewStep === 1 && (
+      <div
+        style={{
+          position:"fixed",
+          inset:0,
+          background:"rgba(0,0,0,0.75)",
+          zIndex:9998
+        }}
+      />
+    )} 
+
+
+    {tourPreviewStep === 1 && (
+      <div
+        style={{
+          position:"fixed",
+          left:"50%",
+          top:"50%",
+          transform:"translate(-50%,-50%)",
+          zIndex:9999,
+          width:"min(340px, calc(100% - 40px))",
+          background:"rgba(20,20,20,0.96)",
+          border:"1px solid rgba(255,200,0,.4)",
+          borderRadius:24,
+          padding:24
+        }}
+      >
+
+        <div style={{
+            width:30,
+            height:30,
+            borderRadius:"50%",
+            background:"#ffcc00",
+            color:"#000",
+            display:"flex",
+            alignItems:"center",
+            justifyContent:"center",
+            fontSize:16,
+            fontWeight:900,
+            marginBottom:20
+          }}>
+            ⚡
+          </div>
+
+        <div
+          style={{
+            color:"#ffcc00",
+            fontSize:26,
+            fontWeight:700,
+            marginBottom:20
+          }}
+        >
+           Descrizione del lavoro
+        </div>
+
+        <div
+          style={{
+            color:"#fff",
+            lineHeight:1.6,
+            fontSize:17,
+            marginBottom:24
+          }}
+        >
+          La descrizione viene generata automaticamente per farti risparmiare tempo.
+          <br /><br />
+          Se vuoi modificarla o aggiungere dettagli, clicca sulla matita.✏️
+        </div>
+
+        <button
+          onClick={() => {
+            prev.tourPreviewDone = true;
+            setTourPreviewStep(0);
+          }}
+          style={{
+            width:"100%",
+            padding:"14px",
+            border:"none",
+            borderRadius:14,
+            background:"#ffcc00",
+            fontWeight:900
+          }}
+        >
+          HO CAPITO
+        </button>
+
+      </div>
+    )} 
+
+    {tourPreviewStep === 2 && (
+      <>
+        <div
+          style={{
+            position:"fixed",
+            inset:0,
+            background:"rgba(0,0,0,0.75)",
+            zIndex:9998
+          }}
+        />
+
+        <div
+          style={{
+            position:"fixed",
+            left:"50%",
+            top:"50%",
+            transform:"translate(-50%,-50%)",
+            zIndex:9999,
+            width:"min(340px, calc(100% - 40px))",
+            background:"rgba(20,20,20,0.96)",
+            border:"1px solid rgba(255,200,0,.4)",
+            borderRadius:24,
+            padding:24
+          }}
+        >
+          <div style={{
+            color:"#ffcc00",
+            fontSize:26,
+            fontWeight:700,
+            marginBottom:20
+          }}>
+            Preventivo pronto
+          </div>
+
+          <div style={{
+            color:"#fff",
+            lineHeight:1.6,
+            fontSize:15,
+            marginBottom:24
+          }}>
+            Da questa schermata puoi scaricare il PDF personalizzato con il logo della tua officina, inviare il preventivo al cliente su WhatsApp e ricevere una notifica quando viene accettato o rifiutato.
+
+            <br /><br />
+
+            Potrai inoltre generare l'XML della fattura elettronica e importarlo direttamente nel tuo gestionale.
+          </div>
+
+          <button
+            type="button"
+            onClick={() => {
+              setTourAzioniMostrato(true);
+              setTourPreviewStep(0);
+            }}
+            style={{
+              width:"100%",
+              padding:"14px",
+              border:"none",
+              borderRadius:14,
+              background:"#ffcc00",
+              fontWeight:900
+            }}
+          >
+            HO CAPITO
+          </button>
+        </div>
+      </>
+    )}
+
 
       <div style={{display:"flex",alignItems:"center",gap:12}}>
         <button onClick={onBack} style={{background:"none",border:"none",color:MT2,cursor:"pointer",fontSize:18}}>←</button>
@@ -1567,7 +2050,16 @@ function Preview({prev,onSalva,onEdit,onBack,saved,readonlyStorico}) {
         marginTop:18
 
       }}>
-         {!readonlyStorico && !saved && <Btn onClick={onSalva} 
+         {!readonlyStorico && !saved && 
+          <Btn
+            onClick={() => {
+              if (!tourAzioniMostrato) {
+                setTourPreviewStep(2);
+                return;
+              }
+
+              onSalva();
+            }} 
         style={{
           display:"flex",
           alignItems:"center",
