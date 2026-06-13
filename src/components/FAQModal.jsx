@@ -5,7 +5,7 @@ const faqs = [
     id: 1,
     domanda: "➡️📱 Devo installare qualcosa?",
     risposta:
-      "No. PitStop funziona come una web app. Ti basta aggiungerla alla schermata Home del telefono.",
+      "No. Ti basta aggiungerla alla schermata Home del telefono.",
   },
   {
     id: 2,
