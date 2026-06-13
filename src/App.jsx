@@ -1058,9 +1058,9 @@ function EditPreventivo({prev,onChange,onPreview,onBack}) {
             marginBottom:25
             
           }}>
-             Cliccando +DETTAGLI puoi trovare i dettagli aggiunti vocalmente nel form: chilometri, immatricolazione, date e note del cliente.
+            PitStop ha salvato automaticamente chilometri, immatricolazione, date e note del cliente.
              <br /><br />
-             Puoi modificarle o aggiungerle manualmente prima di creare il preventivo. 
+             Li trovi nel pulsante +DETTAGLI e puoi modificarli in qualsiasi momento.
           </div>
 
           <button
@@ -1491,7 +1491,7 @@ function EditPreventivo({prev,onChange,onPreview,onBack}) {
               Le voci sono state generate automaticamente.
               Puoi modificare prezzi, quantità, descrizioni oppure eliminare ciò che non ti serve.
               <br /><br />
-              Nella versione completa, PitStop memorizzerà le tue modifiche per i lavori futuri.
+              Nella versione completa, PitStop memorizza le tue modifiche per i lavori futuri.
             </div>
 
             <button
