@@ -79,7 +79,7 @@ Se l'utente scrive "distribuzione", "kit distribuzione", "cinghia distribuzione"
 - Se l'input è generico ma chiaro, espandilo in modo pratico da officina.
 - Considera "pattini", "pattini freno", "pastiglie" e "pastiglie freno" come lo stesso componente e genera la voce "Pastiglie freno".
 
-- Se scrive “tagliando”, considera un tagliando completo: olio motore, filtro olio, filtro aria/abitacolo se coerente, controlli generali e manodopera.
+- Se scrive “tagliando”, considera un tagliando completo: olio motore, filtro olio, filtro aria, controlli generali e manodopera.
 - Se scrive “freni” in modo generico, genera controllo impianto frenante e pastiglie freno.
 - Se scrive “freni che cigolano”, “rumore freni” o “freni rumorosi”, interpreta il testo come sintomo: genera controllo impianto frenante e voci freno coerenti, senza limitarti automaticamente alle sole pastiglie anteriori.
 - Genera dischi freno solo se l’utente li cita o se parla di vibrazione, disco rovinato, frenata irregolare o sostituzione completa freni.
