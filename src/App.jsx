@@ -1048,7 +1048,7 @@ function EditPreventivo({prev,onChange,onPreview,onBack}) {
             color:"#ffcc00",
             letterSpacing:1.5
           }}>
-            Dettagli Extra
+            Preventivo Generato
           </div>
 
           <div style={{
@@ -1058,9 +1058,9 @@ function EditPreventivo({prev,onChange,onPreview,onBack}) {
             marginBottom:25
             
           }}>
-            PitStop ha salvato automaticamente chilometri, immatricolazione, date e note del cliente.
+            PitStop ha preparato automaticamente il preventivo in base alle informazioni inserite.
              <br /><br />
-             Li trovi nel pulsante +DETTAGLI e puoi modificarli in qualsiasi momento.
+             Controlla le voci generate prima di procedere.
           </div>
 
           <button
