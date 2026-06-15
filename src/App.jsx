@@ -1581,7 +1581,7 @@ function EditPreventivo({prev,onChange,onPreview,onBack}) {
           }}>
               Ora vedrai il preventivo così come apparirà al cliente.
               <br /><br />
-               Se qualcosa non ti convince, potrai sempre tornare qui e modificarlo prima dell'invio.
+               Se qualcosa non ti convince, potrai sempre tornare indietro e modificarlo prima dell'invio.
           </div>
 
           <button
