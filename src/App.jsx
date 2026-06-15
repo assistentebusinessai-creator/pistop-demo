@@ -1481,7 +1481,7 @@ function EditPreventivo({prev,onChange,onPreview,onBack}) {
               marginBottom:20,
               color:"#ffcc00"
             }}>
-              Personalizza le voci
+              Modifica una Voce
             </div>
 
             <div style={{
@@ -1489,10 +1489,10 @@ function EditPreventivo({prev,onChange,onPreview,onBack}) {
               lineHeight:1.55,
               marginBottom:20
             }}>
-              Le voci sono state generate automaticamente.
-              Puoi modificare prezzi, quantità, descrizioni oppure eliminare ciò che non ti serve.
+              Puoi modificare quantità, prezzo, descrizione e tipologia della voce.
+              
               <br /><br />
-              Nella versione completa, PitStop memorizza le tue modifiche per i lavori futuri.
+              Ogni modifica aggiorna automaticamente il preventivo.
             </div>
 
             <button
