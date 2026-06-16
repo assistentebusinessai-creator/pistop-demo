@@ -12,7 +12,7 @@ export default async function handler(req, res) {
     const response = await client.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
-        { role: "system", content: "Sei l'assistente AI di DS84 OFFICINE, officina meccanica italiana. Rispondi SOLO con JSON valido, zero testo extra, zero backtick." },
+        { role: "system", content: "Sei l'assistente AI di SALVATORE OFFICINE, officina meccanica italiana. Rispondi SOLO con JSON valido, zero testo extra, zero backtick." },
         { role: "user", content: `Il meccanico ha scritto: "${input}"
 
 Tu sei un assistente esperto per un'officina meccanica e di carrozzeria. Il tuo compito è analizzare l'input dell'utente (che può contenere parole chiave, sintomi, trascrizioni di messaggi vocali o lavorazioni multiple) e restituire SEMPRE e SOLO un oggetto JSON valido, compilato secondo le regole rigorose descritte di seguito.
@@ -67,11 +67,6 @@ Deve generare voci per:
 È vietato ignorare una lavorazione citata.
 È vietato trasformare un sintomo in una sola riparazione certa.
 
-Se l'utente scrive "freni che cigolano", "rumore freni", "freni rumorosi":
-- genera sempre una voce "Controllo impianto frenante"
-- genera una voce "Pastiglie freno" solo come lavorazione coerente
-- NON limitarti alle sole pastiglie anteriori
-- NON inventare "dischi freno" se non richiesti, salvo che l'utente dica dischi, vibrazione, frenata irregolare o sostituzione completa freni
 
 Se l'utente scrive "distribuzione", "kit distribuzione", "cinghia distribuzione":
 - genera sempre un blocco lavoro separato
@@ -85,8 +80,7 @@ Se l'utente scrive "distribuzione", "kit distribuzione", "cinghia distribuzione"
 - Genera dischi freno solo se l’utente li cita o se parla di vibrazione, disco rovinato, frenata irregolare o sostituzione completa freni.
 - Se scrive “spia motore”, genera una voce di diagnosi elettronica.
 - Non inventare lavori non richiesti o non coerenti.
-- se l'utente scrive più lavori nella stessa frase, separali mentalmente e genera voci per ciascuno (es. "tagliando e freni" → voci per entrambi).
-- Non limitarti al primo lavoro menzionato se l'input suggerisce più lavorazioni (es. "tagliando e freni" → voci per entrambi).
+
 
 - Per ogni lavoro, genera tutte le voci normalmente necessarie per eseguirlo, senza usare espressioni come "SE NECESSARIO" o condizioni simili. Le lavorazioni devono essere espresse in modo diretto e deciso.
 - Non limitarti a una singola voce per lavoro.
@@ -111,12 +105,20 @@ CLASSIFICAZIONE VOCI:
 - prezzo sempre 0
 - solo JSON valido
 descrizione_lavoro deve essere un testo professionale da preventivo.
-
+- La descrizione_lavoro deve essere generata a partire dalle lavorazioni individuate nell'input dell'utente, non dall'elenco dei ricambi presenti nelle voci.
+- La descrizione_lavoro deve essere un riassunto professionale del lavoro da eseguire.
+- Non è necessario citare tutti i ricambi presenti nelle voci.
+- I dettagli dei singoli ricambi appartengono alle voci del preventivo.
+- Quando più ricambi appartengono alla stessa lavorazione, descrivili come un unico intervento professionale.
+- Utilizza il nome della lavorazione principale (es. tagliando, distribuzione, impianto frenante, frizione, diagnosi elettronica) invece di elencare tutti i componenti coinvolti.
+- La descrizione_lavoro deve essere leggibile da un cliente finale e non sembrare un elenco di ricambi.
+- Non terminare mai la descrizione_lavoro con il nome di un singolo ricambio (es. filtro aria, filtro olio, pastiglie freno, pompa acqua).
+- L'ultima frase deve chiudere il lavoro in modo professionale e naturale.
 Regole:
 - Deve essere in MAIUSCOLO.
 - Deve essere scritto in italiano corretto (no parole straniere o traduzioni sbagliate).
 - Deve essere composto da 2-3 frasi brevi (una per riga).
-- Deve descrivere le lavorazioni principali presenti nelle voci.
+- Deve descrivere le lavorazioni principali individuate nell'input dell'utente.
 - Deve usare un linguaggio da officina (es. "SOSTITUZIONE", "CONTROLLO", "INSTALLAZIONE").
 - Deve iniziare con "PREVENTIVO DI LAVORAZIONE PER ...".
 - NON deve essere un elenco puntato.
