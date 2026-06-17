@@ -2060,10 +2060,10 @@ function Preview({prev,onSalva,onEdit,onBack,saved,readonlyStorico}) {
          {!readonlyStorico && !saved && 
           <Btn
             onClick={() => {
-              if (!tourAzioniMostrato) {
-                setTourPreviewStep(2);
-                return;
-              }
+              if (tourFromUrl === "1" && !tourAzioniMostrato) {
+                 setTourPreviewStep(2);
+                 return;
+               }
 
               onSalva();
             }} 
