@@ -1623,11 +1623,9 @@ function EditPreventivo({prev,onChange,onPreview,onBack}) {
        type="button"
         onClick={(e) => {
           e.preventDefault();
-          if (!prev.tourFinalDone) {
+          if (tourFromUrl === "1" && !prev.tourFinalDone) {
             setTourMainStep(3);
             return;
-
-
           }
           onPreview({ ...prev, mostraPrezziPDF });
         }}
