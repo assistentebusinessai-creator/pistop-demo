@@ -865,7 +865,7 @@ function EditPreventivo({prev,onChange,onPreview,onBack}) {
   };
 
   const updateVoce = (id,k,v) => { 
-    if (tourMainStep === 0 && !prev.tourVociDone) {
+    if (tourFromUrl === "1" && tourMainStep === 0 && !prev.tourVociDone) {
       onChange({ ...prev, tourVociDone: true });
       setTourMainStep(2);
       return;
@@ -1669,7 +1669,11 @@ function Preview({prev,onSalva,onEdit,onBack,saved,readonlyStorico}) {
   const [pdfDone,setPdfDone]=useState(false);
   const [editingDesc, setEditingDesc] = useState(false);
   const [desc, setDesc] = useState(prev.descrizione_lavoro || "");
-  const [tourPreviewStep, setTourPreviewStep] = useState(prev.tourPreviewDone ? 0 : 1);
+  const tourFromUrl = new URLSearchParams(window.location.search).get("tour");
+
+  const [tourPreviewStep, setTourPreviewStep] = useState(
+    tourFromUrl === "1" && !prev.tourPreviewDone ? 1 : 0
+  );
   const [tourAzioniMostrato, setTourAzioniMostrato] = useState(false);
 
   useEffect(() => {
