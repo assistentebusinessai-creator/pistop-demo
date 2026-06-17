@@ -818,7 +818,10 @@ function EditPreventivo({prev,onChange,onPreview,onBack}) {
   const firstFieldRef = useRef(null);
   const [mostraPrezziPDF, setMostraPrezziPDF] = useState(!!prev.mostraPrezziPDF);
   const [showDettagliExtra, setShowDettagliExtra] = useState(false);
-  const [tourMainStep, setTourMainStep] = useState(prev.tourMainDone ? 0 : 1);
+  const tourFromUrl = new URLSearchParams(window.location.search).get("tour");
+  const [tourMainStep, setTourMainStep] = useState(
+    tourFromUrl === "1" && !prev.tourMainDone ? 1 : 0
+  );
   useEffect(() => {
     setTimeout(() => firstFieldRef.current?.focus(), 120);
   }, []);
