@@ -374,7 +374,8 @@ function Dashboard({db,onNuovo,onArchivio, onCliente}) {
         new URLSearchParams(window.location.search).get("demo") ||
         localStorage.getItem("pitstop_demo_id") ||
         "demo-generale";
-
+        
+      
       const { data, error } = await supabase
         .from("preventivi_bozze")
         .select("*")
@@ -3077,6 +3078,9 @@ export default function App() {
     note: "",
     foto: []
   });
+  
+  const [demoBloccata, setDemoBloccata] = useState(false);
+  const [checkingDemo, setCheckingDemo] = useState(true);
 
   useEffect(() => {
     const handleMessage = (event) => {
@@ -3107,6 +3111,30 @@ export default function App() {
     return () => {
       window.removeEventListener("message", handleMessage);
     };
+  }, []);
+  
+  
+  useEffect(() => {
+    const checkDemoAccess = async () => {
+      const demoId =
+        new URLSearchParams(window.location.search).get("demo") ||
+        localStorage.getItem("pitstop_demo_id") ||
+        "demo-generale";
+
+      const { data, error } = await supabase
+        .from("demo_accessi")
+        .select("attiva")
+        .eq("demo_id", demoId)
+        .maybeSingle();
+
+      if (!error && data?.attiva === false) {
+        setDemoBloccata(true);
+      }
+
+      setCheckingDemo(false);
+    };
+
+    checkDemoAccess();
   }, []);
 
   registraPushNotifiche();
@@ -3530,6 +3558,40 @@ export default function App() {
       </div>
     </div>
   );
+  
+  if (checkingDemo) {
+    return null;
+  }
+
+  if (demoBloccata) {
+    return (
+      <div style={{
+        minHeight: "100vh",
+        background: "#0f0f0f",
+        color: "#fff",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: 24,
+        textAlign: "center"
+      }}>
+        <div style={{
+          maxWidth: 420,
+          background: "#1a1a1a",
+          border: "1px solid #333",
+          borderRadius: 18,
+          padding: 28
+        }}>
+          <h1 style={{marginBottom: 12}}>Demo scaduta</h1>
+          <p style={{color: "#ccc", lineHeight: 1.5}}>
+            La demo di PitStop è terminata.
+            <br />
+            Per continuare ad utilizzare l'app, contattaci per l'attivazione.
+          </p>
+        </div>
+      </div>
+    );
+  }
      
   return (
     <div style={{
