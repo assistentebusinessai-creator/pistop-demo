@@ -3582,11 +3582,13 @@ export default function App() {
           borderRadius: 18,
           padding: 28
         }}>
-          <h1 style={{marginBottom: 12}}>Demo scaduta</h1>
+          <h1 style={{color: "#FFC107", marginBottom: 12}}>Demo scaduta</h1>
           <p style={{color: "#ccc", lineHeight: 1.5}}>
             La demo di PitStop è terminata.
             <br />
-            Per continuare ad utilizzare l'app, contattaci per l'attivazione.
+            Per continuare ad utilizzare l'app, contattaci per l'attivazione. 
+            <br />
+            📞 Richiedi il tuo accesso completo.
           </p>
         </div>
       </div>
