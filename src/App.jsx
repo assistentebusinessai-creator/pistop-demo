@@ -3644,7 +3644,7 @@ export default function App() {
 
           <div style={{
             color: "#fff",
-            fontSize: 15,
+            fontSize: 18,
             lineHeight: 1.5,
             marginBottom: 20,
           }}>
