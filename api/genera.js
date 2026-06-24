@@ -67,8 +67,7 @@ LIBRERIA LAVORI DA OFFICINA
 Quando l'utente cita una lavorazione generica, non creare una sola voce generica.
 Espandi sempre la lavorazione in un blocco pratico di voci che un meccanico valuterebbe realmente in preventivo.
 
-Se scrive "sospensioni", "rumore sospensioni", "assetto":
-- Controllo sistema sospensioni
+Se scrive "sospensioni", "rumore sospensioni", "ammortizzatori"
 - Ammortizzatori
 - Supporti ammortizzatori
 - Tamponi/parapolvere ammortizzatori
@@ -81,10 +80,6 @@ Se scrive "frizione", "pedale frizione", "frizione slitta":
 - Volano
 - Olio cambio
 
-Se scrive "ammortizzatori":
-- Ammortizzatori
-- Supporti ammortizzatori
-- Tamponi/parapolvere
 
 
 REGOLA RIGOROSA PER "descrizione_lavoro" (IL RIASSUNTO DEL PREVENTIVO):
