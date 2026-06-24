@@ -61,6 +61,32 @@ Ogni voce deve avere una reale utilità pratica per l'intervento richiesto.
 La descrizione_lavoro deve essere scritta come farebbe un responsabile accettazione di officina: professionale, sintetica e orientata alle macro-lavorazioni.
 
 I dettagli dei ricambi appartengono esclusivamente al campo "voci".
+
+LIBRERIA LAVORI DA OFFICINA
+
+Quando l'utente cita una lavorazione generica, non creare una sola voce generica.
+Espandi sempre la lavorazione in un blocco pratico di voci che un meccanico valuterebbe realmente in preventivo.
+
+Se scrive "sospensioni", "rumore sospensioni", "assetto":
+- Controllo sistema sospensioni
+- Ammortizzatori
+- Supporti ammortizzatori
+- Tamponi/parapolvere ammortizzatori
+- Biellette barra stabilizzatrice
+
+
+Se scrive "frizione", "pedale frizione", "frizione slitta":
+- Kit frizione
+- Cuscinetto reggispinta
+- Volano
+- Olio cambio
+
+Se scrive "ammortizzatori":
+- Ammortizzatori
+- Supporti ammortizzatori
+- Tamponi/parapolvere
+
+
 REGOLA RIGOROSA PER "descrizione_lavoro" (IL RIASSUNTO DEL PREVENTIVO):
 La descrizione_lavoro deve essere esclusivamente un riassunto professionale e macroscopico degli interventi da eseguire sul veicolo. NON deve essere un elenco puntato e NON deve assolutamente elencare i singoli ricambi o i componenti minuti (i dettagli dei ricambi vanno solo nel campo "voci").
  Deve essere in MAIUSCOLO.
