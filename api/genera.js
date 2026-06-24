@@ -132,6 +132,13 @@ NON deve essere un elenco puntato e NON deve elencare i singoli ricambi o compon
 - Deve essere composta da 2-3 frasi brevi (una per riga), dove ogni riga descrive una macro-lavorazione richiesta (es. TAGLIANDO COMPLETO, SOSTITUZIONE KIT DISTRIBUZIONE, RIPRISTINO IMPIANTO FRENANTE).
 - Usa un linguaggio deciso da officina: SOSTITUZIONE, CONTROLLO, MANUTENZIONE.
 - NON usare frasi generiche inutili: "MANUTENZIONE GENERALE", "ATTIVITÀ NECESSARIE", "EFFETTUAZIONE", "garantire una guida sicura e confortevole", "ripristinare le prestazioni originali".
+- È VIETATO usare la parola "EFFETTUAZIONE" in qualsiasi forma e per qualsiasi lavorazione 
+  (es. mai "EFFETTUAZIONE TAGLIANDO", mai "EFFETTUAZIONE SOSPENSIONI").
+- Usa invece direttamente il nome dell'intervento al posto del verbo, es: 
+  "TAGLIANDO COMPLETO" (non "EFFETTUAZIONE TAGLIANDO"), 
+  "SOSTITUZIONE SOSPENSIONI" (non "EFFETTUAZIONE SOSPENSIONI"), 
+  "REVISIONE IMPIANTO FRENANTE" (non "EFFETTUAZIONE CONTROLLO FRENI").
+
 - Scrivi in italiano professionale e naturale. Usa sempre il termine "SOSPENSIONI" — mai "SUSPENSIONI", "SUSPENSION SYSTEM" o termini misti italiano/inglese.
 - Evita ripetizioni e concetti duplicati: non descrivere la stessa lavorazione con parole diverse.
 - Se le lavorazioni principali sono già descritte chiaramente, fermati senza aggiungere altre frasi.
