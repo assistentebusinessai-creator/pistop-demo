@@ -116,6 +116,9 @@ Se scrive "spia motore": genera sempre una voce di diagnosi elettronica.
 - NON inserire specifiche di viscosità (es. NO "5W40", scrivi solo "Olio motore").
 - Prezzo SEMPRE 0.
 - NON usare mai "eventuale" o "se necessario" nelle voci.
+- Le voci di controllo, verifica, diagnosi o ispezione (es. "Controllo impianto frenante", 
+  "Diagnosi elettronica") devono avere SEMPRE tipo "altro", MAI tipo "manodopera" 
+  e MAI tipo "ricambio".
 
 ---
 
