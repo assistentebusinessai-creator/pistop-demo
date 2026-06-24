@@ -2163,7 +2163,7 @@ function Preview({prev,onSalva,onEdit,onBack,saved,readonlyStorico,setInfoModal}
                   setInfoModal({
                     icon: "📲",
                     title: "Invio WhatsApp",
-                    text: "Nella versione completa di PitStop puoi inviare il preventivo direttamente al cliente su WhatsApp e ricevere la conferma di lettura."
+                    text: "Nella versione completa di PitStop puoi inviare il preventivo direttamente al cliente su WhatsApp e ricevere una notifica quando acceatta o rifiuta."
                   })
                 }
                 style={{
