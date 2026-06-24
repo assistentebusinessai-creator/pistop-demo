@@ -1663,7 +1663,7 @@ function EditPreventivo({prev,onChange,onPreview,onBack}) {
 // ─────────────────────────────────────────
 //  SCREEN: PREVIEW & AZIONI
 // ─────────────────────────────────────────
-function Preview({prev,onSalva,onEdit,onBack,saved,readonlyStorico}) {
+function Preview({prev,onSalva,onEdit,onBack,saved,readonlyStorico,setInfoModal}) {
   const [copied,setCopied]=useState(false);
   const [pdfDone,setPdfDone]=useState(false);
   const [editingDesc, setEditingDesc] = useState(false);
@@ -3803,14 +3803,14 @@ export default function App() {
           />
         )}
         {screen==="preview" && draft && (
-          <Preview prev={draft} onSalva={onSalva} onEdit={()=> setScreen("edit")} onBack={()=>setScreen("edit")} saved={savedId===draft.id}/>
+          <Preview prev={draft} onSalva={onSalva} onEdit={()=> setScreen("edit")} onBack={()=>setScreen("edit")} saved={savedId===draft.id} setInfoModal={setInfoModal}/>
         )}
         {screen==="archivio" && (
           <Archivio db={db} onBack={()=>setScreen("home")} onOpen={onOpenFromArchivio}/>
         )}
         {screen==="view" && viewPrev && (
           <div style={{display:"flex",flexDirection:"column",gap:14}}>
-            <Preview prev={viewPrev} onEdit={()=>{setDraft(viewPrev); setSavedId(viewPrev.id); setScreen("edit")}} onBack={()=>setScreen("archivio")} saved={true} readonlyStorico={readonlyStorico}/>
+            <Preview prev={viewPrev} onEdit={()=>{setDraft(viewPrev); setSavedId(viewPrev.id); setScreen("edit")}} onBack={()=>setScreen("archivio")} saved={true} readonlyStorico={readonlyStorico} setInfoModal={setInfoModal}/>
          {!readonlyStorico && (
             <button onClick={() => {
                /*
