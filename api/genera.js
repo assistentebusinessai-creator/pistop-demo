@@ -95,6 +95,16 @@ genera sempre:
 REGOLA RIGOROSA PER "descrizione_lavoro" (IL RIASSUNTO DEL PREVENTIVO):
 La descrizione_lavoro deve essere esclusivamente un riassunto professionale e macroscopico degli interventi da eseguire sul veicolo. NON deve essere un elenco puntato e NON deve assolutamente elencare i singoli ricambi o i componenti minuti (i dettagli dei ricambi vanno solo nel campo "voci").
  Deve essere in MAIUSCOLO.
+TERMINO CORRETTO:
+
+Utilizzare sempre il termine italiano "SOSPENSIONI".
+
+Non utilizzare mai:
+- SUSPENSIONI
+- SUSPENSIONE SYSTEM
+- parole miste italiano/inglese
+
+Tutte le descrizioni devono essere scritte in italiano corretto.
  Deve iniziare con "PREVENTIVO DI LAVORAZIONE PER ...".
  NON aggiungere mai "DEL VEICOLO" nella prima frase.
  Deve essere composto da 2-3 frasi brevi (una per riga), dove ogni riga descrive una macro-lavorazione richiesta dall'utente (es. TAGLIANDO COMPLETO, SOSTITUZIONE KIT DISTRIBUZIONE, RIPRISTINO IMPIANTO FRENANTE).
