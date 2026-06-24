@@ -3061,6 +3061,7 @@ export default function App() {
     new URLSearchParams(window.location.search).get("demo") ||
     localStorage.getItem("pitstop_demo_id") ||
     "demo-generale";
+  const [infoModal, setInfoModal] = useState(null);
 
   localStorage.setItem("pitstop_demo_id", demoId);
   console.log("DEMO LETTO:", demoId);
@@ -3594,6 +3595,81 @@ export default function App() {
       </div>
     );
   }
+  
+  const InfoModal = () => {
+    if (!infoModal) return null;
+
+    return (
+      <div style={{
+        position: "fixed",
+        inset: 0,
+        background: "rgba(0,0,0,0.65)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        zIndex: 9999,
+        padding: 20,
+      }}>
+        <div style={{
+          width: "100%",
+          maxWidth: 420,
+          background: "#1b1b1b",
+          border: "1px solid rgba(255,255,255,0.08)",
+          borderRadius: 18,
+          padding: 24,
+          textAlign: "center",
+        }}>
+          <div style={{
+            width: 52,
+            height: 52,
+            margin: "0 auto 16px",
+            borderRadius: "50%",
+            background: "#f5c518",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: 24,
+          }}>
+            {infoModal.icon}
+          </div>
+
+          <div style={{
+            color: "#f5c518",
+            fontSize: 22,
+            fontWeight: 800,
+            marginBottom: 12,
+          }}>
+            {infoModal.title}
+          </div>
+
+          <div style={{
+            color: "#fff",
+            fontSize: 15,
+            lineHeight: 1.5,
+            marginBottom: 20,
+          }}>
+            {infoModal.text}
+          </div>
+
+          <button
+            onClick={() => setInfoModal(null)}
+            style={{
+              width: "100%",
+              background: "#f5c518",
+              color: "#111",
+              border: "none",
+              borderRadius: 12,
+              padding: "14px 16px",
+              fontWeight: 800,
+              cursor: "pointer",
+            }}
+          >
+            HO CAPITO
+          </button>
+        </div>
+      </div>
+    );
+  };
      
   return (
     <div style={{
@@ -3663,7 +3739,13 @@ export default function App() {
               setSavedId(null);
               setScreen("nuovo");
             }
-            else if(id==="archivio") setScreen("archivio");
+            else if (id === "archivio") {
+               setInfoModal({
+                 icon: "🔒",
+                 title: "Archivio Personale",
+                 text: "Nella versione completa di PITSTOP ogni officina dispone di un archivio personale, sincronizzato e accessibile da qualsiasi dispositivo."
+               });
+            }
           }}
         />
       )}
@@ -4107,10 +4189,18 @@ export default function App() {
             setSavedId(null);
             setScreen("nuovo");
           }
-          else if(id==="archivio") alert("Nella versione completa di PITSTOP ogni officina dispone di un archivio personale, sincronizzato e accessibile da qualsiasi dispositivo.");
+          else if (id === "archivio") {
+            setInfoModal({
+              icon: "🔒",
+              title: "Archivio Personale",
+              text: "Nella versione completa di PitStop ogni officina dispone di un archivio personale, sincronizzato e accessibile da qualsiasi dispositivo.",
+            });
+           }
         }}
        />
       )}
+      
+      <InfoModal />
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600;700&display=swap');
         *{box-sizing:border-box;margin:0;padding:0}
