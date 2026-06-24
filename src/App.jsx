@@ -2159,7 +2159,13 @@ function Preview({prev,onSalva,onEdit,onBack,saved,readonlyStorico}) {
               </button>
 
               <button
-                onClick={() => alert("Funzione disponibile nella versione completa di PITSTOP. Nella versione definitiva potrai inviare il preventivo direttamente al cliente su WhatsApp e ricevere la conferma di lettura.")}
+                onClick={() =>
+                  setInfoModal({
+                    icon: "📲",
+                    title: "Invio WhatsApp",
+                    text: "Nella versione completa di PitStop puoi inviare il preventivo direttamente al cliente su WhatsApp e ricevere la conferma di lettura."
+                  })
+                }
                 style={{
                   background:"#25D366",
                   color:"#fff",
@@ -2180,7 +2186,13 @@ function Preview({prev,onSalva,onEdit,onBack,saved,readonlyStorico}) {
 
 
               <button
-                onClick={() => alert("Funzione disponibile nella versione completa di PITSTOP. Nella versione definitiva potrai generare il file XML pronto per la fatturazione elettronica.")}
+                onClick={() =>
+                   setInfoModal({
+                     icon: "📄",
+                     title: "Fatturazione XML",
+                     text: "Nella versione completa di PitStop puoi generare il file XML pronto per la fatturazione elettronica."
+                   })
+                 }
                 style={{
                   background:"#22c55e",
                   color:"#000",
