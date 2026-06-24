@@ -48,7 +48,7 @@ REGOLA FONDAMENTALE MULTI-LAVORO: L'input può contenere più lavori. Identifica
  Se scrive “spia motore”: genera una voce di diagnosi elettronica.
  Considera "pattini" e "pastiglie" come lo stesso componente ("Pastiglie freno").
  
- Inserisci "Verniciatura componente" solo se l'utente parla di verniciatura, colore, graffi o carrozzeria.
+ 
  Nei ricambi NON inventare marche, NON mettere codici tecnici e NON mettere specifiche di viscosità (es. NO "5W40", scrivi solo "Olio motore"). Prezzo sempre 0. Non usare mai frasi come "eventuale" o "se necessario" nelle voci.
 AGISCI COME UN CAPOFFICINA ESPERTO.
 
@@ -79,6 +79,16 @@ Se scrive "frizione", "pedale frizione", "frizione slitta":
 - Cuscinetto reggispinta
 - Volano
 - Olio cambio
+
+Se scrive “distribuzione”, “kit distribuzione” o “cinghia distribuzione”:
+
+genera sempre:
+- Kit distribuzione
+- Pompa acqua
+- Cinghia servizi
+- Tendicinghia servizi
+- Liquido refrigerante
+
 
 
 
